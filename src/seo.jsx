@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 const SEO = () => {
   const { t } = useTranslation('seo');
   return (
+
+
     <Helmet>
       <meta charSet="utf-8" />
       <title>{t('seo:title')}</title>
@@ -11,7 +13,6 @@ const SEO = () => {
       <meta name="title" content={t('seo:title')} />
       <meta name="description" content={t('seo:des')} />
       <meta name="keywords" content={t('seo:keywords')} />
-      {/* <meate name="image" content="logo192.png" /> */}
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <meta property="og:site_name" content={t('seo:title')} />
