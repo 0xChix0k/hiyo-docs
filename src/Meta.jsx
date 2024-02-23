@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 
-const SEO = () => {
+const Meta = () => {
   const { t } = useTranslation('seo');
   return (
 
@@ -34,4 +34,4 @@ const SEO = () => {
   );
 };
 
-export default SEO;
+export default Meta;
