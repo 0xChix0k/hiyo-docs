@@ -2,6 +2,7 @@
 import { Flex, Form } from 'antd';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { CusButton, CusCheckBox, TextInput } from 'components';
+import { useLogin } from 'hooks';
 import { useState } from 'react';
 import { cssLogin } from './loginCss';
 
@@ -9,7 +10,11 @@ const Login = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [remin, setRemin] = useState(false);
+  const [failLogin, setFailLogin] = useState(false);
+
+  const { onCheck } = useLogin(userId, password, remin, setFailLogin);
   const onFinish = (values) => {
+    onCheck();
     console.log('Success:', values);
   };
   const onFinishFailed = (errorInfo) => {
@@ -79,6 +84,9 @@ const Login = () => {
               />
             </Form.Item>
           </Form>
+          {failLogin && (
+            <div className="fail">帳號或密碼不正確，請重新輸入</div>
+          )}
         </Flex>
       </Flex>
       <Flex

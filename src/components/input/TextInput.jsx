@@ -6,6 +6,10 @@ import { ConfigProvider, Input } from 'antd';
  * @param {function} onChange
  * @param {string} size
  * @param {string} placeholder
+ * @param {string} type
+ * @param {ReactNode} prefix
+ * @param {ReactNode} suffix
+ * @param {string} radius
  * @returns
  */
 const TextInput = ({
@@ -14,6 +18,10 @@ const TextInput = ({
   size = 'large',
   placeholder = '',
   type = 'text',
+  prefix = null,
+  suffix = null,
+  radius = '10px',
+  mW = '100%',
 }) => {
   return (
     <ConfigProvider
@@ -21,8 +29,9 @@ const TextInput = ({
         token: {
           colorBgContainer: 'var(--grey-20)',
           colorBorder: 'var(--grey-20)',
-          borderRadius: '10px',
+          borderRadius: radius,
           colorTextPlaceholder: 'var(--grey-50)',
+          controlHeightLG: '40px',
         },
         components: {
           Input: {
@@ -43,6 +52,9 @@ const TextInput = ({
         placeholder={placeholder}
         size={size}
         type={type}
+        prefix={prefix}
+        suffix={suffix}
+        style={{ maxWidth: mW }}
       />
     </ConfigProvider>
   );

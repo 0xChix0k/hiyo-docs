@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import WithAuthentication from './WithAuthentication';
 import WithLogin from './WithLogin';
 
-// const Home = lazy(() => import('pages/HomePage'));
+const Main = lazy(() => import('pages/Main'));
 const Login = lazy(() => import('pages/Login'));
 
 const router = createBrowserRouter([
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     element: (
       <WithAuthentication>
         <Suspense>
-          {/* <Home /> */}
+          <Main />
         </Suspense>
       </WithAuthentication>
     ),

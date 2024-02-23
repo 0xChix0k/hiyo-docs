@@ -26,6 +26,10 @@ export const cssLogin = css`
         color: var(--grey-60);
         margin-bottom: 24px;
       }
+      > .fail {
+        font-weight: 600;
+        color: var(--red-default);
+      }
     }
   }
   > .footer {
