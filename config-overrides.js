@@ -14,7 +14,7 @@ module.exports = override(
     model: path.resolve(__dirname, 'src/model'),
     styles: path.resolve(__dirname, 'src/styles'),
     router: path.resolve(__dirname, 'src/router'),
-    pages: path.resolve(__dirname, 'src/Pages'),
+    pages: path.resolve(__dirname, 'src/pages'),
     services: path.resolve(__dirname, 'src/services'),
     store: path.resolve(__dirname, 'src/store'),
     utils: path.resolve(__dirname, 'src/utils'),

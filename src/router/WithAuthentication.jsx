@@ -1,13 +1,11 @@
 import Cookies from 'js-cookie';
 import { Navigate } from 'react-router-dom';
-import { startTransition } from 'react';
 
 const WithAuthentication = ({ children }) => {
   const token = Cookies.get('Jwt');
+  console.log('token', !token);
   if (!token) {
-    startTransition(() => {
-      return <Navigate to="/login" replace />;
-    });
+    return <Navigate to="/login" replace />;
   }
   return children;
 };

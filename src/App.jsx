@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import store from 'store';
+import SEO from './SEO';
 import Router from './router/Router';
-import SEO from './seo'
 
 const queryClient = new QueryClient();
 
@@ -16,6 +16,9 @@ function App() {
         <ConfigProvider
           autoInsertSpaceInButton={false} //移除两个汉字之间的空格
           theme={{
+            token: {
+              colorError: '#ef4564',
+            },
             components: {
               Message: {
                 contentBg: '#EEFFF5',
@@ -25,7 +28,7 @@ function App() {
             },
           }}
         >
-          <AntApp>
+          <AntApp style={{ width: '100vw', height: '100dvh' }}>
             <RouterProvider router={Router} />
           </AntApp>
         </ConfigProvider>
