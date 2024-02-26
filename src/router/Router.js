@@ -3,8 +3,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import WithAuthentication from './WithAuthentication';
 import WithLogin from './WithLogin';
 
-const Main = lazy(() => import('pages/Main'));
 const Login = lazy(() => import('pages/Login'));
+const Main = lazy(() => import('pages/Main'));
+const Todo = lazy(() => import('pages/Todo'));
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,18 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/task/:id',
+        path: '/todo',
+        element: (
+          <WithAuthentication>
+            <Suspense>
+              <Todo />
+            </Suspense>
+          </WithAuthentication>
+        ),
+        errorElement: <div>Not Found</div>,
+      },
+      {
+        path: '/my-form',
         element: (
           <WithAuthentication>
             <Suspense>
@@ -26,6 +38,29 @@ const router = createBrowserRouter([
             </Suspense>
           </WithAuthentication>
         ),
+        errorElement: <div>Not Found</div>,
+      },
+      {
+        path: '/libray',
+        element: (
+          <WithAuthentication>
+            <Suspense>
+              {/* <Home /> */}
+            </Suspense>
+          </WithAuthentication>
+        ),
+        errorElement: <div>Not Found</div>,
+      },
+      {
+        path: '/setting',
+        element: (
+          <WithAuthentication>
+            <Suspense>
+              {/* <Home /> */}
+            </Suspense>
+          </WithAuthentication>
+        ),
+        errorElement: <div>Not Found</div>,
       },
     ],
   },

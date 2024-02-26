@@ -1,9 +1,7 @@
 import Avatar, { genConfig } from 'react-nice-avatar';
 
-const CusAvatar = () => {
-  const config = genConfig();
-
-  return <Avatar style={{ width: '40px', height: '40px' }} {...config} />;
+const CusAvatar = ({ w = '40px', h = '40px', config = genConfig() }) => {
+  return <Avatar style={{ width: w, height: h }} {...config} />;
 };
 
 export { CusAvatar };

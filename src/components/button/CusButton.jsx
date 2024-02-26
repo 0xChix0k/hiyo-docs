@@ -10,8 +10,9 @@ import { Button, ConfigProvider } from 'antd';
  * @param {string} tColor
  * @param {string} size
  * @param {string} htmlType
+ * @param {string} type
  * @param {boolean} isBlock
- * @param {string} radius
+ * @param {number} radius
  * @returns
  */
 const CusButton = ({
@@ -23,8 +24,9 @@ const CusButton = ({
   tColor = '#000',
   size = 'large',
   htmlType = '',
+  type = 'default',
   isBlock = false,
-  radius = '10px',
+  radius = 10,
 }) => {
   return (
     <ConfigProvider
@@ -33,11 +35,11 @@ const CusButton = ({
           colorPrimary: bgColor,
           colorText: tColor,
           colorBgContainer: bgColor,
-          borderRadius: radius,
+          borderRadiusLG: radius,
         },
         components: {
           Button: {
-            contentFontSizeLG: '14px',
+            contentFontSizeLG: 14,
             fontWeight: 600,
             defaultHoverColor: tColor,
           },
@@ -49,6 +51,7 @@ const CusButton = ({
         onClick={onClick}
         disabled={disabled}
         htmlType={htmlType}
+        type={type}
         block={isBlock}
       >
         {icon && icon}

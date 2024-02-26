@@ -1,5 +1,5 @@
 import { ConfigProvider, Input } from 'antd';
-
+import { IconClose } from 'components/icon';
 /**
  * @description Custom TextInput component
  * @param {string|number} value
@@ -9,7 +9,9 @@ import { ConfigProvider, Input } from 'antd';
  * @param {string} type
  * @param {ReactNode} prefix
  * @param {ReactNode} suffix
- * @param {string} radius
+ * @param {number} radius
+ * @param {string} mW
+ * @param {boolean} isClear
  * @returns
  */
 const TextInput = ({
@@ -20,8 +22,9 @@ const TextInput = ({
   type = 'text',
   prefix = null,
   suffix = null,
-  radius = '10px',
+  radius = 10,
   mW = '100%',
+  isClear = false,
 }) => {
   return (
     <ConfigProvider
@@ -29,9 +32,9 @@ const TextInput = ({
         token: {
           colorBgContainer: 'var(--grey-20)',
           colorBorder: 'var(--grey-20)',
-          borderRadius: radius,
+          borderRadiusLG: radius,
           colorTextPlaceholder: 'var(--grey-50)',
-          controlHeightLG: '40px',
+          controlHeightLG: 40,
         },
         components: {
           Input: {
@@ -39,9 +42,9 @@ const TextInput = ({
             hoverBorderColor: '#000',
             activeBg: 'var(--grey-20)',
             activeBorderColor: 'var(--blue-bright)',
-            paddingBlockLG: '12px',
-            paddingInlineLG: '14px',
-            inputFontSizeLG: '14px',
+            inputFontSizeLG: 14,
+            paddingInlineLG: prefix ? 10 : 14,
+            paddingBlockLG: suffix ? 4 : 11,
           },
         },
       }}
@@ -50,6 +53,7 @@ const TextInput = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        allowClear={isClear ? { clearIcon: <IconClose /> } : null}
         size={size}
         type={type}
         prefix={prefix}
