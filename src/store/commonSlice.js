@@ -1,13 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const initSearchData = {
+  text: '',
+  from: '',
+  type: 'all',
+  formId: '',
+  date: '',
+};
+
 const commonSlice = createSlice({
   name: 'common',
-  initialState: {
-    searchStr: '',
-  },
+  initialState: { searchData: initSearchData },
   reducers: {
-    setSearchStr(state, action) {
-      state.searchStr = action.payload;
+    setAllSearchData(state, action) {
+      state.searchData = action.payload;
+    },
+    setSearchData(state, action) {
+      const { field, value } = action.payload;
+      state.searchData[field] = value;
+    },
+    resetSearchData(state) {
+      state.searchData = initSearchData;
     },
   },
 });
@@ -15,4 +28,5 @@ const commonSlice = createSlice({
 export default commonSlice.reducer;
 export const selectCommon = (state) => state.common;
 
-export const { setSearchStr } = commonSlice.actions;
+export const { setAllSearchData, setSearchData, resetSearchData } =
+  commonSlice.actions;

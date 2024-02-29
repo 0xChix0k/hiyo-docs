@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "all",
+    "Name": "全部"
+  },
+  {
+    "Id": "policy",
+    "Name": "政策"
+  },
+  {
+    "Id": "procedure",
+    "Name": "程序書"
+  },
+  {
+    "Id": "standard",
+    "Name": "標準書"
+  },
+  {
+    "Id": "form",
+    "Name": "表單"
+  }
+]

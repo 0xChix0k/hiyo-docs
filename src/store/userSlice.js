@@ -1,9 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { genConfig } from 'react-nice-avatar';
+
+export const initUser = {
+  avatar: genConfig(),
+};
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    userInfo: null,
+    userInfo: initUser,
   },
   reducers: {
     setUser(state, action) {

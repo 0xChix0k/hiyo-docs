@@ -77,8 +77,7 @@ const Login = () => {
             <Form.Item>
               <CusButton
                 text="登入"
-                bgColor="var(--grey-default)"
-                tColor="white"
+                bgColor="#2D336B"
                 htmlType="submit"
                 isBlock={true}
               />

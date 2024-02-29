@@ -17,7 +17,7 @@ export const cssTodo = css`
       height: 400px;
       border-radius: 25px;
       background: white;
-      .text{
+      .text {
         color: var(--grey-50);
       }
     }

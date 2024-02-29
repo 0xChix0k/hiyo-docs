@@ -1,20 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { ReactComponent as Icon } from 'assets/icon-settings.svg';
-import { useState } from 'react';
-
 
 /**
  * @description IconSetting
- * @param {Function} onClick 
+ * @param {Function} onClick
+ * @param {boolean} isClick
  * @returns {JSX.Element}
  */
-const IconSetting = ({ onClick = null }) => {
-  const [isClick, setIsClick] = useState(false);
+const IconSetting = ({ onClick = null, isClick = false }) => {
   const handleClick = (e) => {
     e.stopPropagation();
     onClick && onClick();
-    setIsClick(!isClick);
   };
   return <Icon css={cssSetting(isClick)} onClick={handleClick} />;
 };

@@ -24,6 +24,7 @@ const TextInput = ({
   suffix = null,
   radius = 10,
   mW = '100%',
+  h = 40,
   isClear = false,
 }) => {
   return (
@@ -58,7 +59,7 @@ const TextInput = ({
         type={type}
         prefix={prefix}
         suffix={suffix}
-        style={{ maxWidth: mW }}
+        style={{ maxWidth: mW, height: h }}
       />
     </ConfigProvider>
   );

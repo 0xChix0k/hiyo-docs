@@ -3,15 +3,31 @@ import { ReactComponent as IconApprove } from 'assets/icon-approve.svg';
 import { ReactComponent as IconBook } from 'assets/icon-book.svg';
 import { ReactComponent as IconReject } from 'assets/icon-reject.svg';
 import { ReactComponent as IconUpdate } from 'assets/icon-upadte.svg';
-import TodoList from 'data/TodoList';
 
 /**
  * @description useCollapse
  * @param {Function} setSelectId
+ * @param {Object} data
  * @returns  {Object}
  */
-const useCollapse = (setSelectId) => {
-  const { bookList } = TodoList();
+const useCollapse = (setSelectId, data) => {
+  /**
+   * @description getFilterData
+   * @param {string} status
+   * @returns
+   */
+  const getFilterData = (status) => {
+    return data
+      ?.filter((item) => item.Status === status)
+      .map((item) => {
+        return (
+          <div key={item.Id} onClick={() => setSelectId(item.Id)}>
+            {item.Comment}
+          </div>
+        );
+      });
+  };
+
   const bookItems = [
     {
       key: 'book',
@@ -21,13 +37,7 @@ const useCollapse = (setSelectId) => {
           待閱讀
         </Flex>
       ),
-      children: bookList.map((item) => {
-        return (
-          <div key={item.Id} onClick={() => setSelectId(item.Id)}>
-            {item.Comment}
-          </div>
-        );
-      }),
+      children: getFilterData('book'),
     },
   ];
   const unUpdateItems = [
@@ -39,7 +49,7 @@ const useCollapse = (setSelectId) => {
           待更新
         </Flex>
       ),
-      children: [<div>test</div>],
+      children: getFilterData('update'),
     },
   ];
   const approveItems = [
@@ -51,7 +61,7 @@ const useCollapse = (setSelectId) => {
           待簽核
         </Flex>
       ),
-      children: [<div>test</div>],
+      children: getFilterData('approve'),
     },
   ];
   const rejectItems = [
@@ -63,7 +73,7 @@ const useCollapse = (setSelectId) => {
           你有退件
         </Flex>
       ),
-      children: [<div>test</div>],
+      children: getFilterData('reject'),
     },
   ];
 
@@ -88,18 +98,6 @@ const useCollapse = (setSelectId) => {
     }, 0);
   };
 
-  /**
-   * @description getAllCount
-   * @returns {number}
-   */
-  const getAllCount = () => {
-    return (
-      getItemsCount(bookItems) +
-      getItemsCount(unUpdateItems) +
-      getItemsCount(approveItems) +
-      getItemsCount(rejectItems)
-    );
-  };
 
   return {
     bookItems,
@@ -108,7 +106,6 @@ const useCollapse = (setSelectId) => {
     rejectItems,
     onChangeCollapse,
     getItemsCount,
-    getAllCount,
   };
 };
 

@@ -2,13 +2,12 @@
 import { css } from '@emotion/react';
 import { ReactComponent as Icon } from 'assets/icon-close.svg';
 
-
 /**
  * @description IconClose
  * @returns {JSX.Element}
  */
-const IconClose = () => {
-  return <Icon css={cssClose} />;
+const IconClose = ({ wh = 20, onClick = null }) => {
+  return <Icon css={cssClose} width={wh} height={wh} onClick={onClick} />;
 };
 
 export { IconClose };

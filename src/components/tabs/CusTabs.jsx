@@ -47,4 +47,7 @@ const cssTabs = css`
   .ant-tabs-tab-btn {
     font-weight: 600;
   }
+  .ant-tabs-nav::before{
+    border-bottom: none; //移除最下方的橫線
+  }
 `;
