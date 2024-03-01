@@ -4,14 +4,16 @@ import { IconClose } from 'components/icon';
  * @description Custom TextInput component
  * @param {string|number} value
  * @param {function} onChange
- * @param {string} size
- * @param {string} placeholder
- * @param {string} type
- * @param {ReactNode} prefix
- * @param {ReactNode} suffix
- * @param {number} radius
- * @param {string} mW
- * @param {boolean} isClear
+ * @param {string} size='large'
+ * @param {string} placeholder=''
+ * @param {string} type='text'
+ * @param {ReactNode} prefix=null
+ * @param {ReactNode} suffix=null
+ * @param {number} radius=10
+ * @param {string} mW='100%'
+ * @param {number} h=40
+ * @param {boolean} isClear=false
+ * @param {boolean} isArea=false
  * @returns
  */
 const TextInput = ({
@@ -26,6 +28,7 @@ const TextInput = ({
   mW = '100%',
   h = 40,
   isClear = false,
+  isArea = false,
 }) => {
   return (
     <ConfigProvider
@@ -50,17 +53,35 @@ const TextInput = ({
         },
       }}
     >
-      <Input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        allowClear={isClear ? { clearIcon: <IconClose /> } : null}
-        size={size}
-        type={type}
-        prefix={prefix}
-        suffix={suffix}
-        style={{ maxWidth: mW, height: h }}
-      />
+      {isArea ? (
+        <Input.TextArea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          allowClear={isClear ? { clearIcon: <IconClose /> } : null}
+          size={size}
+          type={type}
+          prefix={prefix}
+          suffix={suffix}
+          style={{ maxWidth: mW, height: h }}
+          autoSize={{
+            minRows: 3,
+            maxRows: 3,
+          }}
+        />
+      ) : (
+        <Input
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          allowClear={isClear ? { clearIcon: <IconClose /> } : null}
+          size={size}
+          type={type}
+          prefix={prefix}
+          suffix={suffix}
+          style={{ maxWidth: mW, height: h }}
+        />
+      )}
     </ConfigProvider>
   );
 };

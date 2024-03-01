@@ -1,11 +1,20 @@
 import { ConfigProvider, Form } from 'antd';
-import { CusSelect, TextInput } from 'components';
+import { CusRangePicker, CusSelect, TextInput } from 'components';
 import { useSelector } from 'react-redux';
 import { selectDropdown } from 'store/dropdownSlice';
 
 const SearchContent = ({ tempData, setTempData }) => {
-  const { types, dates } = useSelector(selectDropdown);
+  const { types, dates, forms } = useSelector(selectDropdown);
 
+  const getNewOptions = (arr) => {
+    return [
+      {
+        Id: 'all',
+        Name: '全部',
+      },
+      ...arr,
+    ];
+  };
   const handleChange = (field, value) => {
     setTempData({ ...tempData, [field]: value });
   };
@@ -47,22 +56,21 @@ const SearchContent = ({ tempData, setTempData }) => {
         <Form.Item label="類型" name="type">
           <CusSelect
             value={tempData?.type}
-            options={types}
+            options={getNewOptions(types)}
             onChange={(v) => handleChange('type', v)}
           />
         </Form.Item>
         <Form.Item label="表單" name="formId">
-          <TextInput
+          <CusSelect
             value={tempData?.formId}
+            options={getNewOptions(forms)}
             onChange={(v) => handleChange('formId', v)}
-            placeholder="請選擇"
           />
         </Form.Item>
         <Form.Item label="日期" name="date">
-          <TextInput
-            value={tempData?.date}
-            onChange={(v) => handleChange('date', v)}
-            placeholder="請選擇"
+          <CusRangePicker
+            value={tempData?.dates}
+            onChange={(v) => handleChange('dates', v)}
           />
         </Form.Item>
       </Form>

@@ -8,7 +8,7 @@ import { genConfig } from 'react-nice-avatar';
 import { useGetReaders } from 'services/readerService';
 import { ReadersContent } from './ReadersContent';
 
-const DocContent = ({ docData }) => {
+const DocContent = ({ isMa, docData }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [linkId, setLinkId] = useState(null);
   const tabs = ['基本資料', '版本歷程'];
@@ -19,8 +19,8 @@ const DocContent = ({ docData }) => {
     {
       label: '觀看數',
       value: `${docData?.RealReadCunt} / ${docData?.ReadCount}`,
-      link: true,
-      onClick: () => setLinkId(docData?.Id),
+      link: isMa ? true : false,
+      onClick: () => (isMa ? setLinkId(docData?.Id) : null),
     },
   ];
   const {

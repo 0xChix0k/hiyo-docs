@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './locales/en/index';
 import zh from './locales/zh/index';
 
+
 const resources = {
   en: en,
   zh: zh,

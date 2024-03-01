@@ -81,6 +81,8 @@ const getStyles = (bgColor) => {
       ? '#222962'
       : bgColor === '#07CE6F'
       ? '#00A756'
+      : bgColor === '#EFF0F8'
+      ? '#DEE1F4'
       : '#fff';
   const bor = bgColor;
   const borH = bgH;
@@ -89,6 +91,8 @@ const getStyles = (bgColor) => {
       ? '#0066FF'
       : bgColor === '#2D336B' || bgColor === '#07CE6F'
       ? 'white'
+      : bgColor === '#EFF0F8'
+      ? '#2D336B'
       : '#000';
   const txH = tx;
 

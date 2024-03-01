@@ -3,8 +3,12 @@ import { Header } from 'components';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useGetDates, useGetTypes } from 'services/dropdownService';
-import { setDates, setTypes } from 'store/dropdownSlice';
+import {
+  useGetDates,
+  useGetForms,
+  useGetTypes,
+} from 'services/dropdownService';
+import { setDates, setForms, setTypes } from 'store/dropdownSlice';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -13,6 +17,7 @@ const Main = () => {
 
   const { data: types, isSuccess: typeSuccess } = useGetTypes();
   const { data: dates, isSuccess: dateSuccess } = useGetDates();
+  const { data: forms, isSuccess: formSuccess } = useGetForms();
 
   useEffect(() => {
     if (typeSuccess) {
@@ -21,7 +26,10 @@ const Main = () => {
     if (dateSuccess) {
       dispatch(setDates(dates));
     }
-  }, [typeSuccess, dateSuccess, dispatch, types, dates]);
+    if (formSuccess) {
+      dispatch(setForms(forms));
+    }
+  }, [typeSuccess, dateSuccess, dispatch, types, dates, formSuccess, forms]);
 
   useEffect(() => {
     if (location.pathname === '/') {

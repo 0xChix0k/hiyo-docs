@@ -1,8 +1,21 @@
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * @description use Login
+ * @param {string} userId 
+ * @param {string} password 
+ * @param {boolean} remin 
+ * @param {Function} setResult 
+ * @returns {object}
+ */
 const useLogin = (userId, password, remin, setResult) => {
   const navigate = useNavigate();
+
+  /**
+   * @description onCheck
+   * @returns {void}
+   */
   const onCheck = () => {
     if (userId === 'hiyo' && password === '000') {
       setResult(false);

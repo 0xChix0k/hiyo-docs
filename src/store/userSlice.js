@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { genConfig } from 'react-nice-avatar';
 
 export const initUser = {
+  role: 'manager',
   avatar: genConfig(),
 };
 

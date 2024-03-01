@@ -1,11 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Flex } from 'antd';
-import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { ReactComponent as IconListCheck } from 'assets/icon-list_check.svg';
 import { CusModal } from 'components';
 import { CusCollapse } from 'components/collapse';
-import { DocContent } from 'components/modal/content';
-import { useCollapse } from 'hooks/todo';
+import { useCollapse, useModalProps } from 'hooks/todo';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetTodo, useGetTodoList } from 'services/todoService';
@@ -34,16 +32,20 @@ const Todo = () => {
   const [approveColl, setApproveColl] = useState(approveItems[0]?.key || []);
   const [rejectColl, setRejectColl] = useState(rejectItems[0]?.key || []);
 
+  const { mProps } = useModalProps(todoData);
+
   return (
     <Flex vertical align="center" css={cssTodo}>
       <CusModal
         open={!!selectId && dataSuccess}
-        title={{ text: '', icon: IconForm }}
-        isClose={true}
-        isFooter={false}
+        title={mProps?.title}
+        isClose={mProps?.isClose}
+        isFooter={mProps?.isFooter}
+        onOk={mProps?.onOk}
+        okStr={mProps?.okStr}
         onCancel={() => setSelectId('')}
-        h={640}
-        content={<DocContent docData={todoData} />}
+        h={mProps.h}
+        content={mProps?.content}
       />
       <div className="todo-container">
         <div className="title">

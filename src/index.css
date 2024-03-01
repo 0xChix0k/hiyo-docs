@@ -108,3 +108,40 @@ code {
 .ant-modal-root .ant-modal-mask {
   background-color: rgba(12, 16, 53, 0.8);
 }
+
+.ant-picker-dropdown {
+  .ant-picker-range-arrow{
+    display: none !important;
+  }
+  .ant-picker-date-panel {
+    .ant-picker-body {
+      padding: 8px 8px;
+      .ant-picker-content {
+        th {
+          height: 30px;
+          font-weight: 600;
+        }
+        .ant-picker-cell {
+          padding: 0;
+          .ant-picker-cell-inner {
+            border-radius: 50px;
+            font-weight: 500;
+          }
+        }
+        .ant-picker-cell-today {
+          .ant-picker-cell-inner::before {
+            border: 1px solid var(--primary-default);
+            border-radius: 50px;
+          }
+        }
+        .ant-picker-cell-range-start,
+        .ant-picker-cell-range-end {
+          .ant-picker-cell-inner {
+            background-color: var(--primary-default);
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

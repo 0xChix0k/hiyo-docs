@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { Flex } from 'antd';
 import { ReactComponent as IconAdd } from 'assets/icon-add.svg';
+import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { ReactComponent as IconSearch } from 'assets/icon-search.svg';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { CusAvatar, CusButton, CusModal, CusTabs, TextInput } from 'components';
 import { IconSetting } from 'components/icon';
-import { SearchContent } from 'components/modal/content';
+import { FormContent, SearchContent } from 'components/modal/content';
 import items from 'data/headerTabs';
 import { useSearch } from 'hooks';
 import { useEffect, useState } from 'react';
@@ -22,7 +23,15 @@ const Header = () => {
   const { searchData } = useSelector(selectCommon);
   const [tabKey, setTabKey] = useState(location.pathname.slice(1));
   const [openFilter, setOpenFilter] = useState(false);
+  const [openNewForm, setOpenNewForm] = useState(false);
   const [tempData, setTempData] = useState(searchData);
+  const [newFormData, setNewFormData] = useState({
+    typeId: '',
+    formId: '',
+    title: '',
+    des: '',
+    file: null,
+  });
 
   const { onInputSearch, onSearch } = useSearch();
 
@@ -53,6 +62,17 @@ const Header = () => {
           <SearchContent tempData={tempData} setTempData={setTempData} />
         }
       />
+      <CusModal
+        open={openNewForm}
+        title={{ text: '新表單', icon: <IconForm /> }}
+        isClose={true}
+        onOk={() => console.log('新增表單')}
+        onCancel={() => setOpenNewForm(false)}
+        okStr="提交"
+        w={800}
+        h={661}
+        content={<FormContent data={newFormData} setData={setNewFormData} />}
+      />
       <Flex align="center" gap={24}>
         <Logo style={{ cursor: 'pointer' }} onClick={() => navigate('/')} />
         <CusTabs tabKey={tabKey} items={items} />
@@ -79,6 +99,7 @@ const Header = () => {
           icon={<IconAdd />}
           bgColor="#2D336B"
           tColor="white"
+          onClick={() => setOpenNewForm(true)}
         />
         <CusAvatar config={userInfo.avatar} />
       </Flex>

@@ -9,8 +9,9 @@ import { useState } from 'react';
  * @param {Array} options
  * @param {string|number} value
  * @param {function} onChange
- * @param {boolean} disabled
- * @param {string} dw
+ * @param {boolean} disabled=false
+ * @param {string} dw=null
+ * @param {string} placeholder="請選擇"
  * @returns
  */
 const CusSelect = ({
@@ -19,6 +20,7 @@ const CusSelect = ({
   onChange,
   disabled = false,
   dw = null,
+  placeholder="請選擇"
 }) => {
   const genOptions = options.map((item, index) => {
     return {
@@ -36,6 +38,8 @@ const CusSelect = ({
           borderRadiusLG: 10,
           fontSizeLG: 14,
           colorText: 'var(--grey-default)',
+          colorTextPlaceholder: 'var(--grey-50)',
+          paddingSM: 15,
         },
         components: {
           Select: {
@@ -56,7 +60,7 @@ const CusSelect = ({
         disabled={disabled}
         popupMatchSelectWidth={!dw ? true : dw}
         size="large"
-        placeholder="請選擇"
+        placeholder={placeholder}
         dropdownStyle={{ padding: '10px 0' }}
         onDropdownVisibleChange={(open) => setOpen(open)}
         suffixIcon={

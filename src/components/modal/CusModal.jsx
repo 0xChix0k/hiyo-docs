@@ -107,8 +107,8 @@ const CusHeader = ({ title, isClose, closeFn }) => {
   return (
     <Flex align="center" style={{ position: 'relative' }}>
       <Flex align="center" gap={8}>
-        {title?.icon && <title.icon />}
-        {title?.text && <div>{title.text}</div>}
+        {title?.icon && title?.icon }
+        {title?.text && <div>{title?.text}</div>}
       </Flex>
       {isClose && (
         <Flex align="center" style={{ position: 'absolute', right: 0 }}>
@@ -137,6 +137,7 @@ const cssModal = (padding, h) => css`
       margin-bottom: 0;
     }
     .ant-modal-body {
+      width: 100%;
       flex: 1 1 72px;
       overflow-y: hidden;
       display: flex;
