@@ -31,11 +31,22 @@ const useSearch = () => {
    * @description search data
    * @returns {void}
    */
-  const onSearch = (newSreachData) => {
+  const onSearch = (newSreachData, setOpenFilter) => {
     dispatch(setAllSearchData(newSreachData));
+    setOpenFilter && setOpenFilter(false);
+    console.log('searchData:', newSreachData);
   };
 
-  return { onInputSearch, onSearchItem, onSearch };
+  const isFiltered = (data) => {
+    return (
+      !!data.from ||
+      data.type !== 'all' ||
+      data.formId !== 'all' ||
+      data.dates.length > 0
+    );
+  };
+
+  return { onInputSearch, onSearchItem, onSearch, isFiltered };
 };
 
 export { useSearch };

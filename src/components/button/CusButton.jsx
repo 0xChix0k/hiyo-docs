@@ -83,13 +83,15 @@ const getStyles = (bgColor) => {
       ? '#00A756'
       : bgColor === '#EFF0F8'
       ? '#DEE1F4'
+      : bgColor === '#EF4564'
+      ? '#C7334E'
       : '#fff';
   const bor = bgColor;
   const borH = bgH;
   const tx =
     bgColor === '#F1F6FF'
       ? '#0066FF'
-      : bgColor === '#2D336B' || bgColor === '#07CE6F'
+      : bgColor === '#2D336B' || bgColor === '#07CE6F' || bgColor === '#EF4564'
       ? 'white'
       : bgColor === '#EFF0F8'
       ? '#2D336B'

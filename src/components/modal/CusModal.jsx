@@ -7,7 +7,8 @@ import { IconClose } from 'components/icon';
 /**
  * @description Custom Modal
  * @param {boolean} open=false
- * @param {object} title={} { text: '', icon: IconForm }
+ * @param {object} title={} { text: '', icon: IconForm,sStr: '', sColor: ''}
+ * @param {number} titleSize=18
  * @param {boolean} isClose=false
  * @param {boolean} isFooter=true
  * @param {function} onOk=null
@@ -16,6 +17,9 @@ import { IconClose } from 'components/icon';
  * @param {function} onCancel=null
  * @param {string} cancelType='text'
  * @param {string} cancelStr=''
+ * @param {function} exFn=null
+ * @param {string} exType='default'
+ * @param {string} exStr='退件'
  * @param {number} w=450
  * @param {number} h=240
  * @param {string} padding='30px 30px'
@@ -25,6 +29,7 @@ import { IconClose } from 'components/icon';
 const CusModal = ({
   open = false,
   title = {},
+  titleSize = 18,
   isClose = false,
   isFooter = true,
   onOk = null,
@@ -33,6 +38,9 @@ const CusModal = ({
   onCancel = null,
   cancelType = 'text',
   cancelStr = '',
+  exFn = null,
+  exType = 'default',
+  exStr = '退件',
   w = 450,
   h = 240,
   padding = '30px 30px',
@@ -53,7 +61,12 @@ const CusModal = ({
         open={open}
         title={
           !!Object.keys(title)?.length || isClose ? (
-            <CusHeader title={title} isClose={isClose} closeFn={onCancel} />
+            <CusHeader
+              title={title}
+              titleSize={titleSize}
+              isClose={isClose}
+              closeFn={onCancel}
+            />
           ) : null
         }
         onOk={onOk}
@@ -75,15 +88,26 @@ const CusModal = ({
                     radius={37}
                   />
                 ),
-                <CusButton
-                  key="submit"
-                  text={okStr}
-                  onClick={onOk}
-                  bgColor="#07CE6F"
-                  tColor="white"
-                  type={okType}
-                  radius={37}
-                />,
+                exFn && (
+                  <CusButton
+                    key="exFn"
+                    text={exStr}
+                    onClick={exFn}
+                    type={exType}
+                    bgColor="#EF4564"
+                    radius={37}
+                  />
+                ),
+                onOk && (
+                  <CusButton
+                    key="submit"
+                    text={okStr}
+                    onClick={onOk}
+                    bgColor="#07CE6F"
+                    type={okType}
+                    radius={37}
+                  />
+                ),
               ]
             : null
         }
@@ -103,12 +127,13 @@ export { CusModal };
  * @param {function} closeFn
  * @returns {JSX.Element}
  */
-const CusHeader = ({ title, isClose, closeFn }) => {
+const CusHeader = ({ title, titleSize, isClose, closeFn }) => {
   return (
-    <Flex align="center" style={{ position: 'relative' }}>
-      <Flex align="center" gap={8}>
-        {title?.icon && title?.icon }
-        {title?.text && <div>{title?.text}</div>}
+    <Flex align="center" css={cssHeader(titleSize, title?.sColor)}>
+      <Flex align="center" gap={8} className="left">
+        {title?.icon && title?.icon}
+        {title?.text && <div className="text">{title?.text}</div>}
+        {title?.sStr && <div className="status">{title?.sStr}</div>}
       </Flex>
       {isClose && (
         <Flex align="center" style={{ position: 'absolute', right: 0 }}>
@@ -118,6 +143,22 @@ const CusHeader = ({ title, isClose, closeFn }) => {
     </Flex>
   );
 };
+
+const cssHeader = (titleSize, sColor) => css`
+  position: relative;
+  .left {
+    .text {
+      font-size: ${titleSize}px;
+      color: var(--grey-default);
+      font-weight: 600;
+    }
+    .status {
+      font-size: 14px;
+      font-weight: 600;
+      color: ${sColor || 'var(--grey-default)'};
+    }
+  }
+`;
 
 /**
  * @description cssModal
@@ -148,6 +189,7 @@ const cssModal = (padding, h) => css`
       margin-top: 0;
       display: flex;
       justify-content: end;
+      gap: 8px;
     }
   }
 `;

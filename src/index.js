@@ -1,14 +1,24 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
+import store from 'store';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Meta from './Meta';
 import './i18n';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <App />
+  <QueryClientProvider client={queryClient}>
+    <Meta />
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </QueryClientProvider>
   // </React.StrictMode>
 );
 

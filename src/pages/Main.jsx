@@ -40,7 +40,7 @@ const Main = () => {
   return (
     <Flex vertical style={{ width: '100%', height: '100%' }}>
       <Header />
-      <Flex vertical flex={'1 1 100%'} style={{ overflowY: 'auto' }}>
+      <Flex vertical flex={'1 1 100%'} style={{ overflowY: 'auto' }} >
         <Outlet />
       </Flex>
     </Flex>

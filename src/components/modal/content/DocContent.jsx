@@ -59,7 +59,7 @@ const DocContent = ({ isMa, docData }) => {
               <Flex key={index} vertical gap={4} className="info">
                 <div className="label">{item.label}</div>
                 <Flex align="center" gap={4}>
-                  {item.avatar && <CusAvatar w="25px" h="25px" />}
+                  {item.avatar && <CusAvatar wh={25} />}
                   <div
                     className={`${item.link && 'link'} value`}
                     onClick={item.onClick || null}

@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { ConfigProvider, Input } from 'antd';
 import { IconClose } from 'components/icon';
 /**
@@ -14,6 +16,8 @@ import { IconClose } from 'components/icon';
  * @param {number} h=40
  * @param {boolean} isClear=false
  * @param {boolean} isArea=false
+ * @param {number} areaSize=3
+ * @param {boolean} isErr=false
  * @returns
  */
 const TextInput = ({
@@ -29,12 +33,14 @@ const TextInput = ({
   h = 40,
   isClear = false,
   isArea = false,
+  areaSize = 3,
+  isErr = false,
 }) => {
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorBgContainer: 'var(--grey-20)',
+          // colorBgContainer: isErr ? 'white' : 'var(--grey-20)',
           colorBorder: 'var(--grey-20)',
           borderRadiusLG: radius,
           colorTextPlaceholder: 'var(--grey-50)',
@@ -42,9 +48,9 @@ const TextInput = ({
         },
         components: {
           Input: {
-            hoverBg: 'var(--grey-20)',
+            // hoverBg: 'var(--grey-20)',
             hoverBorderColor: '#000',
-            activeBg: 'var(--grey-20)',
+            // activeBg: 'var(--grey-20)',
             activeBorderColor: 'var(--blue-bright)',
             inputFontSizeLG: 14,
             paddingInlineLG: prefix ? 10 : 14,
@@ -63,10 +69,10 @@ const TextInput = ({
           type={type}
           prefix={prefix}
           suffix={suffix}
-          style={{ maxWidth: mW, height: h }}
+          css={cssInput(mW, h, isErr)}
           autoSize={{
-            minRows: 3,
-            maxRows: 3,
+            minRows: areaSize,
+            maxRows: areaSize,
           }}
         />
       ) : (
@@ -79,7 +85,7 @@ const TextInput = ({
           type={type}
           prefix={prefix}
           suffix={suffix}
-          style={{ maxWidth: mW, height: h }}
+          css={cssInput(mW, h, isErr)}
         />
       )}
     </ConfigProvider>
@@ -87,3 +93,12 @@ const TextInput = ({
 };
 
 export { TextInput };
+
+const cssInput = (mW, h, isErr) => css`
+  max-width: ${mW};
+  height: ${h}px;
+  background: ${isErr ? 'white' : 'var(--grey-20)'};
+  :hover {
+    background: ${isErr ? 'white' : 'var(--grey-20)'};
+  }
+`;

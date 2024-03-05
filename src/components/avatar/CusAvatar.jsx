@@ -1,15 +1,13 @@
 import Avatar, { genConfig } from 'react-nice-avatar';
 
-
 /**
  * @description Custom Avatar
- * @param {string} w='40px' 
- * @param {string} h='40px'
+ * @param {string} wh=40
  * @param {object} config=genConfig()
- * @returns 
+ * @returns
  */
-const CusAvatar = ({ w = '40px', h = '40px', config = genConfig() }) => {
-  return <Avatar style={{ width: w, height: h }} {...config} />;
+const CusAvatar = ({ wh = 40, config = genConfig() }) => {
+  return <Avatar style={{ width: wh, height: wh }} {...config} />;
 };
 
 export { CusAvatar };

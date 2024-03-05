@@ -2,10 +2,16 @@ import { ConfigProvider, Form } from 'antd';
 import { CusRangePicker, CusSelect, TextInput } from 'components';
 import { useSelector } from 'react-redux';
 import { selectDropdown } from 'store/dropdownSlice';
+import { useEffect } from 'react';
 
-const SearchContent = ({ tempData, setTempData }) => {
+const SearchContent = ({ formInstance,tempData, setTempData }) => {
   const { types, dates, forms } = useSelector(selectDropdown);
-
+  const [form] = Form.useForm();
+  useEffect(() => {
+    if (formInstance) {
+      formInstance.current = form; // 將表單實例暴露給父組件
+    }
+  }, [form, formInstance]);
   const getNewOptions = (arr) => {
     return [
       {
@@ -32,6 +38,7 @@ const SearchContent = ({ tempData, setTempData }) => {
       }}
     >
       <Form
+        form={form}
         name="searchForm"
         colon={false}
         layout="vertical"

@@ -3,6 +3,7 @@ import { Flex } from 'antd';
 import { ReactComponent as IconListCheck } from 'assets/icon-list_check.svg';
 import { CusModal } from 'components';
 import { CusCollapse } from 'components/collapse';
+import { useConfirmProps } from 'hooks';
 import { useCollapse, useModalProps } from 'hooks/todo';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -13,6 +14,8 @@ import { cssTodo } from './todoCss';
 const Todo = () => {
   const { searchData } = useSelector(selectCommon);
   const [selectId, setSelectId] = useState('');
+  const [openConfirm, setOpenConfirm] = useState('');
+  const [rejectRemark, setRejectRemark] = useState('');
   const { data: todos, isSuccess, isLoading, error } = useGetTodoList();
   const {
     data: todoData,
@@ -32,7 +35,14 @@ const Todo = () => {
   const [approveColl, setApproveColl] = useState(approveItems[0]?.key || []);
   const [rejectColl, setRejectColl] = useState(rejectItems[0]?.key || []);
 
-  const { mProps } = useModalProps(todoData);
+  const { mProps } = useModalProps(todoData, setOpenConfirm);
+  const { confirmProps } = useConfirmProps(
+    openConfirm,
+    setOpenConfirm,
+    setSelectId,
+    rejectRemark,
+    setRejectRemark
+  );
 
   return (
     <Flex vertical align="center" css={cssTodo}>
@@ -44,8 +54,24 @@ const Todo = () => {
         onOk={mProps?.onOk}
         okStr={mProps?.okStr}
         onCancel={() => setSelectId('')}
+        exFn={mProps?.exFn}
+        exStr={mProps?.exStr}
+        w={mProps.w}
         h={mProps.h}
         content={mProps?.content}
+      />
+      <CusModal
+        open={!!openConfirm}
+        title={confirmProps?.title}
+        titleSize={20}
+        onOk={confirmProps?.onOk}
+        okStr={'核准'}
+        exFn={confirmProps?.exFn}
+        exStr={'退件'}
+        onCancel={() => setOpenConfirm('')}
+        cancelStr={'取消'}
+        h={confirmProps?.h}
+        content={confirmProps?.content}
       />
       <div className="todo-container">
         <div className="title">

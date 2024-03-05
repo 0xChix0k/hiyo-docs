@@ -2,6 +2,10 @@ import { useQuery } from 'react-query';
 // import apiClient from './apiClient';
 import todoList from 'data/todolist.json';
 
+/**
+ * @description useGetTodoList
+ * @returns {Array<object>}
+ */
 export const useGetTodoList = () => {
   return useQuery(
     'todoList',
@@ -15,6 +19,11 @@ export const useGetTodoList = () => {
   );
 };
 
+/**
+ * @description useGetTodo
+ * @param {string|number} id
+ * @returns {object}
+ */
 export const useGetTodo = (id) => {
   return useQuery(
     ['todoData', id],

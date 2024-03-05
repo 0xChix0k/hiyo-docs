@@ -48,7 +48,7 @@ export { ReadersContent };
 const ReaderItem = ({ item }) => {
   return (
     <Flex gap={10} align="center" className="item">
-      <CusAvatar w={'25px'} h={'25px'} />
+      <CusAvatar wh={25} />
       <div>
         {item?.Dep} {item?.Name}
       </div>

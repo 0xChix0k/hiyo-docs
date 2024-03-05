@@ -54,26 +54,26 @@ const useCollapse = (setSelectId, data) => {
   ];
   const approveItems = [
     {
-      key: 'approve',
+      key: 'pending',
       label: (
         <Flex gap={16} align="center">
           <IconApprove />
           待簽核
         </Flex>
       ),
-      children: getFilterData('approve'),
+      children: getFilterData('pending'),
     },
   ];
   const rejectItems = [
     {
-      key: 'reject',
+      key: 'rejected',
       label: (
         <Flex gap={16} align="center">
           <IconReject />
           你有退件
         </Flex>
       ),
-      children: getFilterData('reject'),
+      children: getFilterData('rejected'),
     },
   ];
 

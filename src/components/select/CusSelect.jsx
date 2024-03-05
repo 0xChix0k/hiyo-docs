@@ -12,6 +12,7 @@ import { useState } from 'react';
  * @param {boolean} disabled=false
  * @param {string} dw=null
  * @param {string} placeholder="請選擇"
+ * @param {boolean} isErr=false
  * @returns
  */
 const CusSelect = ({
@@ -20,7 +21,8 @@ const CusSelect = ({
   onChange,
   disabled = false,
   dw = null,
-  placeholder="請選擇"
+  placeholder = '請選擇',
+  isErr = false,
 }) => {
   const genOptions = options.map((item, index) => {
     return {
@@ -43,7 +45,7 @@ const CusSelect = ({
         },
         components: {
           Select: {
-            selectorBg: 'var(--grey-20)',
+            selectorBg: isErr?'white':'var(--grey-20)',
             optionHeight: 40,
             optionActiveBg: 'var(--grey-10)',
             optionPadding: '11px 14px',
@@ -68,7 +70,8 @@ const CusSelect = ({
             style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
           />
         }
-        css={cssSelect}
+        css={cssSelect(isErr)}
+        className="efarrehthtwwwwwwwwwww"
       />
     </ConfigProvider>
   );
@@ -76,7 +79,10 @@ const CusSelect = ({
 
 export { CusSelect };
 
-const cssSelect = css`
+const cssSelect = (isErr) => css`
+  /* .ant-select-selector {
+    background: ${isErr ? '#fff' : 'var(--grey-20)'};
+  } */
   :not(.ant-select-focused) {
     .ant-select-selector {
       :hover {
