@@ -17,7 +17,6 @@ import { IconClose } from 'components/icon';
  * @param {boolean} isClear=false
  * @param {boolean} isArea=false
  * @param {number} areaSize=3
- * @param {boolean} isErr=false
  * @returns
  */
 const TextInput = ({
@@ -34,7 +33,6 @@ const TextInput = ({
   isClear = false,
   isArea = false,
   areaSize = 3,
-  isErr = false,
 }) => {
   return (
     <ConfigProvider
@@ -69,7 +67,7 @@ const TextInput = ({
           type={type}
           prefix={prefix}
           suffix={suffix}
-          css={cssInput(mW, h, isErr)}
+          css={cssInput(mW, h)}
           autoSize={{
             minRows: areaSize,
             maxRows: areaSize,
@@ -85,7 +83,7 @@ const TextInput = ({
           type={type}
           prefix={prefix}
           suffix={suffix}
-          css={cssInput(mW, h, isErr)}
+          css={cssInput(mW, h)}
         />
       )}
     </ConfigProvider>
@@ -94,11 +92,12 @@ const TextInput = ({
 
 export { TextInput };
 
-const cssInput = (mW, h, isErr) => css`
+const cssInput = (mW, h) => css`
   max-width: ${mW};
   height: ${h}px;
-  background: ${isErr ? 'white' : 'var(--grey-20)'};
-  :hover {
-    background: ${isErr ? 'white' : 'var(--grey-20)'};
+  background: var(--grey-20) !important;
+  :is(.ant-input-status-error) {
+    background: white !important;
+    border-width: 1.5px !important;
   }
 `;

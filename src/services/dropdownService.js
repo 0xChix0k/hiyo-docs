@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query';
 // import apiClient from './apiClient';
-import dates from 'data/dropdown/dates.json';
 import forms from 'data/dropdown/form.json';
 import types from 'data/dropdown/types.json';
 
@@ -10,19 +9,6 @@ export const useGetTypes = () => {
     async () => {
       // console.log('todoList:', todoList);
       return types;
-    },
-    {
-      // staleTime: HOUR_FOR_SEC,
-    }
-  );
-};
-
-export const useGetDates = () => {
-  return useQuery(
-    'dateOptions',
-    async () => {
-      // console.log('todoList:', todoList);
-      return dates;
     },
     {
       // staleTime: HOUR_FOR_SEC,

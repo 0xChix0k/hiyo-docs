@@ -1,18 +1,24 @@
 /** @jsxImportSource @emotion/react */
 import { Flex } from 'antd';
 import { ReactComponent as IconAdd } from 'assets/icon-add.svg';
-import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { ReactComponent as IconSearch } from 'assets/icon-search.svg';
 import { ReactComponent as Logo } from 'assets/logo.svg';
-import { CusAvatar, CusButton, CusModal, CusTabs, TextInput } from 'components';
+import {
+  CusAvatar,
+  CusButton,
+  CusDropdown,
+  CusModal,
+  CusTabs,
+  TextInput,
+} from 'components';
 import { IconSetting } from 'components/icon';
-import { FormContent, SearchContent } from 'components/modal/content';
-import items from 'data/headerTabs';
+import { SearchContent } from 'components/modal/content';
 import { useFormCommon, useSearch } from 'hooks';
+import { useAddForm, useProfile, useTabs } from 'hooks/header';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { selectCommon } from 'store/commonSlice';
+import { initSearchData, selectCommon } from 'store/commonSlice';
 import { selectUser } from 'store/userSlice';
 import { cssHeader } from './headerCss';
 
@@ -36,16 +42,21 @@ const Header = () => {
     Files: [],
   };
   const [newFormData, setNewFormData] = useState(initFormData);
+  const { addModalProps } = useAddForm(
+    addFormRef,
+    setOpenNewForm,
+    newFormData,
+    setNewFormData,
+    initFormData
+  );
+  const { tabs } = useTabs(userInfo.role === 'manager');
+  const { profileList, profileClick } = useProfile();
 
   const { onInputSearch, onSearch, isFiltered } = useSearch();
 
   useEffect(() => {
     setTabKey(location.pathname.slice(1));
   }, [location.pathname]);
-
-  useEffect(() => {
-    setTempData(searchData);
-  }, [searchData]);
 
   return (
     <Flex
@@ -61,8 +72,18 @@ const Header = () => {
         onOk={() =>
           onValidate(searchRef, () => onSearch(tempData, setOpenFilter))
         }
-        onCancel={() => setOpenFilter(false)}
         okStr="搜尋"
+        exFn={() => {
+          const resetData = initSearchData;
+          setTempData(resetData);
+          if (searchRef.current) {
+            searchRef.current.setFieldsValue(resetData);
+          }
+        }}
+        exBgColor={''}
+        exType="text"
+        exStr="重設"
+        onCancel={() => setOpenFilter(false)}
         h={650}
         content={
           <SearchContent
@@ -72,34 +93,22 @@ const Header = () => {
           />
         }
       />
-      <CusModal
-        open={openNewForm}
-        title={{ text: '新表單', icon: <IconForm /> }}
-        isClose={true}
-        onOk={() =>
-          onValidate(addFormRef, () => {
-            console.log('新增表單');
-            setOpenNewForm(false);
-          })
-        }
-        onCancel={() => {
-          setNewFormData(initFormData);
-          setOpenNewForm(false);
-        }}
-        okStr="提交"
-        w={800}
-        h={661}
-        content={
-          <FormContent
-            formInstance={addFormRef}
-            data={newFormData}
-            setData={setNewFormData}
-          />
-        }
-      />
+      {openNewForm && (
+        <CusModal
+          open={openNewForm}
+          title={addModalProps?.title}
+          isClose={addModalProps?.isClose}
+          onOk={addModalProps?.onOk}
+          onCancel={addModalProps?.onCancel}
+          okStr={addModalProps?.okStr}
+          w={addModalProps?.w}
+          h={addModalProps?.h}
+          content={addModalProps?.content}
+        />
+      )}
       <Flex align="center" gap={24}>
         <Logo style={{ cursor: 'pointer' }} onClick={() => navigate('/')} />
-        <CusTabs tabKey={tabKey} items={items} />
+        <CusTabs tabKey={tabKey} items={tabs} />
       </Flex>
       <Flex align="center" gap={20}>
         <Flex flex={'1 1 300px'}>
@@ -125,7 +134,11 @@ const Header = () => {
           tColor="white"
           onClick={() => setOpenNewForm(true)}
         />
-        <CusAvatar config={userInfo.avatar} />
+        <CusDropdown
+          items={profileList}
+          onClick={profileClick}
+          btn={<CusAvatar config={userInfo.avatar} />}
+        />
       </Flex>
     </Flex>
   );

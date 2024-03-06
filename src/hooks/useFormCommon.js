@@ -3,10 +3,13 @@ const useFormCommon = () => {
     required: true,
     message: '必填',
   };
-  const reqiuredFileObj = {
-    required: true,
-    message: '請上傳檔案',
-  };
+  const fileRules = [
+    {
+      required: true,
+      message:'請上傳檔案',
+      type: 'array'
+    }
+  ];
 
   const onValidate = async (formRef, exfn = null) => {
     try {
@@ -20,7 +23,7 @@ const useFormCommon = () => {
     }
   };
 
-  return { requiredObj, reqiuredFileObj, onValidate };
+  return { requiredObj, fileRules, onValidate };
 };
 
 export { useFormCommon };

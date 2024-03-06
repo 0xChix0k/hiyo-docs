@@ -9,6 +9,8 @@ import {
   useGetTypes,
 } from 'services/dropdownService';
 import { setDates, setForms, setTypes } from 'store/dropdownSlice';
+import { useSearch } from 'hooks';
+import  Result  from './Result';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -16,20 +18,17 @@ const Main = () => {
   const dispatch = useDispatch();
 
   const { data: types, isSuccess: typeSuccess } = useGetTypes();
-  const { data: dates, isSuccess: dateSuccess } = useGetDates();
   const { data: forms, isSuccess: formSuccess } = useGetForms();
 
   useEffect(() => {
     if (typeSuccess) {
       dispatch(setTypes(types));
     }
-    if (dateSuccess) {
-      dispatch(setDates(dates));
-    }
+
     if (formSuccess) {
       dispatch(setForms(forms));
     }
-  }, [typeSuccess, dateSuccess, dispatch, types, dates, formSuccess, forms]);
+  }, [typeSuccess, dispatch, types, formSuccess, forms]);
 
   useEffect(() => {
     if (location.pathname === '/') {
@@ -37,11 +36,13 @@ const Main = () => {
     }
   });
 
+  const { isSearched } = useSearch();
+
   return (
     <Flex vertical style={{ width: '100%', height: '100%' }}>
       <Header />
-      <Flex vertical flex={'1 1 100%'} style={{ overflowY: 'auto' }} >
-        <Outlet />
+      <Flex vertical flex={'1 1 100%'} style={{ overflowY: 'auto' }}>
+        {isSearched ? <Result /> : <Outlet />}
       </Flex>
     </Flex>
   );

@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initSearchData = {
   text: '',
   from: '',
-  type: 'all',
+  typeId: 'all',
   formId: 'all',
+  dateId: 'all',
   dates: [],
 };
 

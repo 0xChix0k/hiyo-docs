@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Flex, Form } from 'antd';
+import { Divider, Flex, Form } from 'antd';
 import { ReactComponent as IconCheck2 } from 'assets/icon-check_2.svg';
 import { ReactComponent as IconUpload } from 'assets/icon-upload.svg';
 import {
@@ -14,6 +14,7 @@ import {
 import { useAddFiles, useFormCommon } from 'hooks';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useGetReaders } from 'services/readerService';
 import { selectDropdown } from 'store/dropdownSlice';
 import { ViewContent } from '.';
 
@@ -24,26 +25,32 @@ const FormContent = ({ formInstance, data, setData = null }) => {
       formInstance.current = form; // 將表單實例暴露給父組件
     }
   }, [form, formInstance]);
+  console.log('data', data);
+  const {
+    data: readersData,
+    isLoading,
+    isSuccess,
+  } = useGetReaders(data?.Id === 7 ? 7 : null);
+  const isList = !!readersData?.Readers?.length && isSuccess;
   const { types, forms } = useSelector(selectDropdown);
   const fileInput = useRef(null);
   const { onAddFile } = useAddFiles();
-  const testList = [];
-  const isList = !!testList.length;
   const isOnlyView = data?.Status === 'pending' || data?.Status === 'approved';
   const isRejected = data?.Status === 'rejected';
-  const { requiredObj, reqiuredFileObj } = useFormCommon();
+  const { requiredObj, fileRules } = useFormCommon();
   const handleChange = (field, value) => {
     setData({ ...data, [field]: value });
   };
   const handleAddFiles = (files) => {
-    setData({ ...data, Files: files });
+    const updatedFiles = [...data.Files, ...files];
+    setData({ ...data, Files: updatedFiles });
+    form.setFieldsValue({ files: updatedFiles });
   };
 
-
   return (
-    <Flex vertical css={cssFormContent(isList)}>
+    <Flex vertical css={cssFormContent(isRejected, isList)}>
       {isRejected && <RejInfo data={data?.RejectInfo} />}
-      <Flex gap={24} className="flex-div">
+      <Flex gap={24} className="flex-div" flex="1 1 auto">
         <Flex vertical gap={24} flex={'1 1 auto'} className="left">
           {isOnlyView ? (
             <ViewContent data={data} />
@@ -55,7 +62,7 @@ const FormContent = ({ formInstance, data, setData = null }) => {
               />
               <Form form={form} layout="vertical" autoComplete="off">
                 <Form.Item
-                  name="type"
+                  name="TypeId"
                   rules={[requiredObj]}
                   style={{
                     display: 'inline-block',
@@ -68,7 +75,6 @@ const FormContent = ({ formInstance, data, setData = null }) => {
                     options={types}
                     onChange={(v) => handleChange('TypeId', v)}
                     placeholder="類型 *"
-                    isErr={!!form.getFieldError('type').length}
                   />
                 </Form.Item>
                 <Form.Item
@@ -97,7 +103,6 @@ const FormContent = ({ formInstance, data, setData = null }) => {
                     value={data?.Comment}
                     onChange={(v) => handleChange('Comment', v)}
                     placeholder="標題 *"
-                    isErr={!!form.getFieldError('title').length}
                   />
                 </Form.Item>
                 <Form.Item name="des" initialValue={data?.Des}>
@@ -109,9 +114,9 @@ const FormContent = ({ formInstance, data, setData = null }) => {
                   />
                 </Form.Item>
                 <Form.Item
-                  name="file"
-                  rules={[reqiuredFileObj]}
-                  initialValue={data.Files?.Files}
+                  name="files"
+                  rules={fileRules}
+                  initialValue={data?.Files}
                 >
                   <Flex vertical gap={16}>
                     <CusButton
@@ -121,7 +126,7 @@ const FormContent = ({ formInstance, data, setData = null }) => {
                       bgColor={'#EFF0F8'}
                       htmlType="button"
                     />
-                    {data.Files.map((item, index) => (
+                    {data?.Files.map((item, index) => (
                       <FileBox key={index} file={item} />
                     ))}
                   </Flex>
@@ -134,23 +139,15 @@ const FormContent = ({ formInstance, data, setData = null }) => {
           <Flex align="center" flex={'0 0 auto'} className="title">
             簽核流程
           </Flex>
-          <Flex
-            vertical
-            align="center"
-            gap={isList ? 0 : 14}
-            flex={'1 1 auto'}
-            className="list"
-          >
-            {!isList && (
-              <>
+          <Flex vertical flex="1 1 auto" className="list">
+            {!isList ? (
+              <Flex vertical gap={14} align="center">
                 <IconCheck2 />
                 <div className="des">選擇表單後，您可以預覽審核流程。</div>
-              </>
+              </Flex>
+            ) : (
+              <FlowBlock list={readersData?.Readers} />
             )}
-            {isList &&
-              testList.map((item, index) => {
-                return <Flex key={index} align="center" gap={8}></Flex>;
-              })}
           </Flex>
         </Flex>
       </Flex>
@@ -190,6 +187,44 @@ const RejInfo = ({ data }) => {
 };
 
 /**
+ * @description FlowBlock
+ * @param {Array<object>} list
+ * @returns {JSX.Element}
+ */
+const FlowBlock = ({ list }) => {
+  const boxSize = 25;
+  return (
+    <Flex vertical>
+      {list?.map((item, index) => {
+        return (
+          <>
+            {index > 0 && (
+              <Flex key={index} align="center" gap={10} style={{ height: 24 }}>
+                <Flex
+                  justify="center"
+                  style={{ width: boxSize, height: '100%' }}
+                >
+                  <Divider
+                    type="vertical"
+                    style={{ margin: 0, height: '100%' }}
+                  />
+                </Flex>
+              </Flex>
+            )}
+            <Flex key={item?.Id} gap={10} align="center" style={{ height: 47 }}>
+              <CusAvatar wh={boxSize} />
+              <p>
+                {item?.Dep} {item?.Name}
+              </p>
+            </Flex>
+          </>
+        );
+      })}
+    </Flex>
+  );
+};
+
+/**
  * @description cssFormContent
  * @param {boolean} isRejected
  * @param {boolean} isList
@@ -198,7 +233,7 @@ const RejInfo = ({ data }) => {
 const cssFormContent = (isRejected, isList) => css`
   width: 100%;
   height: 100%;
-  margin-top: ${isRejected ? '24px' : '30px'};
+  margin-top: ${isRejected ? '0px' : '6px'};
   .reject-div {
     background: var(--red-light);
     margin-bottom: 30px;
@@ -218,7 +253,7 @@ const cssFormContent = (isRejected, isList) => css`
   }
   .flex-div {
     width: 100%;
-    height: 100%;
+    overflow-y: hidden;
     .left {
       height: 100%;
       overflow-y: auto;
@@ -226,7 +261,7 @@ const cssFormContent = (isRejected, isList) => css`
     .right {
       height: 100%;
       overflow-y: hidden;
-      .title {
+      > .title {
         font-size: 13px;
         font-weight: 600;
         color: var(--grey-50);

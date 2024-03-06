@@ -95,7 +95,7 @@ const getStyles = (bgColor) => {
       ? 'white'
       : bgColor === '#EFF0F8'
       ? '#2D336B'
-      : '#000';
+      : '#8F9BC8';
   const txH = tx;
 
   return {

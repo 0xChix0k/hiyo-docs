@@ -18,6 +18,7 @@ function App() {
       theme={{
         token: {
           colorError: '#ef4564',
+          colorSplit: 'var(--grey-30)',
         },
         components: {
           Message: {

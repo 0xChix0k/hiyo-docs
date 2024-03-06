@@ -6,6 +6,6 @@ export { Header } from './header';
 export { TextInput,UploadInput } from './input';
 export { CusModal } from './modal';
 export { CusTabs,CapsuleTabs } from './tabs';
-export {CusSelect} from './select';
+export {CusSelect,CusDropdown} from './select';
 export {CusRangePicker} from './datePicker';
 export {FileBox} from './file';

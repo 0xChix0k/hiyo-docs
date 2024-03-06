@@ -12,17 +12,16 @@ import { useState } from 'react';
  * @param {boolean} disabled=false
  * @param {string} dw=null
  * @param {string} placeholder="請選擇"
- * @param {boolean} isErr=false
  * @returns
  */
 const CusSelect = ({
   options = [],
   value,
   onChange,
+  onSelect=null,
   disabled = false,
   dw = null,
   placeholder = '請選擇',
-  isErr = false,
 }) => {
   const genOptions = options.map((item, index) => {
     return {
@@ -31,6 +30,7 @@ const CusSelect = ({
     };
   });
   const [open, setOpen] = useState(false);
+
 
   return (
     <ConfigProvider
@@ -45,7 +45,7 @@ const CusSelect = ({
         },
         components: {
           Select: {
-            selectorBg: isErr?'white':'var(--grey-20)',
+            // selectorBg: 'var(--grey-20)',
             optionHeight: 40,
             optionActiveBg: 'var(--grey-10)',
             optionPadding: '11px 14px',
@@ -59,6 +59,7 @@ const CusSelect = ({
         value={value}
         options={genOptions}
         onChange={onChange}
+        onSelect={onSelect}
         disabled={disabled}
         popupMatchSelectWidth={!dw ? true : dw}
         size="large"
@@ -70,8 +71,7 @@ const CusSelect = ({
             style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
           />
         }
-        css={cssSelect(isErr)}
-        className="efarrehthtwwwwwwwwwww"
+        css={cssSelect}
       />
     </ConfigProvider>
   );
@@ -79,10 +79,17 @@ const CusSelect = ({
 
 export { CusSelect };
 
-const cssSelect = (isErr) => css`
-  /* .ant-select-selector {
-    background: ${isErr ? '#fff' : 'var(--grey-20)'};
-  } */
+const cssSelect = css`
+  width: 100%;
+  .ant-select-selector {
+    background: var(--grey-20) !important;
+  }
+  :is(.ant-select-status-error) {
+    .ant-select-selector {
+      background: white !important;
+      border-width: 1.5px !important;
+    }
+  }
   :not(.ant-select-focused) {
     .ant-select-selector {
       :hover {

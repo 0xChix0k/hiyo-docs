@@ -21,9 +21,9 @@ export { IconSetting };
 const cssSetting = (isClick) => css`
   cursor: pointer;
   border-radius: 50%;
-  background-color: ${isClick ? 'var(--grey-30)' : 'transparent'};
+  background-color: ${isClick ? 'var(--blue-light)' : 'transparent'};
   &:hover {
-    background-color: var(--grey-30);
+    background-color: ${isClick ? 'var(--blue-light)' : 'var(--grey-30)'};
     path {
       fill: var(--blue-bright);
     }

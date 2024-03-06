@@ -40,6 +40,7 @@ const CusModal = ({
   cancelStr = '',
   exFn = null,
   exType = 'default',
+  exBgColor = '#EF4564',
   exStr = '退件',
   w = 450,
   h = 240,
@@ -94,7 +95,7 @@ const CusModal = ({
                     text={exStr}
                     onClick={exFn}
                     type={exType}
-                    bgColor="#EF4564"
+                    bgColor={exBgColor}
                     radius={37}
                   />
                 ),
@@ -175,18 +176,18 @@ const cssModal = (padding, h) => css`
     height: ${h}px;
     .ant-modal-header {
       flex: 0 0 30px;
-      margin-bottom: 0;
+      margin-bottom: 24px;
     }
     .ant-modal-body {
       width: 100%;
-      flex: 1 1 72px;
+      flex: 1 1 auto;
       overflow-y: hidden;
       display: flex;
       flex-direction: column;
     }
     .ant-modal-footer {
       flex: 0 0 40px;
-      margin-top: 0;
+      margin-top: 24px;
       display: flex;
       justify-content: end;
       gap: 8px;

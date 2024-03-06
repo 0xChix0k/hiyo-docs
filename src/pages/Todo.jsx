@@ -6,13 +6,10 @@ import { CusCollapse } from 'components/collapse';
 import { useConfirmProps } from 'hooks';
 import { useCollapse, useModalProps } from 'hooks/todo';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useGetTodo, useGetTodoList } from 'services/todoService';
-import { selectCommon } from 'store/commonSlice';
 import { cssTodo } from './todoCss';
 
 const Todo = () => {
-  const { searchData } = useSelector(selectCommon);
   const [selectId, setSelectId] = useState('');
   const [openConfirm, setOpenConfirm] = useState('');
   const [rejectRemark, setRejectRemark] = useState('');
@@ -74,11 +71,7 @@ const Todo = () => {
         content={confirmProps?.content}
       />
       <div className="todo-container">
-        <div className="title">
-          {searchData?.text
-            ? `「${searchData?.text}」的搜尋結果`
-            : '✨ 歡迎, 侯小吟'}
-        </div>
+        <div className="title">✨ 歡迎, 侯小吟</div>
         {todos ? (
           <Flex vertical gap={20} style={{ marginBottom: 24 }}>
             {!!getItemsCount(bookItems) && (

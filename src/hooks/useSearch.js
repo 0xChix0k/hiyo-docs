@@ -40,13 +40,22 @@ const useSearch = () => {
   const isFiltered = (data) => {
     return (
       !!data.from ||
-      data.type !== 'all' ||
+      data.typeId !== 'all' ||
       data.formId !== 'all' ||
+      data.dateId !== 'all' ||
       data.dates.length > 0
     );
   };
 
-  return { onInputSearch, onSearchItem, onSearch, isFiltered };
+  const isSearched =
+    !!searchData.text ||
+    !!searchData.from ||
+    searchData.typeId !== 'all' ||
+    searchData.formId !== 'all' ||
+    searchData.dateId !== 'all' ||
+    searchData.dates.length > 0;
+
+  return { onInputSearch, onSearchItem, onSearch, isFiltered, isSearched };
 };
 
 export { useSearch };

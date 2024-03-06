@@ -6,6 +6,7 @@ import localeZh from 'antd/es/date-picker/locale/zh_TW';
 import 'dayjs/locale/en';
 import 'dayjs/locale/zh-tw';
 import i18n from 'src/i18n';
+import dayjs from 'dayjs';
 
 const LNG = i18n.language;
 
@@ -15,6 +16,8 @@ const LNG = i18n.language;
  * @param {function} onChange
  * @param {boolean} disabled = false
  * @param {boolean} isHiddenInput = false
+ * @param {boolean} openTrigger = false
+ * @param {boolean} isOpen = false
  * @returns
  */
 const CusRangePicker = ({
@@ -22,10 +25,26 @@ const CusRangePicker = ({
   onChange,
   disabled = false,
   isHiddenInput = false,
+  openTrigger = false,
+  isOpen = false,
+  setOpen = null,
 }) => {
+  const exProps = openTrigger
+    ? {
+        open: isOpen,
+      }
+    : null;
+
   const handleChange = (dates, dateStrings) => {
-    onChange(dates);
+    // console.log('dates', dates);
+    // console.log('dateStrings', dateStrings);
+    setOpen && setOpen(false);
+    onChange(dateStrings);
   };
+
+  const objectValue = value.map((item) => {
+    return item ? dayjs(item) : null;
+  });
 
   return (
     <ConfigProvider
@@ -57,8 +76,8 @@ const CusRangePicker = ({
       }}
     >
       <DatePicker.RangePicker
-        // open={true}
-        value={value}
+        {...exProps}
+        value={objectValue}
         onChange={handleChange}
         locale={LNG === 'zh' ? localeZh : localeEn}
         disabled={disabled}

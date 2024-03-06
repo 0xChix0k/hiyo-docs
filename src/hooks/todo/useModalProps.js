@@ -37,7 +37,7 @@ const useModalProps = (data, setOpenConfirm) => {
         : status === 'pending'
         ? () => setOpenConfirm('approve')
         : status === 'rejected'
-        ? () => console.log('重新提交')
+        ? () => setOpenConfirm('approve')
         : null,
     okStr:
       status === 'update'
