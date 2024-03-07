@@ -2,6 +2,8 @@
 import { css } from '@emotion/react';
 import { Divider, Flex, Form } from 'antd';
 import { ReactComponent as IconCheck2 } from 'assets/icon-check_2.svg';
+import { ReactComponent as IconCheck } from 'assets/icon-check_round.svg';
+import { ReactComponent as IconCheckGrey } from 'assets/icon-check_round_grey.svg';
 import { ReactComponent as IconUpload } from 'assets/icon-upload.svg';
 import {
   CusAvatar,
@@ -12,7 +14,7 @@ import {
   UploadInput,
 } from 'components';
 import { useAddFiles, useFormCommon } from 'hooks';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetReaders } from 'services/readerService';
 import { selectDropdown } from 'store/dropdownSlice';
@@ -194,10 +196,10 @@ const RejInfo = ({ data }) => {
 const FlowBlock = ({ list }) => {
   const boxSize = 25;
   return (
-    <Flex vertical>
+    <Flex vertical style={{paddingRight:8}}>
       {list?.map((item, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             {index > 0 && (
               <Flex key={index} align="center" gap={10} style={{ height: 24 }}>
                 <Flex
@@ -211,13 +213,35 @@ const FlowBlock = ({ list }) => {
                 </Flex>
               </Flex>
             )}
-            <Flex key={item?.Id} gap={10} align="center" style={{ height: 47 }}>
-              <CusAvatar wh={boxSize} />
-              <p>
-                {item?.Dep} {item?.Name}
-              </p>
+            <Flex
+              key={item?.Id}
+              justify="space-between"
+              align="center"
+              style={{ height: 47 }}
+            >
+              <Flex align="center" flex="1 1 auto" gap={10}>
+                <CusAvatar wh={boxSize} />
+                <Flex vertical justify="center">
+                  <p>
+                    {item?.Dep} {item?.Name}
+                  </p>
+                  {!!item?.ApproveDate && (
+                    <p style={{ fontSize: 13, color: 'var(--grey-50)' }}>
+                      {item?.ApproveDate}
+                    </p>
+                  )}
+                </Flex>
+              </Flex>
+              <Flex
+                flex="0 0 auto"
+                justify="center"
+                align="center"
+                styel={{ width: 25, height: 25 }}
+              >
+                {!!item?.ApproveDate ? <IconCheck /> : <IconCheckGrey />}
+              </Flex>
             </Flex>
-          </>
+          </React.Fragment>
         );
       })}
     </Flex>

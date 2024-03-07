@@ -8,3 +8,4 @@ export {useCommon} from './useCommon';
 export {useConfirmProps} from './useConfirmProps';
 export {useMessage} from './useMessage';
 export {useDateOption} from './useDateOption';
+export{useModalProps} from './useModalProps';

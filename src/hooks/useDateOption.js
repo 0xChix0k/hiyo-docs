@@ -1,9 +1,8 @@
 import dayjs from 'dayjs';
+import { useCommon } from 'hooks';
 
-const useDateOption = (dates) => {
-  const dFormat = (dateObj) => {
-    return dateObj.format('YYYY-MM-DD');
-  };
+const useDateOption = (cusName) => {
+  const { dFormat } = useCommon();
 
   const searchDates = [
     {
@@ -33,7 +32,7 @@ const useDateOption = (dates) => {
     },
     {
       Id: 'custom',
-      Name: !!dates.length ? `${dates[0]} ~ ${dates[1]}` : '日期範圍',
+      Name: cusName,
       DValue: [],
     },
   ];
@@ -61,7 +60,7 @@ const useDateOption = (dates) => {
     },
     {
       Id: 'custom',
-      Name: !!dates.length ? `${dates[0]} ~ ${dates[1]}` : '日期範圍',
+      Name: cusName,
       DValue: [],
     },
   ];

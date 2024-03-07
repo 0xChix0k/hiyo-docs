@@ -128,10 +128,9 @@ const Header = () => {
           />
         </Flex>
         <CusButton
-          text="申請表單"
+          text="申請單"
           icon={<IconAdd />}
           bgColor="#2D336B"
-          tColor="white"
           onClick={() => setOpenNewForm(true)}
         />
         <CusDropdown

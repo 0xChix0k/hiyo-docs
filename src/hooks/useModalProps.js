@@ -21,7 +21,7 @@ const useModalProps = (data, setOpenConfirm) => {
   const mProps = {
     title: ['book', 'update'].includes(status)
       ? { text: '', icon: <IconForm /> }
-      : ['pending', 'rejected'].includes(status)
+      : ['pending', 'rejected', 'approved'].includes(status)
       ? {
           text: data?.No,
           icon: <IconForm />,
@@ -49,13 +49,13 @@ const useModalProps = (data, setOpenConfirm) => {
         : '確定',
     exFn: status === 'pending' ? () => setOpenConfirm('reject') : null,
     exStr: status === 'pending' ? '退件' : '',
-    w: ['pending', 'rejected'].includes(status) ? 800 : 450,
+    w: ['pending', 'rejected', 'approved'].includes(status) ? 800 : 450,
     h:
       status === 'book'
         ? 640
         : status === 'update'
         ? 470
-        : ['pending', 'rejected'].includes(status)
+        : ['pending', 'rejected', 'approved'].includes(status)
         ? 661
         : 240,
     content:
@@ -63,7 +63,7 @@ const useModalProps = (data, setOpenConfirm) => {
         <DocContent isMa={userInfo.role === 'manager'} docData={data} />
       ) : status === 'update' ? (
         <UpdateContent data={data} />
-      ) : ['pending', 'rejected'].includes(status) ? (
+      ) : ['pending', 'rejected', 'approved'].includes(status) ? (
         <FormContent data={data} />
       ) : null,
   };

@@ -18,13 +18,13 @@
         "Id": 3,
         "Name": "Tom",
         "Dep": "資訊部",
-        "IsReaded": false
+        "IsReaded": true
       },
       {
         "Id": 4,
         "Name": "Jerry",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 5,
@@ -42,85 +42,85 @@
         "Id": 7,
         "Name": "Daisy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 8,
         "Name": "Goofy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 9,
         "Name": "Pluto",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 10,
         "Name": "Minnie",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 11,
         "Name": "Mickey",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 12,
         "Name": "Donald",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 13,
         "Name": "Daisy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 14,
         "Name": "Goofy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 15,
         "Name": "Pluto",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 16,
         "Name": "Minnie",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 17,
         "Name": "Mickey",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 18,
         "Name": "Donald",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 19,
         "Name": "Daisy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       },
       {
         "Id": 20,
         "Name": "Goofy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false
       }
     ]
   },
@@ -456,61 +456,71 @@
         "Id": 1,
         "Name": "John",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": true,
+        "ApproveDate": "2024-02-03"
       },
       {
         "Id": 2,
         "Name": "Mary",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": true,
+        "ApproveDate": "2024-02-28"
       },
       {
         "Id": 3,
         "Name": "Tom",
         "Dep": "資訊部",
-        "IsReaded": false
+        "IsReaded": true,
+        "ApproveDate": "2024-03-01"
       },
       {
         "Id": 4,
         "Name": "Jerry",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false,
+        "ApproveDate": ""
       },
       {
         "Id": 5,
         "Name": "Micky",
         "Dep": "資訊部",
-        "IsReaded": false
+        "IsReaded": false,
+        "ApproveDate": ""
       },
       {
         "Id": 6,
         "Name": "Donald",
         "Dep": "資訊部",
-        "IsReaded": false
+        "IsReaded": false,
+        "ApproveDate": ""
       },
       {
         "Id": 7,
         "Name": "Daisy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false,
+        "ApproveDate": ""
       },
       {
         "Id": 8,
         "Name": "Goofy",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false,
+        "ApproveDate": ""
       },
       {
         "Id": 9,
         "Name": "Pluto",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false,
+        "ApproveDate": ""
       },
       {
         "Id": 10,
         "Name": "Minnie",
         "Dep": "資訊部",
-        "IsReaded": true
+        "IsReaded": false,
+        "ApproveDate": ""
       }
     ]
   }

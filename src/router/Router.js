@@ -7,6 +7,7 @@ const Login = lazy(() => import('pages/Login'));
 const Main = lazy(() => import('pages/Main'));
 const Todo = lazy(() => import('pages/Todo'));
 const MyForm = lazy(() => import('pages/MyForm'));
+const Setting = lazy(() => import('pages/Setting'));
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
         element: (
           <WithAuthentication>
             <Suspense>
-              {/* <Home /> */}
+              <Setting />
             </Suspense>
           </WithAuthentication>
         ),

@@ -1,1 +1,0 @@
-export {CusAvatar} from './CusAvatar';

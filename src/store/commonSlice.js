@@ -6,7 +6,8 @@ export const initSearchData = {
   typeId: 'all',
   formId: 'all',
   dateId: 'all',
-  dates: [],
+  sDate: "",
+  eDate: "",
 };
 
 const commonSlice = createSlice({

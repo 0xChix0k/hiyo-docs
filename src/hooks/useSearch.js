@@ -39,21 +39,23 @@ const useSearch = () => {
 
   const isFiltered = (data) => {
     return (
-      !!data.from ||
+      data.from ||
       data.typeId !== 'all' ||
       data.formId !== 'all' ||
       data.dateId !== 'all' ||
-      data.dates.length > 0
+      data.sDate ||
+      data.eDate
     );
   };
 
   const isSearched =
-    !!searchData.text ||
-    !!searchData.from ||
+    searchData.text ||
+    searchData.from ||
     searchData.typeId !== 'all' ||
     searchData.formId !== 'all' ||
     searchData.dateId !== 'all' ||
-    searchData.dates.length > 0;
+    searchData.sDate ||
+    searchData.eDate;
 
   return { onInputSearch, onSearchItem, onSearch, isFiltered, isSearched };
 };

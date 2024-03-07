@@ -10,7 +10,7 @@ import {
 } from 'services/dropdownService';
 import { setDates, setForms, setTypes } from 'store/dropdownSlice';
 import { useSearch } from 'hooks';
-import  Result  from './Result';
+import Result from './Result';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Main = () => {
   return (
     <Flex vertical style={{ width: '100%', height: '100%' }}>
       <Header />
-      <Flex vertical flex={'1 1 100%'} style={{ overflowY: 'auto' }}>
+      <Flex vertical flex={'1 1 auto'} style={{ overflowY: 'hidden' }}>
         {isSearched ? <Result /> : <Outlet />}
       </Flex>
     </Flex>

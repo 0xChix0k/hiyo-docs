@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Flex } from 'antd';
 import { ReactComponent as IconListCheck } from 'assets/icon-list_check.svg';
-import { CusModal } from 'components';
-import { CusCollapse } from 'components/collapse';
-import { useConfirmProps } from 'hooks';
-import { useCollapse, useModalProps } from 'hooks/todo';
+import { CusCollapse, CusModal } from 'components';
+import { useConfirmProps ,useModalProps} from 'hooks';
+import { useCollapse,  } from 'hooks/todo';
 import { useState } from 'react';
 import { useGetTodo, useGetTodoList } from 'services/todoService';
 import { cssTodo } from './todoCss';
@@ -43,33 +42,37 @@ const Todo = () => {
 
   return (
     <Flex vertical align="center" css={cssTodo}>
-      <CusModal
-        open={!!selectId && dataSuccess}
-        title={mProps?.title}
-        isClose={mProps?.isClose}
-        isFooter={mProps?.isFooter}
-        onOk={mProps?.onOk}
-        okStr={mProps?.okStr}
-        onCancel={() => setSelectId('')}
-        exFn={mProps?.exFn}
-        exStr={mProps?.exStr}
-        w={mProps.w}
-        h={mProps.h}
-        content={mProps?.content}
-      />
-      <CusModal
-        open={!!openConfirm}
-        title={confirmProps?.title}
-        titleSize={20}
-        onOk={confirmProps?.onOk}
-        okStr={'核准'}
-        exFn={confirmProps?.exFn}
-        exStr={'退件'}
-        onCancel={() => setOpenConfirm('')}
-        cancelStr={'取消'}
-        h={confirmProps?.h}
-        content={confirmProps?.content}
-      />
+      {!!selectId && dataSuccess && (
+        <CusModal
+          open={!!selectId && dataSuccess}
+          title={mProps?.title}
+          isClose={mProps?.isClose}
+          isFooter={mProps?.isFooter}
+          onOk={mProps?.onOk}
+          okStr={mProps?.okStr}
+          onCancel={() => setSelectId('')}
+          exFn={mProps?.exFn}
+          exStr={mProps?.exStr}
+          w={mProps.w}
+          h={mProps.h}
+          content={mProps?.content}
+        />
+      )}
+      {!!openConfirm && (
+        <CusModal
+          open={!!openConfirm}
+          title={confirmProps?.title}
+          titleSize={20}
+          onOk={confirmProps?.onOk}
+          okStr={'核准'}
+          exFn={confirmProps?.exFn}
+          exStr={'退件'}
+          onCancel={() => setOpenConfirm('')}
+          cancelStr={'取消'}
+          h={confirmProps?.h}
+          content={confirmProps?.content}
+        />
+      )}
       <div className="todo-container">
         <div className="title">✨ 歡迎, 侯小吟</div>
         {todos ? (

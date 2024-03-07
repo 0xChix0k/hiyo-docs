@@ -38,6 +38,7 @@ const CusCollapse = ({
       <Collapse
         activeKey={activeKey}
         items={items}
+        collapsible="header"
         onChange={onChange}
         bordered={bordered}
         expandIcon={(panelProps) => <IconArrow />}

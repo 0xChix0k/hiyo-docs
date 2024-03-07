@@ -3,7 +3,8 @@ import { css } from '@emotion/react';
 export const cssTodo = css`
   width: 100%;
   height: 100%;
-  padding-block: 30px;
+  padding-top: 30px;
+  overflow-y: auto;
   > .todo-container {
     width: 700px;
     > .title {

@@ -8,6 +8,8 @@ import { selectDropdown } from 'store/dropdownSlice';
 const SearchContent = ({ formInstance, tempData, setTempData }) => {
   const { types, forms } = useSelector(selectDropdown);
   const [form] = Form.useForm();
+  const [cusName, setCusName] = useState('日期範圍');
+
   useEffect(() => {
     if (formInstance) {
       formInstance.current = form; // 將表單實例暴露給父組件
@@ -28,15 +30,17 @@ const SearchContent = ({ formInstance, tempData, setTempData }) => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const { searchDates } = useDateOption(tempData?.dates);
+  const { searchDates } = useDateOption(cusName);
   const onDateChange = (v) => {
     const range = searchDates.find((item) => item.Id === v)?.DValue || [];
-    setTempData({ ...tempData, dates: range, dateId: v });
-    form.setFieldValue({ dates: range, dateId: v });
+    setTempData({ ...tempData, sDate: range[0], eDate: range[1], dateId: v });
+    form.setFieldValue({ dateId: v });
   };
   const onDateSelect = (v) => {
     if (v === 'custom') {
       setIsOpen(true);
+    } else {
+      setCusName('日期範圍');
     }
   };
 
@@ -97,8 +101,12 @@ const SearchContent = ({ formInstance, tempData, setTempData }) => {
         <Form.Item label="日期" name="date" initialValue={tempData?.dates}>
           <div>
             <CusRangePicker
-              value={tempData?.dates}
-              onChange={(v) => handleChange('dates', v)}
+              value={[tempData?.sDate, tempData?.eDate]}
+              onChange={(v) => {
+                handleChange('sDate', v[0]);
+                handleChange('eDate', v[1]);
+                setCusName(v[0] + ' ~ ' + v[1]);
+              }}
               isHiddenInput={true}
               openTrigger={true}
               isOpen={isOpen}

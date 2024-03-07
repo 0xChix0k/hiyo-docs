@@ -13,7 +13,7 @@ const ViewContent = ({ data }) => {
   return (
     <Flex vertical gap={24} css={cssViewContent}>
       <Flex vertical gap={10} flex="0 0 auto" className="title-div">
-        <Flex className="path">
+        <Flex wrap="wrap" className="path">
           {getNameById(data?.TypeId, types)} /{' '}
           {getNameById(data?.FormId, forms)}
         </Flex>
@@ -31,7 +31,9 @@ const ViewContent = ({ data }) => {
         <Flex flex="0 0 auto" className="des-label">
           描述
         </Flex>
-        <Flex flex="1 1 auto">{data?.Des}</Flex>
+        <Flex wrap="wrap" flex="1 1 auto">
+          {data?.Des}
+        </Flex>
       </Flex>
     </Flex>
   );
