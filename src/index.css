@@ -104,13 +104,18 @@ code {
 .ant-form-item-explain-error {
   font-weight: 600;
 }
+.ant-form-item-required {
+  &::before {
+    content: '' !important;
+  }
+}
 
 .ant-modal-root .ant-modal-mask {
   background-color: rgba(12, 16, 53, 0.8);
 }
 
 .ant-picker-dropdown {
-  .ant-picker-range-arrow{
+  .ant-picker-range-arrow {
     display: none !important;
   }
   .ant-picker-date-panel {

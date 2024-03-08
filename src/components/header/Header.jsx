@@ -14,7 +14,7 @@ import {
 import { IconSetting } from 'components/icon';
 import { SearchContent } from 'components/modal/content';
 import { useFormCommon, useSearch } from 'hooks';
-import { useAddForm, useProfile, useTabs } from 'hooks/header';
+import { useAddForm, useProfile, useSetProps, useTabs } from 'hooks/header';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -27,6 +27,7 @@ const Header = () => {
   const location = useLocation();
   const searchRef = useRef(null);
   const addFormRef = useRef(null);
+  const setRef = useRef(null);
   const { onValidate } = useFormCommon();
   const { userInfo } = useSelector(selectUser);
   const { searchData } = useSelector(selectCommon);
@@ -50,7 +51,9 @@ const Header = () => {
     initFormData
   );
   const { tabs } = useTabs(userInfo.role === 'manager');
-  const { profileList, profileClick } = useProfile();
+  const [openSet, setOpenSet] = useState(false);
+  const { profileList, profileClick } = useProfile(setOpenSet);
+  const { setPrrops } = useSetProps(setRef, setOpenSet);
 
   const { onInputSearch, onSearch, isFiltered } = useSearch();
 
@@ -104,6 +107,19 @@ const Header = () => {
           w={addModalProps?.w}
           h={addModalProps?.h}
           content={addModalProps?.content}
+        />
+      )}
+      {openSet && (
+        <CusModal
+          open={openSet}
+          title={setPrrops?.title}
+          isClose={setPrrops?.isClose}
+          onOk={setPrrops?.onOk}
+          onCancel={setPrrops?.onCancel}
+          okStr={setPrrops?.okStr}
+          w={setPrrops?.w}
+          h={setPrrops?.h}
+          content={setPrrops?.content}
         />
       )}
       <Flex align="center" gap={24}>

@@ -5,3 +5,5 @@ export {UpdateContent} from './UpdateContent';
 export {FormContent} from './FormContent';
 export {ViewContent} from './ViewContent';
 export {RejectContent} from './RejectContent';
+export {RenameContent} from './RenameContent';
+export {SetContent} from './SetContent';

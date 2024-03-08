@@ -43,6 +43,7 @@ const TextInput = ({
           borderRadiusLG: radius,
           colorTextPlaceholder: 'var(--grey-50)',
           controlHeightLG: 40,
+          activeBg: 'white',
         },
         components: {
           Input: {
@@ -95,7 +96,7 @@ export { TextInput };
 const cssInput = (mW, h) => css`
   max-width: ${mW};
   height: ${h}px;
-  background: var(--grey-20) !important;
+  background: var(--grey-20);
   :is(.ant-input-status-error) {
     background: white !important;
     border-width: 1.5px !important;

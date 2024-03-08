@@ -10,3 +10,5 @@ export { TextInput, UploadInput } from './input';
 export { CusModal } from './modal';
 export { CusDropdown, CusSelect } from './select';
 export { CapsuleTabs, CusTabs } from './tabs';
+export {CusTooltip} from './CusTooltip';
+export {CusSpin} from './CusSpin';

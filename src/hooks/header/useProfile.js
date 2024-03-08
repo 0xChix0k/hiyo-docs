@@ -1,4 +1,6 @@
-const useProfile = () => {
+import jsCookie from 'js-cookie';
+
+const useProfile = (setOpen) => {
   const profileList = [
     {
       label: '設定',
@@ -9,8 +11,14 @@ const useProfile = () => {
       key: 'logout',
     },
   ];
-  const profileClick = ({key}) => {
-    console.log('key', key);
+  const profileClick = ({ key }) => {
+    if (key === 'logout') {
+      localStorage.clear();
+      jsCookie.remove('Jwt');
+      window.location.href = '/login';
+    } else {
+      setOpen(true);
+    }
   };
 
   return { profileList, profileClick };

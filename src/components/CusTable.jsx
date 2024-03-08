@@ -5,13 +5,12 @@ import { ReactComponent as IconLoading } from 'assets/icon_loading.svg';
 import { debounce } from 'lodash';
 import { memo, useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-
 /**
  * @des Custom Table
  * @param {Array<object>} data
  * @param {Array<object>} columns
  * @param {function} onRow
- * @param {string} keyName
+ * @param {string} keyName='Id'
  * @param {boolean} loading=false
  * @param {Array<string|number>} selectedRowKeys=[]
  * @param {function} onTableSelectChange=null
@@ -19,6 +18,7 @@ import { useDispatch } from 'react-redux';
  * @param {boolean} hasNextPage=false
  * @param {boolean} showSelect=false
  * @param {function} hoverItemFn=null
+ * @param {boolean} sticky=false
  * @returns {JSX.Element}
  */
 const CusTable = memo(
@@ -26,14 +26,15 @@ const CusTable = memo(
     data,
     columns,
     onRow,
+    keyName = 'Id',
     loading = false,
     selectedRowKeys = [],
     onTableSelectChange = null,
     fetchNextPage = () => {},
     hasNextPage = false,
-    keyName,
     showSelect = false,
     hoverItemFn = null,
+    sticky = false,
   }) => {
     const dispatch = useDispatch();
     const containerRef = useRef(null);
@@ -137,16 +138,8 @@ const CusTable = memo(
       };
     };
 
-    const footLoading = () => {
-      return (
-        <>
-          {hasNextPage ? (
-            <Icon component={IconLoading} style={{ fontSize: 34 }} />
-          ) : (
-            <div style={{ height: 24 }}></div>
-          )}
-        </>
-      );
+    const FootLoading = () => {
+      return <Icon component={IconLoading} style={{ fontSize: 34 }} />;
     };
 
     return (
@@ -181,7 +174,7 @@ const CusTable = memo(
               }}
               // loading={{
               //   spinning: loading,
-              //   indicator: <Icon component={LoadingOutlined} />,
+              //   indicator: <CusSpin loading={loading} />,
               // }}
               loading={loading}
               rowKey={(record) => record[keyName]}
@@ -190,7 +183,8 @@ const CusTable = memo(
               pagination={false}
               onRow={onTableRow}
               scroll
-              footer={footLoading}
+              sticky={sticky}
+              footer={hasNextPage ? <FootLoading /> : null}
             />
           </ConfigProvider>
         )}
@@ -202,7 +196,14 @@ const CusTable = memo(
 export { CusTable };
 
 const StTable = styled(Table)`
-  position: relative;
+  .ant-spin-nested-loading {
+    > div:not(.ant-spin-container) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
   .ant-table-thead {
     > tr {
       height: 45px;

@@ -18,7 +18,7 @@ const CusSelect = ({
   options = [],
   value,
   onChange,
-  onSelect=null,
+  onSelect = null,
   disabled = false,
   dw = null,
   placeholder = '請選擇',
@@ -30,7 +30,6 @@ const CusSelect = ({
     };
   });
   const [open, setOpen] = useState(false);
-
 
   return (
     <ConfigProvider
@@ -84,7 +83,7 @@ const cssSelect = css`
   .ant-select-selector {
     background: var(--grey-20) !important;
   }
-  :is(.ant-select-status-error) {
+  :is(.ant-select-status-error, .ant-select-focused, ) {
     .ant-select-selector {
       background: white !important;
       border-width: 1.5px !important;
