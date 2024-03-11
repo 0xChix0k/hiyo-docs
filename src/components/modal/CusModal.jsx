@@ -22,6 +22,7 @@ import { IconClose } from 'components/icon';
  * @param {string} exStr='退件'
  * @param {number} w=450
  * @param {number} h=240
+ * @param {array} placement=[]
  * @param {string} padding='30px 30px'
  * @param {ReactNode} content=null
  * @returns  {JSX.Element}
@@ -44,9 +45,14 @@ const CusModal = ({
   exStr = '退件',
   w = 450,
   h = 240,
+  placement = [],
   padding = '30px 30px',
   content = null,
 }) => {
+  const placeStyles = !!placement.length
+    ? { top: placement[0], left: placement[1],margin: 0}
+    : {};
+
   return (
     <ConfigProvider
       theme={{
@@ -70,6 +76,7 @@ const CusModal = ({
             />
           ) : null
         }
+        style={placeStyles}
         onOk={onOk}
         onCancel={onCancel}
         closeIcon={false}

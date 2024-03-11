@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Tooltip, ConfigProvider } from 'antd';
+import { ConfigProvider, Tooltip } from 'antd';
 
 /**
  * @description CusTooltip
@@ -31,11 +31,12 @@ const CusTooltip = ({
       }}
     >
       <Tooltip
-        // open={true}  
+        // open={true}
         title={title}
         placement={placement}
         color={bgColor}
         arrow={arrow}
+        mouseLeaveDelay={0}
         css={cssTooltip}
       >
         {children}

@@ -48,8 +48,7 @@ const useCommon = () => {
    * @returns
    */
   const getNameById = (value, data, id = 'Id', name = 'Name') => {
-    const item = data.find((item) => item[id] === value);
-    return item ? item[name] : '';
+    return value && data ? data.find((item) => item[id] === value)[name] : '';
   };
 
   return { EMPRTY_COLUMN, dFormat, isDateBetween, getNameById };

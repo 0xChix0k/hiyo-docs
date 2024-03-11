@@ -10,7 +10,7 @@ export const useGetFolders = () => {
     async () => {
       // console.log('param:', param);
       const data = formFolder;
-      console.log('formFolder list:', data);
+      // console.log('formFolder list:', data);
       return data;
     },
     {
@@ -32,6 +32,27 @@ export const useGetForms = (id) => {
     ['folderFormList', id],
     async () => {
       const data = id === '1' ? formForms : [];
+      // console.log('myFormList', data);
+      return data;
+    },
+    {
+      enabled: !!id,
+      cacheTime: 0,
+      staleTime: 0,
+    }
+  );
+};
+
+/**
+ * @description useGetFormInfo
+ * @param {string|number} id
+ * @returns {object}
+ */
+export const useGetFormData = (id) => {
+  return useQuery(
+    ['folderFormData', id],
+    async () => {
+      const data = formForms.find((item) => item.Id === id);
       // console.log('myFormList', data);
       return data;
     },

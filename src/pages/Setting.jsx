@@ -5,15 +5,18 @@ import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import {
   CusButton,
   CusCollpaseF,
+  CusModal,
   CusSpin,
   CusTable,
-  CusModal,
 } from 'components';
-import { useSetFormsCol } from 'hooks/settings';
-import { useEffect, useState, useRef } from 'react';
-import { useGetFolders, useGetForms } from 'services/settingService';
+import { useEditProps, useFormProps, useSetFormsCol } from 'hooks/settings';
+import { useEffect, useRef, useState } from 'react';
+import {
+  useGetFolders,
+  useGetFormData,
+  useGetForms,
+} from 'services/settingService';
 import { cssSetting } from './settingCss';
-import { useEditProps } from 'hooks/settings';
 
 const Setting = () => {
   const { data: folders, isLoading, isSuccess } = useGetFolders();
@@ -25,34 +28,79 @@ const Setting = () => {
     }
   }, [isSuccess, folders]);
   const [folderId, setFolderId] = useState('');
+  const [formOpen, setFormOpen] = useState({ open: false, id: null });
+  const [level, setLevel] = useState(1);
+  const [addOpen, setAddOpen] = useState(false);
   const [folderName, setFolderName] = useState('');
   const [extraAction, setExtraAction] = useState({
     action: 'rename',
     fName: '',
+    place: [],
   });
   const {
     data: formList,
     isLoading: formLoading,
     isSuccess: formSuccess,
   } = useGetForms(collId);
+
+  const {
+    data: formData,
+    isLoading: dataLoading,
+    iseSuccess: dataSuccess,
+  } = useGetFormData(formOpen.id);
+
   const columns = useSetFormsCol();
   const editRef = useRef(null);
-  const { editProps } = useEditProps(editRef, extraAction, setFolderId);
+  const { editProps } = useEditProps(
+    editRef,
+    extraAction,
+    setFolderId,
+    setAddOpen
+  );
+  const formRef = useRef(null);
+  const { props } = useFormProps(
+    formRef,
+    formOpen.id,
+    setFormOpen,
+    level,
+    setLevel
+  );
+
+  const handleAddCategory = () => {
+    setAddOpen(true);
+    setExtraAction({ action: 'add', fName: '', place: [175, 50] });
+  };
 
   return (
     <Flex css={cssSetting}>
-      <CusModal
-        open={folderId}
-        title={editProps?.title}
-        titleSize={editProps?.titleSize}
-        onOk={editProps?.onOk}
-        okStr={editProps?.okStr}
-        onCancel={editProps?.onCancel}
-        cancelStr={editProps?.cancelStr}
-        w={editProps?.w}
-        h={editProps?.h}
-        content={editProps?.content}
-      />
+      {(folderId || addOpen) && (
+        <CusModal
+          open={folderId || addOpen}
+          title={editProps?.title}
+          titleSize={editProps?.titleSize}
+          onOk={editProps?.onOk}
+          okStr={editProps?.okStr}
+          onCancel={editProps?.onCancel}
+          cancelStr={editProps?.cancelStr}
+          w={editProps?.w}
+          h={editProps?.h}
+          placement={editProps?.placement}
+          content={editProps?.content}
+        />
+      )}
+      {formOpen.open && (
+        <CusModal
+          open={formOpen.open}
+          title={props?.title}
+          isClose={props?.isClose}
+          onOk={props?.onOk}
+          okStr={props?.okStr}
+          onCancel={props?.onCancel}
+          w={props?.w}
+          h={props?.h}
+          content={props?.content}
+        />
+      )}
 
       <Flex vertical flex="0 0 300px" className="setting-left">
         <Flex vertical gap={16} flex="0 0 auto" className="tool-div">
@@ -62,7 +110,7 @@ const Setting = () => {
               text="新增類別"
               icon={<IconAdd className="btn-icon" />}
               bgColor="#F1F6FF"
-              onClick={() => console.log('click')}
+              onClick={handleAddCategory}
             />
           )}
         </Flex>
@@ -91,7 +139,7 @@ const Setting = () => {
                 text="新增類別"
                 icon={<IconAdd className="btn-icon" />}
                 bgColor="#F1F6FF"
-                onClick={() => console.log('click')}
+                onClick={handleAddCategory}
               />
             </Flex>
           </>
@@ -132,10 +180,11 @@ const Setting = () => {
               <CusTable
                 data={formList}
                 columns={columns}
-                onRow={(record) => ({
-                  onClick: () => console.log(record),
-                })}
-                loading={false}
+                onRow={(record) => {
+                  console.log(record);
+                  setFormOpen({ open: true, id: record.Id });
+                }}
+                loading={dataLoading}
                 sticky={true}
               />
             </>

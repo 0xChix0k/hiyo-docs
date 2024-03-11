@@ -83,6 +83,7 @@ const renderCollapseItems = (
             fName={item.Name}
             setFolderId={setFolderId}
             setAction={setExtraAction}
+            isForm={!!item?.Forms.length}
           />
         </div>
       ) : null,
@@ -162,8 +163,7 @@ const renderCollapse = (
   );
 };
 
-const isForm = false;
-const GenExtra = ({ formId, fName, setFolderId, setAction }) => {
+const GenExtra = ({ formId, fName, setFolderId, setAction, isForm }) => {
   return (
     <Flex align="center" gap={8}>
       <div css={cssIcon(false)}>
@@ -173,6 +173,7 @@ const GenExtra = ({ formId, fName, setFolderId, setAction }) => {
             setAction({
               fName: fName,
               action: 'rename',
+              place: [175, 50],
             });
             setFolderId(formId);
           }}
@@ -181,11 +182,7 @@ const GenExtra = ({ formId, fName, setFolderId, setAction }) => {
       <div css={cssIcon(!isForm)}>
         {!isForm ? (
           <CusTooltip title="類別中已有表單，無法刪除" placement="bottom">
-            <IconTrash
-            // onClick={(event) => {
-            //   event.stopPropagation();
-            // }}
-            />
+            <IconTrash />
           </CusTooltip>
         ) : (
           <IconTrash
@@ -194,6 +191,7 @@ const GenExtra = ({ formId, fName, setFolderId, setAction }) => {
               setAction({
                 fName: fName,
                 action: 'delete',
+                place: [],
               });
               setFolderId(formId);
             }}
