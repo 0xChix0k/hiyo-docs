@@ -27,6 +27,11 @@ function App() {
             contentPadding: '12px 16px',
             zIndexPopup: 9999,
           },
+          Form: {
+            labelFontSize: 13,
+            labelColor: 'var(--grey-60)',
+            verticalLabelPadding: '0 0 8px',
+          },
         },
       }}
     >

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Checkbox } from 'antd';
+import { Checkbox, ConfigProvider } from 'antd';
 
 /**
  * @description custom checkbox
@@ -8,38 +8,52 @@ import { Checkbox } from 'antd';
  * @param {boolean} checked
  * @param {function} onChange
  * @param {boolean} disabled
+ * @param {string} bgColor
  * @returns
  */
-const CusCheckBox = ({ label, checked, onChange, disabled = false }) => {
+const CusCheckBox = ({
+  label,
+  checked,
+  onChange,
+  disabled = false,
+  bgColor = '#07CE6F',
+  tColor = '#2D336B',
+}) => {
   return (
-    <Checkbox
-      checked={checked}
-      disabled={disabled}
-      onChange={(e) => onChange(e.target.checked)}
-      className="cuCh"
-      css={cssCusCheckBox}
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: bgColor,
+          colorPrimaryBorder: bgColor,
+          colorPrimaryHover: bgColor,
+          colorBorder: bgColor,
+          colorText: tColor,
+          borderRadiusSM: 5,
+        },
+      }}
     >
-      {label}
-    </Checkbox>
+      <Checkbox
+        checked={checked}
+        disabled={disabled}
+        onChange={(e) => onChange(e.target.checked)}
+        className="cuCh"
+        css={cssCusCheckBox}
+      >
+        {label}
+      </Checkbox>
+    </ConfigProvider>
   );
 };
 
 export { CusCheckBox };
 
 const cssCusCheckBox = css`
-  :is(.ant-checkbox-wrapper-checked) {
-    .ant-checkbox-inner {
-      border: 1px solid var(--blue-bright);
-    }
-  }
   .ant-checkbox-inner {
-    border-radius: 5px;
-    border: 1px solid var(--grey-70);
     ::after {
       inset-inline-start: 20%;
     }
   }
-  span:nth-of-type(2) {
+  /* span:nth-of-type(2) {
     color: var(--grey-60);
-  }
+  } */
 `;

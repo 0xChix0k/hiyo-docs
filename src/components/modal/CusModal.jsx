@@ -36,6 +36,7 @@ const CusModal = ({
   onOk = null,
   okType = 'default',
   okStr = '確定',
+  okBgColor = '#07CE6F',
   onCancel = null,
   cancelType = 'text',
   cancelStr = '',
@@ -50,7 +51,7 @@ const CusModal = ({
   content = null,
 }) => {
   const placeStyles = !!placement.length
-    ? { top: placement[0], left: placement[1],margin: 0}
+    ? { top: placement[0], left: placement[1], margin: 0 }
     : {};
 
   return (
@@ -84,6 +85,7 @@ const CusModal = ({
         destroyOnClose
         maskClosable={false}
         width={w}
+        centered={!placement.length}
         footer={
           isFooter
             ? [
@@ -111,7 +113,7 @@ const CusModal = ({
                     key="submit"
                     text={okStr}
                     onClick={onOk}
-                    bgColor="#07CE6F"
+                    bgColor={okBgColor}
                     type={okType}
                     radius={37}
                   />

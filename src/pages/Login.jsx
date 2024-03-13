@@ -72,6 +72,8 @@ const Login = () => {
                 label="記住登入資訊"
                 checked={remin}
                 onChange={setRemin}
+                bgColor="#367aff"
+                tColor="#5566a4"
               />
             </Form.Item>
             <Form.Item>

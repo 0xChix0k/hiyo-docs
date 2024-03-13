@@ -17,9 +17,11 @@ const useFormCommon = () => {
       // 表單驗證通過
       formRef.current.submit(); // 提交表單
       exfn && exfn();
+      return true;
     } catch (error) {
       // 表單驗證未通過
       console.log('表單驗證未通過:', error);
+      return false;
     }
   };
 

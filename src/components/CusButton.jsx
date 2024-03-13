@@ -61,7 +61,7 @@ const CusButton = ({
           htmlType={htmlType}
           type={type}
           block={isBlock}
-          css={cssButton}
+          css={cssButton(getStyles(bgColor).tx)}
         >
           {icon && icon}
           {text}
@@ -107,7 +107,7 @@ const getStyles = (bgColor) => {
   };
 };
 
-const cssButton = css`
+const cssButton = (iconColor) => css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,5 +115,8 @@ const cssButton = css`
   svg {
     width: 15px;
     height: 15px;
+    path {
+      fill: ${iconColor};
+    }
   }
 `;

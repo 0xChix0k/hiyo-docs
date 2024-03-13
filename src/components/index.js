@@ -7,7 +7,7 @@ export { CusTable } from './CusTable';
 export { CusTagUser } from './CusTagUser';
 export { CusTooltip } from './CusTooltip';
 export { CusCollapse, CusCollpaseF } from './collapse';
-export { CusRangePicker } from './datePicker';
+export { CusRangePicker,CusDatePicker } from './datePicker';
 export { FileBox } from './file';
 export { Header } from './header';
 export { TextInput, UploadInput } from './input';

@@ -27,7 +27,6 @@ const FormContent = ({ formInstance, data, setData = null }) => {
       formInstance.current = form; // 將表單實例暴露給父組件
     }
   }, [form, formInstance]);
-  console.log('data', data);
   const {
     data: readersData,
     isLoading,

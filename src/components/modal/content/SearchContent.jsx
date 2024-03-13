@@ -1,4 +1,4 @@
-import { ConfigProvider, Form } from 'antd';
+import { Form } from 'antd';
 import { CusRangePicker, CusSelect, TextInput } from 'components';
 import { useDateOption } from 'hooks';
 import { useEffect, useState } from 'react';
@@ -45,83 +45,70 @@ const SearchContent = ({ formInstance, tempData, setTempData }) => {
   };
 
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Form: {
-            labelColor: '#5566A4',
-            labelFontSize: 13,
-            labelHeight: 40,
-            verticalLabelPadding: '0 0 4px',
-          },
-        },
-      }}
+    <Form
+      form={form}
+      name="searchForm"
+      colon={false}
+      layout="vertical"
+      autoComplete="off"
+      style={{ overflowY: 'auto' }}
     >
-      <Form
-        form={form}
-        name="searchForm"
-        colon={false}
-        layout="vertical"
-        autoComplete="off"
-        style={{ overflowY: 'auto' }}
+      <Form.Item
+        label="關鍵字"
+        name="text"
+        size={'large'}
+        initialValue={tempData?.text}
       >
-        <Form.Item
-          label="關鍵字"
-          name="text"
-          size={'large'}
-          initialValue={tempData?.text}
-        >
-          <TextInput
-            value={tempData?.text}
-            onChange={(v) => handleChange('text', v)}
-            placeholder="輸入單號、名稱或內容"
+        <TextInput
+          value={tempData?.text}
+          onChange={(v) => handleChange('text', v)}
+          placeholder="輸入單號、名稱或內容"
+        />
+      </Form.Item>
+      <Form.Item label="來自" name="from" initialValue={tempData?.from}>
+        <TextInput
+          value={tempData?.from}
+          onChange={(v) => handleChange('from', v)}
+          placeholder="例：王小明"
+        />
+      </Form.Item>
+      <Form.Item label="類型" name="typeId" initialValue={tempData?.typeId}>
+        <CusSelect
+          value={tempData?.typeId}
+          options={getNewOptions(types)}
+          onChange={(v) => handleChange('typeId', v)}
+        />
+      </Form.Item>
+      <Form.Item label="表單" name="formId" initialValue={tempData?.formId}>
+        <CusSelect
+          value={tempData?.formId}
+          options={getNewOptions(forms)}
+          onChange={(v) => handleChange('formId', v)}
+        />
+      </Form.Item>
+      <Form.Item label="日期" name="date" initialValue={tempData?.dates}>
+        <div>
+          <CusRangePicker
+            value={[tempData?.sDate, tempData?.eDate]}
+            onChange={(v) => {
+              handleChange('sDate', v[0]);
+              handleChange('eDate', v[1]);
+              setCusName(v[0] + ' ~ ' + v[1]);
+            }}
+            isHiddenInput={true}
+            openTrigger={true}
+            isOpen={isOpen}
+            setOpen={setIsOpen}
           />
-        </Form.Item>
-        <Form.Item label="來自" name="from" initialValue={tempData?.from}>
-          <TextInput
-            value={tempData?.from}
-            onChange={(v) => handleChange('from', v)}
-            placeholder="例：王小明"
-          />
-        </Form.Item>
-        <Form.Item label="類型" name="typeId" initialValue={tempData?.typeId}>
           <CusSelect
-            value={tempData?.typeId}
-            options={getNewOptions(types)}
-            onChange={(v) => handleChange('typeId', v)}
+            value={tempData?.dateId}
+            options={searchDates}
+            onChange={onDateChange}
+            onSelect={onDateSelect}
           />
-        </Form.Item>
-        <Form.Item label="表單" name="formId" initialValue={tempData?.formId}>
-          <CusSelect
-            value={tempData?.formId}
-            options={getNewOptions(forms)}
-            onChange={(v) => handleChange('formId', v)}
-          />
-        </Form.Item>
-        <Form.Item label="日期" name="date" initialValue={tempData?.dates}>
-          <div>
-            <CusRangePicker
-              value={[tempData?.sDate, tempData?.eDate]}
-              onChange={(v) => {
-                handleChange('sDate', v[0]);
-                handleChange('eDate', v[1]);
-                setCusName(v[0] + ' ~ ' + v[1]);
-              }}
-              isHiddenInput={true}
-              openTrigger={true}
-              isOpen={isOpen}
-              setOpen={setIsOpen}
-            />
-            <CusSelect
-              value={tempData?.dateId}
-              options={searchDates}
-              onChange={onDateChange}
-              onSelect={onDateSelect}
-            />
-          </div>
-        </Form.Item>
-      </Form>
-    </ConfigProvider>
+        </div>
+      </Form.Item>
+    </Form>
   );
 };
 

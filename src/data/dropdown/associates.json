@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "Type": "policy",
+    "Name": "ISMS-M-001 資通安全管理"
+  },
+  {
+    "Id": 2,
+    "Type": "policy",
+    "Name": "ISMS-P-002 資通安全組織與權責管理"
+  },
+  {
+    "Id": 3,
+    "Type": "policy",
+    "Name": "ISMS-P-007 資通安全稽核管理"
+  },
+  {
+    "Id": 4,
+    "Type": "policy",
+    "Name": "ISMS-P-001-05文件報表資料調閱申請單"
+  },
+  {
+    "Id": 5,
+    "Type": "procedure",
+    "Name": "ISMS-M-001 資通安全管理"
+  },
+  {
+    "Id": 6,
+    "Type": "procedure",
+    "Name": "ISMS-P-002 資通安全組織與權責管理"
+  },
+  {
+    "Id": 7,
+    "Type": "procedure",
+    "Name": "ISMS-P-007 資通安全稽核管理"
+  },
+  {
+    "Id": 8,
+    "Type": "standard",
+    "Name": "ISMS-P-001-05文件報表資料調閱申請單"
+  },
+  {
+    "Id": 9,
+    "Type": "form",
+    "Name": "ISMS-P-007 資通安全稽核管理"
+  },
+  {
+    "Id": 10,
+    "Type": "form",
+    "Name": "ISMS-P-002 資通安全組織與權責管理"
+  },
+  {
+    "Id": 11,
+    "Type": "policy",
+    "Name": "ISMS-P-001-99 文件報表資料調閱"
+  },
+  {
+    "Id": 12,
+    "Type": "policy",
+    "Name": "ISMS-P-001-98 報表資料調閱申請單"
+  },
+  {
+    "Id": 13,
+    "Type": "policy",
+    "Name": "ISMS-P-001-90 文件報表調閱申請單"
+  },
+  {
+    "Id": 14,
+    "Type": "form",
+    "Name": "ISMS-P-010 資通安全稽核管理"
+  },
+  {
+    "Id": 15,
+    "Type": "form",
+    "Name": "ISMS-P-100 安全稽核管理"
+  },
+  {
+    "Id": 16,
+    "Type": "form",
+    "Name": "ISMS-P-099 資通安全管理"
+  }
+]

@@ -102,8 +102,12 @@ code {
 }
 
 .ant-form-item-explain-error,
-.ant-form-item-label > label {
+.ant-form-item-label {
+  padding: 0 !important;
   font-weight: 600;
+  > label {
+    font-weight: 600;
+  }
 }
 .ant-form-item-required {
   &::before {
@@ -116,6 +120,10 @@ code {
 }
 
 .ant-picker-dropdown {
+  .ant-picker-now-btn {
+    font-weight: 600;
+    color: var(--primary-default);
+  }
   .ant-picker-range-arrow {
     display: none !important;
   }
@@ -132,6 +140,12 @@ code {
           .ant-picker-cell-inner {
             border-radius: 50px;
             font-weight: 500;
+          }
+        }
+        .ant-picker-cell-selected {
+          .ant-picker-cell-inner {
+            background-color: var(--primary-default);
+            color: white;
           }
         }
         .ant-picker-cell-today {

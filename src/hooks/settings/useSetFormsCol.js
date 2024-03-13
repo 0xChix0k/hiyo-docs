@@ -5,15 +5,15 @@ const useSetFormsCol = () => {
   return [
     {
       title: '名稱',
-      dataIndex: 'Name',
-      key: 'Name',
+      dataIndex: 'FormName',
+      key: 'FormName',
       // width: 530,
       ellipsis: true,
-      render: (Name, record) => {
+      render: (FormName, record) => {
         return (
           <Flex align="center" gap={8}>
             <IconForm />
-            <div>{Name}</div>
+            <div>{FormName}</div>
           </Flex>
         );
       },

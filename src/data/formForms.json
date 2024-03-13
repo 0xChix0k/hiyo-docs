@@ -1,52 +1,166 @@
 [
   {
-    "Id": "Form-1",
-    "Name": "ISMS-M-001 資通安全管理",
-    "FinalDate": "2024-02-24"
+    "Id": 1,
+    "FormId": "Form-1",
+    "FormName": "ISMS-M-001 資通安全管理",
+    "StartDate": "2024-02-01",
+    "FinalDate": "2024-02-24",
+    "TypeId": "policy",
+    "UpTime": 1,
+    "IsUpdateUser": true,
+    "UpdateUser": [1, 2, 3],
+    "IsAllRead": false,
+    "IsDownload": false,
+    "IsPrint": false,
+    "Flows": [
+      {
+        "Id": 22,
+        "Order": 1
+      },
+      {
+        "Id": 23,
+        "Order": 5
+      },
+      {
+        "Id": 24,
+        "Order": 3
+      },
+      {
+        "Id": 25,
+        "Order": 4
+      },
+      {
+        "Id": 26,
+        "Order": 2
+      },
+      {
+        "Id": 17,
+        "Order": 6
+      },
+      {
+        "Id": 18,
+        "Order": 9
+      },
+      {
+        "Id": 19,
+        "Order": 7
+      },
+      {
+        "Id": 20,
+        "Order": 8
+      }
+    ],
+    "Associates": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
   },
   {
-    "Id": "Form-2",
-    "Name": "ISMS-M-002 資通安全管理",
-    "FinalDate": "2024-03-07"
+    "Id": 2,
+    "FormId": "Form-2",
+    "FormName": "ISMS-M-002 資通安全管理",
+    "StartDate": "2024-02-10",
+    "FinalDate": "2024-03-07",
+    "TypeId": "procedure",
+    "UpTime": 2,
+    "IsUpdateUser": false,
+    "UpdateUser": [],
+    "IsAllRead": true,
+    "IsDownload": true,
+    "IsPrint": true,
+    "Flows": [
+      {
+        "Id": 22,
+        "Order": 4
+      },
+      {
+        "Id": 23,
+        "Order": 1
+      },
+      {
+        "Id": 24,
+        "Order": 2
+      },
+      {
+        "Id": 25,
+        "Order": 3
+      },
+      {
+        "Id": 26,
+        "Order": 5
+      }
+    ],
+    "Associates": [1, 2, 7, 8, 9, 10]
   },
   {
-    "Id": "Form-3",
-    "Name": "ISMS-M-003 資通安全管理",
-    "FinalDate": "2024-02-29"
+    "Id": 3,
+    "FormId": "Form-3",
+    "FormName": "ISMS-M-003 資通安全管理",
+    "StartDate": "2024-01-01",
+    "FinalDate": "2024-01-29",
+    "TypeId": "standard",
+    "UpTime": 3,
+    "IsUpdateUser": true,
+    "UpdateUser": [24, 25, 26],
+    "IsAllRead": true,
+    "IsDownload": false,
+    "IsPrint": false,
+    "Flows": [
+      {
+        "Id": 22,
+        "Order": 1
+      },
+      {
+        "Id": 23,
+        "Order": 5
+      },
+      {
+        "Id": 24,
+        "Order": 3
+      },
+      {
+        "Id": 25,
+        "Order": 4
+      },
+      {
+        "Id": 26,
+        "Order": 2
+      }
+    ],
+    "Associates": [1, 8, 9, 10]
   },
   {
-    "Id": "Form-4",
-    "Name": "ISMS-M-004 資通安全管理",
-    "FinalDate": "2024-02-17"
-  },
-  {
-    "Id": "Form-5",
-    "Name": "ISMS-M-005 資通安全管理",
-    "FinalDate": "2024-02-29"
-  },
-  {
-    "Id": "Form-6",
-    "Name": "ISMS-M-006 資通安全管理",
-    "FinalDate": "2024-02-29"
-  },
-  {
-    "Id": "Form-7",
-    "Name": "ISMS-M-007 資通安全管理",
-    "FinalDate": "2024-02-29"
-  },
-  {
-    "Id": "Form-8",
-    "Name": "ISMS-M-008 資通安全管理",
-    "FinalDate": "2024-02-29"
-  },
-  {
-    "Id": "Form-9",
-    "Name": "ISMS-M-009 資通安全管理",
-    "FinalDate": "2024-02-29"
-  },
-  {
-    "Id": "Form-10",
-    "Name": "ISMS-M-010 資通安全管理",
-    "FinalDate": "2024-02-29"
+    "Id": 4,
+    "FormId": "Form-4",
+    "FormName": "ISMS-M-004 資通安全管理",
+    "StartDate": "2024-02-04",
+    "FinalDate": "2024-02-17",
+    "TypeId": "form",
+    "UpTime": 4,
+    "IsUpdateUser": false,
+    "UpdateUser": [],
+    "IsAllRead": true,
+    "IsDownload": true,
+    "IsPrint": false,
+    "Flows": [
+      {
+        "Id": 22,
+        "Order": 1
+      },
+      {
+        "Id": 23,
+        "Order": 5
+      },
+      {
+        "Id": 24,
+        "Order": 3
+      },
+      {
+        "Id": 25,
+        "Order": 4
+      },
+      {
+        "Id": 26,
+        "Order": 2
+      }
+    ],
+    "Associates": [1, 2]
   }
 ]

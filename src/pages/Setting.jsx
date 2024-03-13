@@ -9,7 +9,12 @@ import {
   CusSpin,
   CusTable,
 } from 'components';
-import { useEditProps, useFormProps, useSetFormsCol } from 'hooks/settings';
+import {
+  useEditProps,
+  useFormProps,
+  useSetFormsCol,
+  useSetting,
+} from 'hooks/settings';
 import { useEffect, useRef, useState } from 'react';
 import {
   useGetFolders,
@@ -19,6 +24,7 @@ import {
 import { cssSetting } from './settingCss';
 
 const Setting = () => {
+  const { iniFormData } = useSetting();
   const { data: folders, isLoading, isSuccess } = useGetFolders();
   const [collId, setCollId] = useState('');
   useEffect(() => {
@@ -46,8 +52,14 @@ const Setting = () => {
   const {
     data: formData,
     isLoading: dataLoading,
-    iseSuccess: dataSuccess,
+    isSuccess: dataSuccess,
   } = useGetFormData(formOpen.id);
+  const [newFormData, setNewFormData] = useState(iniFormData);
+  useEffect(() => {
+    if (dataSuccess) {
+      setNewFormData(formData);
+    }
+  }, [dataSuccess, formData]);
 
   const columns = useSetFormsCol();
   const editRef = useRef(null);
@@ -58,12 +70,18 @@ const Setting = () => {
     setAddOpen
   );
   const formRef = useRef(null);
+  const sub1Ref = useRef(null);
+  const sub2Ref = useRef(null);
+  const sub3Ref = useRef(null);
   const { props } = useFormProps(
-    formRef,
+    [formRef, sub1Ref, sub2Ref, sub3Ref],
     formOpen.id,
+    newFormData,
+    setNewFormData,
     setFormOpen,
     level,
-    setLevel
+    setLevel,
+    iniFormData
   );
 
   const handleAddCategory = () => {
@@ -95,7 +113,12 @@ const Setting = () => {
           isClose={props?.isClose}
           onOk={props?.onOk}
           okStr={props?.okStr}
+          okBgColor={props?.okBgColor}
           onCancel={props?.onCancel}
+          exFn={props?.exFn}
+          exStr={props?.exStr}
+          exType={props?.exType}
+          exBgColor={props?.exBgColor}
           w={props?.w}
           h={props?.h}
           content={props?.content}
@@ -181,7 +204,8 @@ const Setting = () => {
                 data={formList}
                 columns={columns}
                 onRow={(record) => {
-                  console.log(record);
+                  // console.log(record);
+                  setLevel(1);
                   setFormOpen({ open: true, id: record.Id });
                 }}
                 loading={dataLoading}
