@@ -39,6 +39,7 @@ const FormsetS3Content = React.forwardRef(({ data, setData }, ref) => {
   const handleOk = async () => {
     const isForm0Valid = await onValidate(assFlowRef, null);
     if (isForm0Valid) {
+      form.setFieldsValue({ Associates: associate });
       setData({ ...data, Associates: associate });
       onClose();
     }
@@ -57,7 +58,7 @@ const FormsetS3Content = React.forwardRef(({ data, setData }, ref) => {
     >
       <CusModal
         open={openAss}
-        title={{ text: data?.Flows ? '編輯關聯' : '新增關聯' }}
+        title={{ text: data?.Associates ? '編輯關聯' : '新增關聯' }}
         isClose={true}
         onOk={() => handleOk()}
         okStr="儲存"
@@ -84,18 +85,18 @@ const FormsetS3Content = React.forwardRef(({ data, setData }, ref) => {
               <Form.Item
                 name="Associates"
                 style={{ marginBottom: 0 }}
-                initialValue={data?.Associates || []}
+                initialValue={data?.Associates}
               >
                 <CusButton
-                  text={data?.Associates ? '編輯' : '新增'}
-                  icon={data?.Associates ? <IconPen /> : <IconAdd />}
+                  text={!!data?.Associates.length ? '編輯' : '新增'}
+                  icon={!!data?.Associates.length ? <IconPen /> : <IconAdd />}
                   onClick={() => setOpenAss(true)}
                   bgColor={'#F1F6FF'}
                 />
               </Form.Item>
             </Form>
           </Flex>
-          {data?.Associates && (
+          {!!data?.Associates.length && (
             <AssBlock list={data?.Associates} getName={getNameById} />
           )}
         </>

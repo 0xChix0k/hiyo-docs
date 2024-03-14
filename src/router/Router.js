@@ -1,3 +1,4 @@
+import { CusSpin } from 'components';
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import WithAuthentication from './WithAuthentication';
@@ -8,13 +9,14 @@ const Main = lazy(() => import('pages/Main'));
 const Todo = lazy(() => import('pages/Todo'));
 const MyForm = lazy(() => import('pages/MyForm'));
 const Setting = lazy(() => import('pages/Setting'));
+const Document = lazy(() => import('pages/Document'));
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <WithAuthentication>
-        <Suspense>
+        <Suspense fallback={<CusSpin loading={true} full={true} />}>
           <Main />
         </Suspense>
       </WithAuthentication>
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
         path: '/todo',
         element: (
           <WithAuthentication>
-            <Suspense>
+            <Suspense fallback={<CusSpin loading={true} full={true} />}>
               <Todo />
             </Suspense>
           </WithAuthentication>
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
         path: '/my-form',
         element: (
           <WithAuthentication>
-            <Suspense>
+            <Suspense fallback={<CusSpin loading={true} full={true} />}>
               <MyForm />
             </Suspense>
           </WithAuthentication>
@@ -43,11 +45,11 @@ const router = createBrowserRouter([
         errorElement: <div>Not Found</div>,
       },
       {
-        path: '/libray',
+        path: '/document',
         element: (
           <WithAuthentication>
-            <Suspense>
-              {/* <Home /> */}
+            <Suspense fallback={<CusSpin loading={true} full={true} />}>
+              <Document />
             </Suspense>
           </WithAuthentication>
         ),
@@ -57,7 +59,7 @@ const router = createBrowserRouter([
         path: '/setting',
         element: (
           <WithAuthentication>
-            <Suspense>
+            <Suspense fallback={<CusSpin loading={true} full={true} />}>
               <Setting />
             </Suspense>
           </WithAuthentication>

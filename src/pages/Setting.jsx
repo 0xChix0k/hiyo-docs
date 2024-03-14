@@ -89,6 +89,12 @@ const Setting = () => {
     setExtraAction({ action: 'add', fName: '', place: [175, 50] });
   };
 
+  const handleAddForm = () => {
+    setLevel(1);
+    setFormOpen({ open: true, id: null });
+    setNewFormData({ ...iniFormData, FolderId: collId });
+  };
+
   return (
     <Flex css={cssSetting}>
       {(folderId || addOpen) && (
@@ -197,7 +203,7 @@ const Setting = () => {
                   text="新增表單"
                   icon={<IconAdd />}
                   bgColor="#07CE6F"
-                  onClick={() => console.log('click')}
+                  onClick={handleAddForm}
                 />
               </Flex>
               <CusTable
@@ -206,7 +212,7 @@ const Setting = () => {
                 onRow={(record) => {
                   // console.log(record);
                   setLevel(1);
-                  setFormOpen({ open: true, id: record.Id });
+                  setFormOpen({ open: true, id: record.FormId });
                 }}
                 loading={dataLoading}
                 sticky={true}
@@ -220,7 +226,7 @@ const Setting = () => {
                 text="新增表單"
                 icon={<IconAdd />}
                 bgColor="#07CE6F"
-                onClick={() => console.log('click')}
+                onClick={handleAddForm}
               />
             </Flex>
           ))}

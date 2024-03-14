@@ -161,6 +161,7 @@ const cssHeader = (titleSize, sColor) => css`
       font-size: ${titleSize}px;
       color: var(--grey-default);
       font-weight: 600;
+      white-space: pre-line;
     }
     .status {
       font-size: 14px;

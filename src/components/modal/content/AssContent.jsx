@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Divider, Flex, Form } from 'antd';
+import { Flex, Form } from 'antd';
 import { CusSelect } from 'components';
 import { IconClose } from 'components/icon';
 import assList from 'data/dropdown/associates.json';
@@ -25,10 +25,12 @@ const AssContent = ({ formInstance, ass, setAss }) => {
   const boxSize = '20px';
 
   const [genAss, setGenAss] = useState(
-    ass.map((item) => ({
-      Id: item,
-      Type: getNameById(item, assList, 'Id', 'Type'),
-    }))
+    !!ass.length
+      ? ass.map((item) => ({
+          Id: item,
+          Type: getNameById(item, assList, 'Id', 'Type'),
+        }))
+      : [{ Id: null, Type: null }]
   );
 
   useEffect(() => {
@@ -193,10 +195,10 @@ const cssFlowContent = (boxSize, flowConut) => css`
       border-radius: 54px;
       background: var(--grey-50);
       color: white;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       margin-top: 10px;
-      :is(.nomar){
+      :is(.nomar) {
         margin-top: 0;
       }
     }

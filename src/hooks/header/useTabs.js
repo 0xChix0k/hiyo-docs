@@ -9,7 +9,7 @@ const useTabs = (isMa) => {
       label: '我的表單',
     },
     {
-      key: 'libray',
+      key: 'document',
       label: '文件庫',
     },
     {

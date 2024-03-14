@@ -1,12 +1,13 @@
 import { useQuery } from 'react-query';
 // import apiClient from './apiClient';
 import formFolder from 'data/formFolder.json';
+import docFolders from 'data/docFolders.json';
 import formForms from 'data/formForms.json';
 
 const TIME = 1000 * 60 * 10;
 export const useGetFolders = () => {
   return useQuery(
-    ['folderList'],
+    ['docfolderList'],
     async () => {
       // console.log('param:', param);
       const data = formFolder;
@@ -27,11 +28,11 @@ export const useGetFolders = () => {
  * @param {string|number} id
  * @returns {object}
  */
-export const useGetForms = (id) => {
+export const useGetFolder = (id) => {
   return useQuery(
-    ['folderFormList', id],
+    ['docfolder', id],
     async () => {
-      const data = formForms.filter((item) => item.FolderId === id);
+      const data = docFolders.find((item) => item.Id === id);
       // console.log('myFormList', data);
       return data;
     },

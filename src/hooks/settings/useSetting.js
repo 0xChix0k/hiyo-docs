@@ -1,10 +1,13 @@
+import dayjs from 'dayjs';
+
 const useSetting = () => {
   const iniFormData = {
-    Id: '',
-    FormId: '',
+    Id: null,
+    FolderId: null,
+    FormId: null,
     FormName: '',
-    StartDate: '',
-    FinalDate: '',
+    StartDate: dayjs().format('YYYY-MM-DD'),
+    FinalDate: null,
     TypeId: 'policy',
     UpTime: 2,
     IsUpdateUser: false,
@@ -13,6 +16,7 @@ const useSetting = () => {
     IsDownload: false,
     IsPrint: false,
     Flows: [],
+    Associates: [],
   };
 
   return { iniFormData };

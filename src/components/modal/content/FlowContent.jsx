@@ -9,8 +9,6 @@ import React, { useEffect } from 'react';
 const FlowContent = ({ formInstance, flow, setFlow }) => {
   const [form] = Form.useForm();
 
-  // console.log('flow', flow);
-
   useEffect(() => {
     if (formInstance) {
       formInstance.current = form; // 將表單實例暴露給父組件
@@ -20,10 +18,9 @@ const FlowContent = ({ formInstance, flow, setFlow }) => {
   const boxSize = '20px';
 
   useEffect(() => {
-    if (flow && form) {
-      form.setFieldsValue({ flow });
-    }
-  }, [flow, form]);
+    !flow.length && setFlow([{ Id: null, Order: 1 }]);
+    form && form.setFieldsValue({ flow });
+  }, [flow, form, setFlow]);
 
   const onGetNewFlow = () => {
     const newFlow = form

@@ -21,7 +21,7 @@ const FormsetS2Content = React.forwardRef(({ data, setData }, ref) => {
   const flowRef = useRef(null);
 
   useEffect(() => {
-    openFlow && setTempFlow(data?.Flows || []);
+    openFlow && setTempFlow(data?.Flows);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openFlow]);
 
@@ -36,6 +36,7 @@ const FormsetS2Content = React.forwardRef(({ data, setData }, ref) => {
   const handleOk = async () => {
     const isForm0Valid = await onValidate(flowRef, null);
     if (isForm0Valid) {
+      form.setFieldsValue({ Flows: tempFlow });
       setData({ ...data, Flows: tempFlow });
       onClose();
     }
@@ -47,7 +48,7 @@ const FormsetS2Content = React.forwardRef(({ data, setData }, ref) => {
         open={openFlow}
         title={{ text: data?.Flows ? '編輯流程' : '新增流程' }}
         isClose={true}
-        onOk={() => handleOk()}
+        onOk={()=>handleOk()}
         okStr="儲存"
         onCancel={onClose}
         h={650}
@@ -75,18 +76,20 @@ const FormsetS2Content = React.forwardRef(({ data, setData }, ref) => {
               },
             ]}
             style={{ marginBottom: 0 }}
-            initialValue={data?.Flows || []}
+            initialValue={data?.Flows}
           >
             <CusButton
-              text={data?.Flows ? '編輯' : '新增'}
-              icon={data?.Flows ? <IconPen /> : <IconAdd />}
+              text={!!data?.Flows.length ? '編輯' : '新增'}
+              icon={!!data?.Flows.length ? <IconPen /> : <IconAdd />}
               onClick={() => setOpenFlow(true)}
               bgColor={'#F1F6FF'}
             />
           </Form.Item>
         </Form>
       </Flex>
-      {data?.Flows && <FlowBlock list={data?.Flows} getName={getNameById} />}
+      {!!data?.Flows.length && (
+        <FlowBlock list={data?.Flows} getName={getNameById} />
+      )}
     </Flex>
   );
 });

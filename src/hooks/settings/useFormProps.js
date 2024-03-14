@@ -1,6 +1,7 @@
 import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { FormSetContent } from 'components/modal/content';
 import { useFormCommon } from '..';
+import { useMessage } from 'hooks';
 
 const useFormProps = (
   refs,
@@ -13,7 +14,7 @@ const useFormProps = (
   initData
 ) => {
   const { onValidate } = useFormCommon();
-
+  const { openMes } = useMessage();
   const handleChlick = async (exFn) => {
     const isForm0Valid = await onValidate(refs[0], null);
     console.log('isForm0Valid', isForm0Valid);
@@ -44,8 +45,9 @@ const useFormProps = (
         ? () =>
             handleChlick(() =>
               onValidate(refs[3], () => {
+                // set update Api
                 handleClose();
-                console.log('onOk');
+                openMes(id ? '已成功更新！' : '已成功新增！');
               })
             )
         : null,
