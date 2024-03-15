@@ -1,3 +1,5 @@
+import debounce from 'lodash/debounce';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCommon,
@@ -7,15 +9,28 @@ import {
 
 const useSearch = () => {
   const dispatch = useDispatch();
+  // const { debounce } = useCommon();
   const { searchData } = useSelector(selectCommon);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceFn = useCallback(
+    debounce((value) => {
+      dispatch(setAllSearchData({ ...searchData, text: value }));
+      console.log('searchData:', value);
+    }, 500),
+    []
+  );
 
   /**
    * @description input search
    * @param {string} value
    */
   const onInputSearch = (value) => {
-    const newData = { ...searchData, text: value };
-    onSearch(newData);
+    if (value) {
+      debounceFn(value);
+    } else {
+      dispatch(setAllSearchData({ ...searchData, text: value }));
+    }
   };
 
   /**

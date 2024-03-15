@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 const WithLogin = ({ children }) => {
   const token = Cookies.get('Jwt');
-  console.log('token', token);
+  // console.log('token', token);
   if (token) {
     return <Navigate to="/" replace />;
   }

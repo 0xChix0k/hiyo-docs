@@ -2,13 +2,7 @@
 import { Flex } from 'antd';
 import { ReactComponent as IconAdd } from 'assets/icon-add.svg';
 import { ReactComponent as IconForm } from 'assets/icon-form.svg';
-import {
-  CusButton,
-  CusCollpaseF,
-  CusModal,
-  CusSpin,
-  CusTable,
-} from 'components';
+import { CusButton, CusModal, CusSpin, CusTable, FolderSet } from 'components';
 import {
   useEditProps,
   useFormProps,
@@ -26,18 +20,16 @@ import { cssSetting } from './settingCss';
 const Setting = () => {
   const { iniFormData } = useSetting();
   const { data: folders, isLoading, isSuccess } = useGetFolders();
-  const [collId, setCollId] = useState('');
+  const [coll, setColl] = useState({ Id: null, Name: null });
   useEffect(() => {
     if (isSuccess) {
-      setCollId(folders[0].Id);
-      setFolderName(folders[0].Name);
+      setColl({ Id: folders[0].Id, Name: folders[0].Name });
     }
   }, [isSuccess, folders]);
   const [folderId, setFolderId] = useState('');
   const [formOpen, setFormOpen] = useState({ open: false, id: null });
   const [level, setLevel] = useState(1);
   const [addOpen, setAddOpen] = useState(false);
-  const [folderName, setFolderName] = useState('');
   const [extraAction, setExtraAction] = useState({
     action: 'rename',
     fName: '',
@@ -47,7 +39,7 @@ const Setting = () => {
     data: formList,
     isLoading: formLoading,
     isSuccess: formSuccess,
-  } = useGetForms(collId);
+  } = useGetForms(coll?.Id);
 
   const {
     data: formData,
@@ -92,7 +84,7 @@ const Setting = () => {
   const handleAddForm = () => {
     setLevel(1);
     setFormOpen({ open: true, id: null });
-    setNewFormData({ ...iniFormData, FolderId: collId });
+    setNewFormData({ ...iniFormData, FolderId: coll.Id });
   };
 
   return (
@@ -145,12 +137,11 @@ const Setting = () => {
         </Flex>
         {!!folders?.length ? (
           <Flex vertical flex="1 1 auto" className="list-div">
-            <CusCollpaseF
-              itemsData={folders}
-              activeId={collId}
-              setId={setCollId}
+            <FolderSet
+              list={folders}
+              active={coll}
+              setActive={setColl}
               setFolderId={setFolderId}
-              setName={setFolderName}
               setExtraAction={setExtraAction}
             />
           </Flex>
@@ -198,7 +189,7 @@ const Setting = () => {
                 flex="0 0 40px"
                 className="title-div"
               >
-                <div className="title">{folderName}</div>
+                <div className="title">{coll?.Name}</div>
                 <CusButton
                   text="新增表單"
                   icon={<IconAdd />}

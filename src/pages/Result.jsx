@@ -5,15 +5,20 @@ import { ReactComponent as IconEmpty } from 'assets/icon-empty-box.svg';
 import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { CapsuleTabs } from 'components';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCommon } from 'store/commonSlice';
 import { cssResult } from './resultCss';
 
 const Result = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const { searchData } = useSelector(selectCommon);
 
   return (
     <Flex vertical align="center" css={cssResult}>
       <Flex vertical gap={30} className="result-container">
-        <p className="title">「ISMS-P-003」的搜尋結果</p>
+        <p className="title">
+          {searchData.text ? `「${searchData.text}」的` : ''} 搜尋結果
+        </p>
         <Flex vertical gap={24} className="result-div">
           <Flex flex="0 0 auto">
             <CapsuleTabs
@@ -22,7 +27,7 @@ const Result = () => {
               onChange={setActiveTab}
             />
           </Flex>
-          <Flex vertical flex='1 1 auto'>
+          <Flex vertical flex="1 1 auto">
             <Flex vertical justify="center" align="center" className="nodata">
               <IconEmpty />
               <p className="comment">沒有顯示任何內容</p>

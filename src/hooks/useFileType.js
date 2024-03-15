@@ -6,6 +6,11 @@ import { ReactComponent as IconUnKnow } from 'assets/files/icon_unknown_fills.sv
 import { ReactComponent as IconVideo } from 'assets/files/icon_video_fills.svg';
 import { ReactComponent as IconExcel } from 'assets/files/icon_xls_fills.svg';
 
+
+/**
+ * @description useFileType
+ * @returns {Object}
+ */
 const useFileType = () => {
   const typePdf = ['application/pdf'];
   const typeImg = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -38,6 +43,12 @@ const useFileType = () => {
     ...typeVideo,
   ];
 
+
+  /**
+   * @description Get File Icon
+   * @param {string} fileName 
+   * @returns {Object}
+   */
   const onGetFileIcon = (fileName) => {
     const fileExt = fileName.split('.').pop().toLowerCase();
     if (fileExt === 'pdf') {

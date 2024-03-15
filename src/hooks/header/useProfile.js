@@ -1,5 +1,10 @@
 import jsCookie from 'js-cookie';
 
+/**
+ * @description useProfile dropdown
+ * @param {Function} setOpen 
+ * @returns {Object} profileList, profileClick
+ */
 const useProfile = (setOpen) => {
   const profileList = [
     {
@@ -11,9 +16,14 @@ const useProfile = (setOpen) => {
       key: 'logout',
     },
   ];
+
+  /**
+   * @description profileClick
+   * @param {string} key
+   * @returns {void} 
+   */
   const profileClick = ({ key }) => {
     if (key === 'logout') {
-      localStorage.clear();
       jsCookie.remove('Jwt');
       window.location.href = '/login';
     } else {

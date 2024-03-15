@@ -2,11 +2,20 @@ import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { useFormCommon } from 'hooks';
 import { FormContent } from 'components/modal/content';
 
+/**
+ * @description Add Form Modal props
+ * @param {ref} ref
+ * @param {Function} setOpen
+ * @param {object} formData
+ * @param {Function} setFormData
+ * @param {object} initForm
+ * @returns {Object} props
+ */
 const useAddForm = (ref, setOpen, formData, setFormData, initForm) => {
   const { onValidate } = useFormCommon();
 
   const addModalProps = {
-    title: { text: '新表單', icon: <IconForm /> },
+    title: { text: '新增申請', icon: <IconForm /> },
     isClose: true,
     onOk: () =>
       onValidate(ref, () => {

@@ -1,6 +1,10 @@
 import { Flex } from 'antd';
 import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 
+/**
+ * @description Set Forms Column
+ * @returns {Array<object>} columns
+ */
 const useSetFormsCol = () => {
   return [
     {

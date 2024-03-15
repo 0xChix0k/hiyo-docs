@@ -1,14 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { ConfigProvider, Select, Space, Spin, Flex } from 'antd';
+import { ConfigProvider, Flex, Select, Space, Spin } from 'antd';
 import { ReactComponent as IconArrow } from 'assets/icon-arrow_down.svg';
 import { CusAvatar, CusEmpty } from 'components';
 import users from 'data/dropdown/users.json';
 import { useCommon } from 'hooks/useCommon';
-import { useEffect, useState } from 'react';
+import debounce from 'lodash/debounce';
+import { useCallback, useEffect, useState } from 'react';
 import { useGetUsers } from 'services/dropdownService';
 import { cssSelect } from './selectCss';
 
+/**
+ * @description Custom User Select
+ * @param {string} value=null
+ * @param {function} onChange
+ * @param {function} onSelect=null
+ * @param {boolean} disabled=false
+ * @param {boolean} dw=null
+ * @param {string} placeholder="請選擇"
+ * @returns {JSX.Element}
+ */
 const CusUser = ({
   value = null,
   onChange,
@@ -28,8 +39,17 @@ const CusUser = ({
         }
       : null
   );
-  const [searchStr, setSearchStr] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchStr, setSearchStr] = useState(null);
   const { data, isLoading, isSuccess } = useGetUsers(searchStr);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceFn = useCallback(
+    debounce((value) => {
+      setSearchStr(value);
+    }, 500),
+    []
+  );
 
   const handleChange = (value) => {
     // console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
@@ -41,7 +61,12 @@ const CusUser = ({
   };
 
   const handleSearch = (v) => {
-    setSearchStr(v);
+    setOptions([]);
+    setSearchInput(v);
+    debounceFn(v);
+    if (!v) {
+      setOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -58,7 +83,8 @@ const CusUser = ({
 
   useEffect(() => {
     if (!open) {
-      setSearchStr('');
+      setSearchInput('');
+      setSearchStr(null);
       setOptions([]);
     }
   }, [open]);
@@ -94,7 +120,11 @@ const CusUser = ({
         options={options}
         onSearch={handleSearch}
         notFoundContent={
-          isLoading ? <Spin size="small" /> : searchStr ? <CusEmpty /> : null
+          isLoading ? (
+            <Spin size="small" />
+          ) : !isLoading && searchStr ? (
+            <CusEmpty />
+          ) : null
         }
         onChange={handleChange}
         onSelect={onSelect}
@@ -105,7 +135,7 @@ const CusUser = ({
         placeholder={placeholder}
         dropdownStyle={{ padding: '10px 0' }}
         onDropdownVisibleChange={(open) => setOpen(open)}
-        open={searchStr ? open : false}
+        open={searchInput ? open : false}
         suffixIcon={
           <IconArrow
             style={{

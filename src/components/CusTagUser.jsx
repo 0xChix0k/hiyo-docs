@@ -2,13 +2,22 @@
 import { css } from '@emotion/react';
 import { ConfigProvider, Tag } from 'antd';
 
+/**
+ * @description CusTagUser
+ * @param {string} text
+ * @param { JSX.Element } avatar
+ * @param {function} onMouseDown
+ * @param {boolean} closable
+ * @param {function} onClose
+ * @returns  {JSX.Element}
+ */
 const CusTagUser = ({ text, avatar, onMouseDown, closable, onClose }) => {
   return (
     <ConfigProvider
       theme={{
-        token:{
+        token: {
           fontSizeSM: 14,
-        } ,
+        },
         components: {
           Tag: {
             defaultBg: 'var(--grey-20)',
@@ -37,7 +46,7 @@ const cssTag = css`
   padding: 4px !important;
   border-radius: 32px;
   margin: 0px 4px 4px 0px;
-  > span{
+  > span {
     margin-left: 10px;
   }
 `;

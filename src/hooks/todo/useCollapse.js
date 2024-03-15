@@ -22,7 +22,7 @@ const useCollapse = (setSelectId, data) => {
       .map((item) => {
         return (
           <div key={item.Id} onClick={() => setSelectId(item.Id)}>
-            {item.Comment}
+            {item.Name}
           </div>
         );
       });

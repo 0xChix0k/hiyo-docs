@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import Icon from '@ant-design/icons';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Checkbox, ConfigProvider, Table } from 'antd';
 import { ReactComponent as IconLoading } from 'assets/icon_loading.svg';
@@ -163,9 +165,9 @@ const CusTable = memo(
               },
             }}
           >
-            <StTable
-              className="tabledddwdwfwfwfefeaf"
+            <Table
               size="small"
+              css={cssTable(sticky)}
               showSorterTooltip={false}
               sortDirections={['ascend', 'descend', 'ascend']}
               rowSelection={onRowselection}
@@ -183,7 +185,7 @@ const CusTable = memo(
               pagination={false}
               onRow={onTableRow}
               scroll
-              sticky={sticky}
+              // sticky={sticky}
               footer={hasNextPage ? <FootLoading /> : null}
             />
           </ConfigProvider>
@@ -195,7 +197,7 @@ const CusTable = memo(
 
 export { CusTable };
 
-const StTable = styled(Table)`
+const cssTable = (sticky) => css`
   .ant-spin-nested-loading {
     > div:not(.ant-spin-container) {
       position: absolute;
@@ -206,6 +208,9 @@ const StTable = styled(Table)`
   }
   .ant-table-thead {
     > tr {
+      position: ${sticky ? 'sticky' : 'relative'};
+      top: ${sticky ? '0' : 'auto'};
+      z-index: 10;
       height: 45px;
       > th {
         ::before {

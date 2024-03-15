@@ -9,7 +9,8 @@ import { Checkbox, ConfigProvider } from 'antd';
  * @param {function} onChange
  * @param {boolean} disabled
  * @param {string} bgColor
- * @returns
+ * @param {string} tColor
+ * @returns {JSX.Element}
  */
 const CusCheckBox = ({
   label,

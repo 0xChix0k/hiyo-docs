@@ -1,5 +1,15 @@
 import { RenameContent } from 'components/modal/content';
 
+
+
+/**
+ * @description Edit Modal props
+ * @param {ref} ref 
+ * @param {object} exAction 
+ * @param {Function} setId 
+ * @param {Function} setAdd 
+ * @returns  {Object} editProps
+ */
 const useEditProps = (ref, exAction, setId, setAdd) => {
   const editProps = {
     title: exAction.action === 'delete' ? { text: '是否確認刪除此類別' } : {},

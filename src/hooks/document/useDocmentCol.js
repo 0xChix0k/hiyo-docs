@@ -2,12 +2,16 @@ import Icon from '@ant-design/icons';
 import { Flex } from 'antd';
 import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import { ReactComponent as IconAMark } from 'assets/icon-mark.svg';
-import { useCommon, useFileType } from 'hooks';
 import { CusAvatar } from 'components';
+import { useCommon, useFileType } from 'hooks';
 
+/**
+ * @description Document List Column
+ * @param {string} topType
+ * @returns
+ */
 const useDocmentCol = (topType) => {
   const isFolder = topType === 'folder';
-  console.log('useDocmentCol, isFolder:', isFolder);
   const { onGetFileIcon } = useFileType();
   const { EMPRTY_COLUMN } = useCommon();
 
@@ -16,8 +20,8 @@ const useDocmentCol = (topType) => {
         { ...EMPRTY_COLUMN },
         {
           title: '版本',
-          dataIndex: 'Licence',
-          key: 'Licence',
+          dataIndex: 'License',
+          key: 'License',
           width: 50,
           ellipsis: true,
         },
@@ -105,10 +109,21 @@ const useDocmentCol = (topType) => {
 
 export { useDocmentCol };
 
+/**
+ * @description Form Icon
+ * @param {string} name
+ * @param {Function} getIcon
+ * @returns {JSX.Element}
+ */
 const FormIcon = (name, getIcon) => {
   return <Icon component={getIcon(name)} style={{ fontSize: 15 }} />;
 };
 
+/**
+ * @description Folder Icon
+ * @param {string} type
+ * @returns {JSX.Element}
+ */
 const FolderIcon = (type) => {
   return (
     <Icon

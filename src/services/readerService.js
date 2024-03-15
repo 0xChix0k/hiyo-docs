@@ -7,7 +7,7 @@ export const useGetReaders = (id) => {
     ['readersList', id],
     async () => {
       console.log('todo id:', id);
-      const data = readersList.find((item) => item.Id === id);
+      const data = readersList.find((item) => item.Id === 1);
       console.log('readers data:', data);
       return data;
     },

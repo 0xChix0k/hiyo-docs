@@ -4,7 +4,8 @@ import { ReactComponent as IconArrow } from 'assets/icon-arrow_down.svg';
 import { CusAvatar, CusEmpty, CusTagUser } from 'components';
 import users from 'data/dropdown/users.json';
 import { useCommon } from 'hooks/useCommon';
-import { useEffect, useState } from 'react';
+import debounce from 'lodash/debounce';
+import { useCallback, useEffect, useState } from 'react';
 import { useGetUsers } from 'services/dropdownService';
 import { cssSelect } from './selectCss';
 
@@ -28,12 +29,26 @@ const CusUserM = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
-  const [searchStr, setSearchStr] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchIStr, setSearchStr] = useState(null);
   const [isClose, setIsClose] = useState(false);
-  const { data, isLoading, isSuccess } = useGetUsers(searchStr);
+  const { data, isLoading, isSuccess } = useGetUsers(searchIStr);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceFn = useCallback(
+    debounce((value) => {
+      setSearchStr(value);
+    }, 500),
+    []
+  );
 
   const handleSearch = (v) => {
-    setSearchStr(v);
+    setOptions([]);
+    setSearchInput(v);
+    debounceFn(v);
+    if (!v) {
+      setOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -50,7 +65,8 @@ const CusUserM = ({
 
   useEffect(() => {
     if (!open) {
-      setSearchStr('');
+      setSearchInput('');
+      setSearchStr(null);
       setOptions([]);
     }
   }, [open]);
@@ -88,7 +104,11 @@ const CusUserM = ({
         options={options}
         onSearch={handleSearch}
         notFoundContent={
-          isLoading ? <Spin size="small" /> : searchStr ? <CusEmpty /> : null
+          isLoading ? (
+            <Spin size="small" delay={0} />
+          ) : !isLoading && searchIStr ? (
+            <CusEmpty />
+          ) : null
         }
         onChange={onChange}
         onSelect={onSelect}
@@ -99,7 +119,7 @@ const CusUserM = ({
         placeholder={placeholder}
         dropdownStyle={{ padding: '10px 0' }}
         onDropdownVisibleChange={(open) => setOpen(open)}
-        open={searchStr ? open : false}
+        open={searchInput ? open : false}
         suffixIcon={
           <IconArrow
             style={{

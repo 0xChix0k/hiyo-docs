@@ -6,6 +6,7 @@ export const cssSetting = css`
   > .setting-left {
     overflow-y: hidden;
     background-color: white;
+    border-right: 1px solid #dee1f4;
     > .tool-div {
       padding: 20px 10px 10px 20px;
       > .title {
@@ -16,7 +17,7 @@ export const cssSetting = css`
     }
     > .list-div {
       padding-bottom: 16px;
-      /* overflow-y: auto; */
+      overflow-y: auto;
     }
     > .noList-div {
       margin-top: 200px;

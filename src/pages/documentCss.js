@@ -8,6 +8,7 @@ export const cssDocument = css`
     height: 100%;
     background-color: white;
     border-right: 1px solid #dee1f4;
+    overflow-y: hidden;
     .left-title {
       font-size: 20px;
       font-weight: 600;
@@ -32,12 +33,21 @@ export const cssDocument = css`
   > .right {
     height: 100%;
     padding: 40px 40px 0px 40px;
-    > .no-forms {
-      > .book-icon {
-        width: 50px;
-        height: 50px;
-        svg {
-          color: var(--grey-40);
+    overflow-y: hidden;
+    .right-list {
+      overflow-y: hidden;
+      .no-forms {
+        > .book-icon {
+          width: 50px;
+          height: 50px;
+          svg {
+            color: var(--grey-40);
+          }
+        }
+        .no-form-title {
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--grey-60);
         }
       }
     }

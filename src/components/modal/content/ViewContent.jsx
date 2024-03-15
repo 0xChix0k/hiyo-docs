@@ -18,7 +18,7 @@ const ViewContent = ({ data }) => {
           {getNameById(data?.FormId, forms)}
         </Flex>
         <Flex wrap={'wrap'} className="comment">
-          {data?.Comment}
+          {data?.Name}
         </Flex>
         <Flex className="date">{data?.PostDate}</Flex>
       </Flex>

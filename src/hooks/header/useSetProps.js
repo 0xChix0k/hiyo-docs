@@ -1,6 +1,12 @@
 import { SetContent } from 'src/components/modal/content';
 import { useMessage } from 'src/hooks';
 
+/**
+ * @description Profile setting Modal props
+ * @param {ref} ref
+ * @param {Function} setOpen
+ * @returns {Object} setPrrops
+ */
 const useSetProps = (ref, setOpen) => {
   const { openMes } = useMessage();
 

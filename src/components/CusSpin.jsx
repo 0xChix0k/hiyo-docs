@@ -1,6 +1,6 @@
-import { LoadingOutlined } from '@ant-design/icons';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { ConfigProvider, Spin } from 'antd';
-
 
 /**
  * @description Custom Spin
@@ -8,7 +8,7 @@ import { ConfigProvider, Spin } from 'antd';
  * @param {number} delay=300
  * @param {boolean} full=false
  * @param {string} size='large'
- * @param {number} dotSize=50 
+ * @param {number} dotSize=50
  * @returns {JSX.Element}
  */
 const CusSpin = ({
@@ -35,10 +35,17 @@ const CusSpin = ({
         delay={delay}
         size={size}
         fullscreen={full}
-        indicator={<LoadingOutlined spin />}
+        css={cssSpin}
+        // indicator={<LoadingOutlined spin />}
       />
     </ConfigProvider>
   );
 };
 
 export { CusSpin };
+
+const cssSpin = css`
+  :is(.ant-spin-fullscreen) {
+    background-color: #3a3d5ccc;
+  }
+`;

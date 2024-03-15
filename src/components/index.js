@@ -1,13 +1,14 @@
 export { CusAvatar } from './CusAvatar';
 export { CusButton } from './CusButton';
 export { CusCheckBox } from './CusCheckBox';
+export { CusDivider } from './CusDivider';
 export { CusEmpty } from './CusEmpty';
 export { CusSpin } from './CusSpin';
 export { CusTable } from './CusTable';
 export { CusTagUser } from './CusTagUser';
 export { CusTooltip } from './CusTooltip';
-export { CusCollapse, CusCollpaseF,CusFolder } from './collapse';
-export { CusRangePicker,CusDatePicker } from './datePicker';
+export { CusCollapse, CusCollpaseF, FolderDoc,FolderSet } from './collapse';
+export { CusDatePicker, CusRangePicker } from './datePicker';
 export { FileBox } from './file';
 export { Header } from './header';
 export { TextInput, UploadInput } from './input';

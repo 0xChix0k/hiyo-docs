@@ -1,3 +1,7 @@
+/**
+ * @description Forms Common Function
+ * @returns  {Object} {requiredObj, fileRules, onValidate}
+ */
 const useFormCommon = () => {
   const requiredObj = {
     required: true,
@@ -6,11 +10,17 @@ const useFormCommon = () => {
   const fileRules = [
     {
       required: true,
-      message:'請上傳檔案',
-      type: 'array'
-    }
+      message: '請上傳檔案',
+      type: 'array',
+    },
   ];
 
+  /**
+   * @description 表單驗證
+   * @param {ref} formRef
+   * @param {Function} exfn
+   * @returns {boolean}
+   */
   const onValidate = async (formRef, exfn = null) => {
     try {
       await formRef.current.validateFields(); // 驗證表單

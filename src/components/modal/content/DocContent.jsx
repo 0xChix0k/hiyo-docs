@@ -15,7 +15,11 @@ const DocContent = ({ isMa, docData }) => {
   const infoFields = [
     { label: '目前版本', value: docData?.License },
     { label: '最新發佈日期', value: docData?.PostDate },
-    { label: '擁有者', value: docData?.Owner, avatar: genConfig() },
+    {
+      label: '擁有者',
+      value: `${docData?.Owner?.Dep} ${docData?.Owner?.Name}`,
+      avatar: genConfig(),
+    },
     {
       label: '觀看數',
       value: `${docData?.RealReadCunt} / ${docData?.ReadCount}`,
@@ -42,7 +46,7 @@ const DocContent = ({ isMa, docData }) => {
         content={<ReadersContent readersList={readersData} />}
       />
       <Flex vertical className="title-div">
-        <Flex className="title">{docData?.Comment}</Flex>
+        <Flex className="title">{docData?.Name}</Flex>
         <Flex className="category">{docData?.Path}</Flex>
         <CusButton text={'下載'} icon={<IconDownload />} bgColor={'#F1F6FF'} />
       </Flex>

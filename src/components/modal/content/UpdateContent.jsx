@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { Divider, Flex } from 'antd';
+import { Flex } from 'antd';
+import { CusDivider } from 'components';
 import { cssDocContent } from './DocContent';
 
 const UpdateContent = ({ data }) => {
@@ -11,10 +12,10 @@ const UpdateContent = ({ data }) => {
   return (
     <Flex vertical gap={24} css={cssDocContent}>
       <Flex vertical className="title-div">
-        <Flex className="title">{data?.Comment}</Flex>
+        <Flex className="title">{data?.Name}</Flex>
         <Flex className="category">{data?.Path}</Flex>
       </Flex>
-      <Divider style={{ margin: 0 }} />
+      <CusDivider />
       <Flex vertical gap={24} className="info-div">
         {infoFields?.map((item, index) => (
           <Flex key={index} vertical gap={4} className="info">

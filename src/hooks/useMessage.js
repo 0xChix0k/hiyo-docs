@@ -9,6 +9,13 @@ const useMessage = () => {
   const dispatch = useDispatch();
   const { message } = App.useApp();
 
+
+  /**
+   * @description openMes
+   * @param {string} str 
+   * @param {string} type
+   * @returns {void} 
+   */
   const openMes = (str = 'NA', type = 'success') => {
     onMesType(type);
     message.open({

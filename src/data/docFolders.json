@@ -7,22 +7,26 @@
       {
         "Id": "Form-1",
         "Name": "ISMS-M-001 資通安全管理",
-        "Type": "form"
+        "Type": "form",
+        "Children":[2]
       },
       {
         "Id": "Form-2",
         "Name": "ISMS-M-002 資通安全管理",
-        "Type": "form"
+        "Type": "form",
+        "Children":[1]
       },
       {
         "Id": "Form-3",
         "Name": "ISMS-M-003 資通安全管理",
-        "Type": "form"
+        "Type": "form",
+        "Children":[]
       },
       {
         "Id": "1-1",
         "Name": "資通安全手冊",
-        "Type": "folder"
+        "Type": "folder",
+        "Children":[2]
       }
     ]
   },
@@ -34,12 +38,14 @@
       {
         "Id": "1-1-1",
         "Name": "資通安全手冊-1",
-        "Type": "folder"
+        "Type": "folder",
+        "Children":[]
       },
       {
         "Id": "Form-4",
         "Name": "ISMS-M-004 資通安全管理",
-        "Type": "form"
+        "Type": "form",
+        "Children":[1]
       }
     ]
   },
@@ -51,51 +57,88 @@
       {
         "Id": "form-1-1",
         "Name": "ISMS-P-001 文件與紀錄與管理表單003.doc",
+        "Path": "20 程序書 | 管理程序書",
         "Type": "file",
-        "Licence": 1.1,
-        "PsotDate": "2023-11-01",
+        "License": "1.2",
+        "PostDate": "2023-11-01",
         "RealReadCunt": 27,
         "ReadCount": 35,
         "Owner": {
           "Id": 25,
           "Name": "Steve",
           "Dep": "資訊部"
-        }
+        },
+        "LicenseHistorys": [
+          {
+            "History_License": "1.2",
+            "License_Date": "2023-11-01"
+          },
+          {
+            "History_License": "1.1",
+            "License_Date": "2021-09-27"
+          },
+          {
+            "History_License": "1.0",
+            "License_Date": "2021-09-26"
+          }
+        ]
       },
       {
         "Id": "form-1-2",
         "Name": "ISMS-P-001 文件與紀錄與管理表單003.doc",
+        "Path": "20 程序書 | 管理程序書",
         "Type": "file",
-        "Licence": 1.0,
-        "PsotDate": "2023-10-30",
+        "License": "1.0",
+        "PostDate": "2023-10-30",
         "RealReadCunt": 35,
         "ReadCount": 35,
         "Owner": {
           "Id": 25,
           "Name": "Steve",
           "Dep": "資訊部"
-        }
+        },
+        "LicenseHistorys": [
+          {
+            "History_License": "1.0",
+            "License_Date": "2023-10-30"
+          },
+          {
+            "History_License": "0.9",
+            "License_Date": "2021-09-27"
+          }
+        ]
       }
     ]
   },
   {
     "Id": "Form-2",
     "Name": "ISMS-M-002 資通安全管理",
+    "Path": "20 程序書 | 管理程序書",
     "Type": "form",
     "Children": [
       {
         "Id": "form-2-1",
         "Name": "ISMS-P-002 文件與紀錄與管理表單003.doc",
         "Type": "file",
-        "Licence": 1.0,
-        "PsotDate": "2023-11-01",
+        "License": "1.3",
+        "PostDate": "2023-11-01",
         "RealReadCunt": 27,
         "ReadCount": 35,
         "Owner": {
           "Id": 23,
           "Name": "Ray",
           "Dep": "資訊部"
-        }
+        },
+        "LicenseHistorys": [
+          {
+            "History_License": "1.3",
+            "License_Date": "2023-11-01"
+          },
+          {
+            "History_License": "1.2",
+            "License_Date": "2021-09-27"
+          }
+        ]
       }
     ]
   },
@@ -108,27 +151,39 @@
   {
     "Id": "Form-4",
     "Name": "ISMS-M-004 資通安全管理",
+    "Path": "20 程序書 | 管理程序書",
     "Type": "form",
     "Children": [
       {
         "Id": "form-4-1",
         "Name": "ISMS-P-002 文件與紀錄與管理表單003.doc",
-        "Licence": 1.0,
-        "PsotDate": "2023-12-01",
+        "License": "2.1",
+        "PostDate": "2023-12-01",
         "RealReadCunt": 27,
         "ReadCount": 35,
         "Owner": {
           "Id": 22,
           "Name": "Penny",
           "Dep": "資訊部"
-        }
+        },
+        "LicenseHistorys": [
+          {
+            "History_License": "2.1",
+            "License_Date": "2023-12-01"
+          },
+          {
+            "History_License": "2.0", 
+            "License_Date": "2021-09-27"
+          }
+        ]
       }
     ]
   },
   {
     "Id": "1-1",
     "Name": "資通安全手冊",
-    "Type": "folder"
+    "Type": "folder",
+    "Children":[1]
   },
   {
     "Id": "1-1-1",

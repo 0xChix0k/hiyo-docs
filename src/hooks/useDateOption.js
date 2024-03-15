@@ -1,6 +1,12 @@
 import dayjs from 'dayjs';
 import { useCommon } from 'hooks';
 
+
+/**
+ * @description Date Select Option
+ * @param {string} cusName 
+ * @returns {Object} searchDates, myFormDates
+ */
 const useDateOption = (cusName) => {
   const { dFormat } = useCommon();
 

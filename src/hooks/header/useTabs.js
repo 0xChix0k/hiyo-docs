@@ -1,3 +1,8 @@
+/**
+ * @description tab info
+ * @param {boolean} isMa
+ * @returns  {Object} tabs
+ */
 const useTabs = (isMa) => {
   const initTabs = [
     {

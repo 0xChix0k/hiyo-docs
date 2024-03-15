@@ -3,6 +3,15 @@ import { useRef } from 'react';
 import { useFormCommon } from './useFormCommon';
 import { useMessage } from './useMessage';
 
+/**
+ * @description Confirm Modal props
+ * @param {string} confirmType
+ * @param {Function} setConfirm
+ * @param {Function} setSelectId
+ * @param {string} rejRemark
+ * @param {Function} rejSetMark
+ * @returns {Object} confirmProps
+ */
 const useConfirmProps = (
   confirmType,
   setConfirm,

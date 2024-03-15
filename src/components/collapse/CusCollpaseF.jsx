@@ -12,9 +12,9 @@ import { memo } from 'react';
 
 const CusCollpaseF = memo(
   ({
-    itemsData,
-    activeId,
-    setId,
+    list,
+    active,
+    setActive,
     isExtra = true,
     setFolderId,
     setName,
@@ -23,9 +23,9 @@ const CusCollpaseF = memo(
     return (
       <div>
         {renderCollapse(
-          itemsData,
-          setId,
-          activeId,
+          list,
+          setActive,
+          active,
           isExtra,
           setFolderId,
           setName,
@@ -39,8 +39,8 @@ export { CusCollpaseF };
 
 const renderCollapseItems = (
   data,
-  setId,
-  activeId,
+  setActive,
+  active,
   isExtra,
   setFolderId,
   setName,
@@ -55,7 +55,7 @@ const renderCollapseItems = (
     const headerClass = cx(
       // Use cx for joining classes
       `${item.Id}-header`,
-      activeId === item.Id && 'active-header' // Add 'active-header' conditionally
+      active === item.Id && 'active-header' // Add 'active-header' conditionally
     );
     keys.push(item.Id);
     return {
@@ -66,7 +66,7 @@ const renderCollapseItems = (
           align="center"
           gap={5}
           onClick={() => {
-            setId(item.Id);
+            setActive(item.Id);
             setName(item.Name);
           }}
         >
@@ -76,7 +76,7 @@ const renderCollapseItems = (
       ),
       extra: isExtra ? (
         <div
-          className={`header-extra ${activeId === item.Id && 'active-extra'}`}
+          className={`header-extra ${active === item.Id && 'active-extra'}`}
         >
           <GenExtra
             formId={item.Id}
@@ -91,8 +91,8 @@ const renderCollapseItems = (
         <div>
           {renderCollapse(
             item.Children,
-            setId,
-            activeId,
+            setActive,
+            active,
             isExtra,
             setFolderId,
             setName,
@@ -106,8 +106,8 @@ const renderCollapseItems = (
 
 const renderCollapse = (
   data,
-  setId,
-  activeId,
+  setActive,
+  active,
   isExtra,
   setFolderId,
   setName,
@@ -116,8 +116,8 @@ const renderCollapse = (
 ) => {
   const items = renderCollapseItems(
     data,
-    setId,
-    activeId,
+    setActive,
+    active,
     isExtra,
     setFolderId,
     setName,
@@ -179,8 +179,8 @@ const GenExtra = ({ formId, fName, setFolderId, setAction, isForm }) => {
           }}
         />
       </div>
-      <div css={cssIcon(!isForm)}>
-        {!isForm ? (
+      <div css={cssIcon(isForm)}>
+        {isForm ? (
           <CusTooltip title="類別中已有表單，無法刪除" placement="bottom">
             <IconTrash />
           </CusTooltip>

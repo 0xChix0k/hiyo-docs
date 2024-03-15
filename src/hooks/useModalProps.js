@@ -11,7 +11,8 @@ import { selectUser } from 'store/userSlice';
 /**
  * @description useModalProps
  * @param {Array} data
- * @returns {Object}
+ * @param {Function} setOpenConfirm
+ * @returns {Object} mProps
  */
 const useModalProps = (data, setOpenConfirm) => {
   const { userInfo } = useSelector(selectUser);

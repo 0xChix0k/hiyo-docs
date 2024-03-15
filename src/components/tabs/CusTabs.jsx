@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
  * @description Custom Tabs
  * @param {string} tabKey
  * @param {Array} items
- * @returns
+ * @returns {JSX.Element}
  */
 const CusTabs = ({ tabKey, items = [] }) => {
   const navigate = useNavigate();

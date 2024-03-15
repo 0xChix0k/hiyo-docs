@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     path: '/login',
     element: (
       <WithLogin>
-        <Suspense>
+        <Suspense fallback={<CusSpin loading={true} full={true} />}>
           <Login />
         </Suspense>
       </WithLogin>

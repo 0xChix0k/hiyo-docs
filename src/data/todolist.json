@@ -2,12 +2,15 @@
   {
     "Id": 1,
     "No": "ISD2610001",
-    "Comment": "ISMS-P-007 資通安全稽核管理程序書",
+    "Name": "ISMS-P-007 資通安全稽核管理程序書",
     "Path": "20 程序書 | 管理程序書",
     "Des": "資通安全稽核管理程序書，用於規範資通安全稽核的流程與作業方式，以確保資通安全稽核的有效性與一致性。",
     "PostDate": "2021-09-28",
-    "Dep": "資訊部",
-    "Owner": "林小安",
+    "Owner": {
+      "Id": 17,
+      "Name": "Mickey",
+      "Dep": "資訊部"
+    },
     "ReadCount": 20,
     "RealReadCunt": 17,
     "Status": "book",
@@ -33,12 +36,15 @@
   {
     "Id": 2,
     "No": "ISD2610002",
-    "Comment": "ISMS-P-008 資通安全稽核管理程序書",
+    "Name": "ISMS-P-008 資通安全稽核管理程序書",
     "Path": "20 程序書 | 管理程序書",
     "Des": "",
     "PostDate": "2021-08-28",
-    "Dep": "資訊部",
-    "Owner": "林大名",
+    "Owner": {
+      "Id": 24,
+      "Name": "Neal",
+      "Dep": "資訊部"
+    },
     "ReadCount": 10,
     "RealReadCunt": 7,
     "Status": "book",
@@ -60,12 +66,15 @@
   {
     "Id": 3,
     "No": "ISD2610003",
-    "Comment": "Ballot documents naming convention",
+    "Name": "Ballot documents naming convention",
     "Path": "20 程序書 | 管理程序書",
     "Des": "",
     "PostDate": "2021-08-28",
-    "Dep": "資訊部",
-    "Owner": "林大名",
+    "Owner": {
+      "Id": 25,
+      "Name": "Steve",
+      "Dep": "資訊部"
+    },
     "ReadCount": 10,
     "RealReadCunt": 7,
     "Status": "update",
@@ -87,12 +96,15 @@
   {
     "Id": 4,
     "No": "ISD2610004",
-    "Comment": "Meeting documents naming convention",
+    "Name": "Meeting documents naming convention",
     "Path": "20 程序書 | 管理程序書",
     "Des": "",
     "PostDate": "2021-08-28",
-    "Dep": "資訊部",
-    "Owner": "林大名",
+    "Owner": {
+      "Id": 23,
+      "Name": "Ray",
+      "Dep": "資訊部"
+    },
     "ReadCount": 10,
     "RealReadCunt": 7,
     "Status": "update",
@@ -114,12 +126,15 @@
   {
     "Id": 5,
     "No": "ISD2610005",
-    "Comment": "General recommendations",
+    "Name": "General recommendations",
     "Path": "20 程序書 | 管理程序書",
     "Des": "test123",
     "PostDate": "2021-08-28",
-    "Dep": "資訊部",
-    "Owner": "林大名",
+    "Owner": {
+      "Id": 22,
+      "Name": "Penny",
+      "Dep": "資訊部"
+    },
     "ReadCount": 10,
     "RealReadCunt": 7,
     "Status": "pending",
@@ -141,12 +156,15 @@
   {
     "Id": 6,
     "No": "ISD2610006",
-    "Comment": "Ballot documents naming convention",
+    "Name": "Ballot documents naming convention",
     "Path": "20 程序書 | 管理程序書",
     "Des": "",
     "PostDate": "2021-08-28",
-    "Dep": "資訊部",
-    "Owner": "林大名",
+    "Owner": {
+      "Id": 21,
+      "Name": "Hiyo",
+      "Dep": "資訊部"
+    },
     "ReadCount": 10,
     "RealReadCunt": 7,
     "Status": "pending",
@@ -168,12 +186,15 @@
   {
     "Id": 7,
     "No": "ISD2610007",
-    "Comment": "Ballot documents naming convention",
+    "Name": "Ballot documents naming convention",
     "Path": "20 程序書 | 管理程序書",
     "Des": "",
     "PostDate": "2021-08-28",
-    "Dep": "資訊部",
-    "Owner": "林大名",
+    "Owner": {
+      "Id": 20,
+      "Name": "Goofy",
+      "Dep": "資訊部"
+    },
     "ReadCount": 10,
     "RealReadCunt": 7,
     "Status": "rejected",
@@ -181,7 +202,7 @@
       "Id": 3,
       "Name": "Tom",
       "Dep": "資訊部",
-      "ReMark":"填寫說明有遺漏的部分，請重新補上，謝謝",
+      "ReMark": "填寫說明有遺漏的部分，請重新補上，謝謝",
       "RejDate": "2024-01-20"
     },
     "License": "1.1",

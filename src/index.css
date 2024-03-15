@@ -116,7 +116,7 @@ code {
 }
 
 .ant-modal-root .ant-modal-mask {
-  background-color: rgba(12, 16, 53, 0.8);
+  background-color: #3A3D5CCC;
 }
 
 .ant-picker-dropdown {

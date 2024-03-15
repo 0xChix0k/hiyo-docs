@@ -1,6 +1,15 @@
 import { ConfigProvider, Dropdown } from 'antd';
 import { cloneElement } from 'react';
 
+
+/**
+ * @description Custom Dropdown
+ * @param {Array} items=[]
+ * @param {Function} onClick=null
+ * @param {JSX.Element} btn=null
+ * @param {number} dw=150 
+ * @returns 
+ */
 const CusDropdown = ({ items = [], onClick = null, btn = null, dw = 150 }) => {
   return (
     <ConfigProvider

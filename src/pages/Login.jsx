@@ -3,13 +3,14 @@ import { Flex, Form } from 'antd';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { CusButton, CusCheckBox, TextInput } from 'components';
 import { useLogin } from 'hooks';
+import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { cssLogin } from './loginCss';
 
 const Login = () => {
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
-  const [remin, setRemin] = useState(false);
+  const [userId, setUserId] = useState(Cookies.get('userId') || '');
+  const [password, setPassword] = useState(Cookies.get('password') || '');
+  const [remin, setRemin] = useState(Cookies.get('userId') ? true : false);
   const [failLogin, setFailLogin] = useState(false);
 
   const { onCheck } = useLogin(userId, password, remin, setFailLogin);
@@ -20,6 +21,8 @@ const Login = () => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+
   return (
     <Flex vertical css={cssLogin}>
       <Flex align="center" flex={'0 0 104px'} className="header">
@@ -38,6 +41,7 @@ const Login = () => {
           >
             <Form.Item
               name="userId"
+              initialValue={userId}
               rules={[
                 {
                   required: true,
@@ -53,6 +57,7 @@ const Login = () => {
             </Form.Item>
             <Form.Item
               name="password"
+              initialValue={password}
               rules={[
                 {
                   required: true,

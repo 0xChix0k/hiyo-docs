@@ -4,6 +4,12 @@ import { Flex } from 'antd';
 import { CusAvatar } from 'components';
 import { useCommon } from 'hooks';
 
+
+/**
+ * @description MyForm List Column
+ * @param {string} status 
+ * @returns {Array} columns
+ */
 const useMyFormCol = (status) => {
   const { EMPRTY_COLUMN } = useCommon();
 
@@ -33,14 +39,14 @@ const useMyFormCol = (status) => {
   return [
     {
       title: '名稱',
-      dataIndex: 'Comment',
-      key: 'Comment',
+      dataIndex: 'Name',
+      key: 'Name',
       width: 530,
       ellipsis: true,
-      render: (Comment, record) => {
+      render: (Name, record) => {
         return (
           <Flex vertical justify="center" css={cssComment}>
-            <div className="title">{Comment}</div>
+            <div className="title">{Name}</div>
             <div className="date">{record.PostDate}</div>
           </Flex>
         );

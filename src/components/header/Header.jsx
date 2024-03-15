@@ -32,6 +32,7 @@ const Header = () => {
   const { userInfo } = useSelector(selectUser);
   const { searchData } = useSelector(selectCommon);
   const [tabKey, setTabKey] = useState(location.pathname.slice(1));
+  const [searchInput, setSearchInput] = useState(searchData.text || '');
   const [openFilter, setOpenFilter] = useState(false);
   const [openNewForm, setOpenNewForm] = useState(false);
   const [tempData, setTempData] = useState(searchData);
@@ -60,6 +61,11 @@ const Header = () => {
   useEffect(() => {
     setTabKey(location.pathname.slice(1));
   }, [location.pathname]);
+
+  useEffect(() => {
+    setTempData(searchData);
+    setSearchInput(searchData.text || '');
+  },[searchData])
 
   return (
     <Flex
@@ -129,8 +135,11 @@ const Header = () => {
       <Flex align="center" gap={20}>
         <Flex flex={'1 1 300px'}>
           <TextInput
-            value={searchData.text}
-            onChange={onInputSearch}
+            value={searchInput}
+            onChange={(v) => {
+              setSearchInput(v);
+              onInputSearch(v);
+            }}
             placeholder="搜尋"
             prefix={<IconSearch />}
             suffix={

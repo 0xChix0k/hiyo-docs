@@ -3,6 +3,18 @@ import { FormSetContent } from 'components/modal/content';
 import { useFormCommon } from '..';
 import { useMessage } from 'hooks';
 
+/**
+ * @description Form Modal props
+ * @param {ref} refs 
+ * @param {number} id 
+ * @param {Array<object>} data 
+ * @param {Function} setData 
+ * @param {Function} setOpen 
+ * @param {number} level 
+ * @param {Function} setLevel 
+ * @param {object} initData 
+ * @returns  {Object} props
+ */
 const useFormProps = (
   refs,
   id,
