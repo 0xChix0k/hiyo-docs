@@ -8,7 +8,7 @@ import { ReactComponent as IconAMark } from 'assets/icon-mark.svg';
 import { useState } from 'react';
 
 const FolderDoc = ({ list, active, setActive }) => {
-  console.log('list', list);
+  // console.log('list', list);
   return (
     <>
       {list?.map((data, index) => {

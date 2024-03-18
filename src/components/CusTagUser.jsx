@@ -45,7 +45,7 @@ const cssTag = css`
   align-items: center;
   padding: 4px !important;
   border-radius: 32px;
-  margin: 0px 4px 4px 0px;
+  margin: 0px 4px 2px 0px;
   > span {
     margin-left: 10px;
   }

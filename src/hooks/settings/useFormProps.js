@@ -29,9 +29,8 @@ const useFormProps = (
   const { openMes } = useMessage();
   const handleChlick = async (exFn) => {
     const isForm0Valid = await onValidate(refs[0], null);
-    console.log('isForm0Valid', isForm0Valid);
     if (isForm0Valid) {
-      console.log('exFn');
+      // console.log('exFn');
       await exFn();
     }
   };

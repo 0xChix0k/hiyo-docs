@@ -1,14 +1,17 @@
 /** @jsxImportSource @emotion/react */
+import { LoadingOutlined } from '@ant-design/icons';
 import { ConfigProvider, Select } from 'antd';
 import { ReactComponent as IconArrow } from 'assets/icon-arrow_down.svg';
 import { useState } from 'react';
-import {cssSelect} from './selectCss';
+import { cssSelect } from './selectCss';
 
 /**
  * @description Custom Select
  * @param {Array} options
  * @param {string|number} value
  * @param {function} onChange
+ * @param {function} onSelect=null
+ * @param {boolean} loading=false
  * @param {boolean} disabled=false
  * @param {string} dw=null
  * @param {string} placeholder="請選擇"
@@ -19,6 +22,7 @@ const CusSelect = ({
   value,
   onChange,
   onSelect = null,
+  loading = false,
   disabled = false,
   dw = null,
   placeholder = '請選擇',
@@ -30,7 +34,6 @@ const CusSelect = ({
     };
   });
   const [open, setOpen] = useState(false);
-
   return (
     <ConfigProvider
       theme={{
@@ -59,6 +62,7 @@ const CusSelect = ({
         options={genOptions}
         onChange={onChange}
         onSelect={onSelect}
+        loading={loading}
         disabled={disabled}
         popupMatchSelectWidth={!dw ? true : dw}
         size="large"
@@ -66,9 +70,13 @@ const CusSelect = ({
         dropdownStyle={{ padding: '10px 0' }}
         onDropdownVisibleChange={(open) => setOpen(open)}
         suffixIcon={
-          <IconArrow
-            style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
-          />
+          loading ? (
+            <LoadingOutlined />
+          ) : (
+            <IconArrow
+              style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+            />
+          )
         }
         css={cssSelect}
       />

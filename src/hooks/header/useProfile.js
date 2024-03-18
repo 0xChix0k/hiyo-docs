@@ -1,4 +1,5 @@
 import jsCookie from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * @description useProfile dropdown
@@ -6,6 +7,7 @@ import jsCookie from 'js-cookie';
  * @returns {Object} profileList, profileClick
  */
 const useProfile = (setOpen) => {
+  const navigate = useNavigate();
   const profileList = [
     {
       label: '設定',
@@ -25,7 +27,8 @@ const useProfile = (setOpen) => {
   const profileClick = ({ key }) => {
     if (key === 'logout') {
       jsCookie.remove('Jwt');
-      window.location.href = '/login';
+      // window.location.href = '/login';
+      navigate('/login', { replace: true });
     } else {
       setOpen(true);
     }

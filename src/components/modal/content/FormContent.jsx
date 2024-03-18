@@ -13,8 +13,9 @@ import {
   TextInput,
   UploadInput,
 } from 'components';
+import assList from 'data/dropdown/associates.json';
 import { useAddFiles, useFormCommon } from 'hooks';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetReaders } from 'services/readerService';
 import { selectDropdown } from 'store/dropdownSlice';
@@ -39,6 +40,18 @@ const FormContent = ({ formInstance, data, setData = null }) => {
   const isOnlyView = data?.Status === 'pending' || data?.Status === 'approved';
   const isRejected = data?.Status === 'rejected';
   const { requiredObj, fileRules } = useFormCommon();
+  const [filterForms, setFilterForms] = useState([]);
+
+  useEffect(() => {
+    if (!isOnlyView && data?.TypeId) {
+      const filter = assList.filter((item) => item.Type === data?.TypeId);
+      setFilterForms(filter);
+      setData({ ...data, FormId: null });
+      form.setFieldsValue({ form: null });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.TypeId, form, setData]);
+
   const handleChange = (field, value) => {
     setData({ ...data, [field]: value });
   };
@@ -74,7 +87,9 @@ const FormContent = ({ formInstance, data, setData = null }) => {
                   <CusSelect
                     value={data?.TypeId}
                     options={types}
-                    onChange={(v) => handleChange('TypeId', v)}
+                    onChange={(v) => {
+                      handleChange('TypeId', v);
+                    }}
                     placeholder="類型 *"
                   />
                 </Form.Item>
@@ -90,9 +105,10 @@ const FormContent = ({ formInstance, data, setData = null }) => {
                 >
                   <CusSelect
                     value={data?.FormId}
-                    options={forms}
+                    options={filterForms}
                     onChange={(v) => handleChange('FormId', v)}
-                    placeholder="選擇表單 *"
+                    disabled={!filterForms?.length}
+                    placeholder={data?.TypeId ? '選擇表單 *' : '請先選擇類型'}
                   />
                 </Form.Item>
                 <Form.Item
@@ -195,7 +211,7 @@ const RejInfo = ({ data }) => {
 const FlowBlock = ({ list }) => {
   const boxSize = 25;
   return (
-    <Flex vertical style={{paddingRight:8}}>
+    <Flex vertical style={{ paddingRight: 8 }}>
       {list?.map((item, index) => {
         return (
           <React.Fragment key={index}>

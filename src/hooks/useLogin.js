@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
  * @param {Function} setResult 
  * @returns {object}
  */
-const useLogin = (userId, password, remin, setResult) => {
+const useLogin = (userId, password,company, remin, setResult) => {
   const navigate = useNavigate();
 
   /**
@@ -22,9 +22,11 @@ const useLogin = (userId, password, remin, setResult) => {
       if (remin) {
         Cookies.set('userId', userId, { expires: 7 });
         Cookies.set('password', password, { expires: 7 });
+        Cookies.set('company', company, { expires: 7 });
       } else {
         Cookies.remove('userId');
         Cookies.remove('password');
+        Cookies.remove('company');
       }
       Cookies.set('Jwt', '123', { expires: 7 });
       navigate('/');

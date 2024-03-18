@@ -88,6 +88,7 @@ const AssContent = ({ formInstance, ass, setAss }) => {
                               setGenAss(form.getFieldValue('assData'))
                             }
                             options={types}
+                            placeholder="選擇類型 *"
                           />
                         </Form.Item>
                         <Form.Item
@@ -101,6 +102,10 @@ const AssContent = ({ formInstance, ass, setAss }) => {
                               setGenAss(form.getFieldValue('assData'))
                             }
                             options={filteredOptions}
+                            disabled={!currentType}
+                            placeholder={
+                              currentType ? '選擇表單 *' : '請先選擇類型'
+                            }
                           />
                         </Form.Item>
                       </Flex>
