@@ -1,6 +1,6 @@
 # Getting Started Hiyo-docs
 
-### git clone https://github.com/0xChix0k/hiyo-docs.git
+### git clone 
 ### npm install -g yarn
 ### yarn install
 ### yarn dev
