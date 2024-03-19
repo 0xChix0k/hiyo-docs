@@ -36,7 +36,7 @@ const Result = () => {
           </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    </Flex> 
   );
 };
 

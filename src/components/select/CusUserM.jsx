@@ -4,10 +4,10 @@ import { ReactComponent as IconArrow } from 'assets/icon-arrow_down.svg';
 import { CusAvatar, CusEmpty, CusTagUser } from 'components';
 import users from 'data/dropdown/users.json';
 import { useCommon } from 'hooks/useCommon';
-import debounce from 'lodash/debounce';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetUsers } from 'services/dropdownService';
 import { cssSelect } from './selectCss';
+// import {CloseOutlined} from '@ant-design/icons';
 
 /**
  * @description Custom Select
@@ -34,18 +34,12 @@ const CusUserM = ({
   const [isClose, setIsClose] = useState(false);
   const { data, isLoading, isSuccess } = useGetUsers(searchIStr);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debounceFn = useCallback(
-    debounce((value) => {
-      setSearchStr(value);
-    }, 500),
-    []
-  );
+  const { getNameById, debounceFn } = useCommon();
 
   const handleSearch = (v) => {
     setOptions([]);
     setSearchInput(v);
-    debounceFn(v);
+    debounceFn(v, setSearchStr);
     if (!v) {
       setOpen(false);
     }
@@ -54,14 +48,16 @@ const CusUserM = ({
   useEffect(() => {
     if (isSuccess) {
       setOptions(
-        data.map((item) => ({
-          label: item.Name,
-          value: item.Id,
-          dep: item.Dep,
-        }))
+        data
+          ?.filter((item) => !value.includes(item.Id))
+          ?.map((item) => ({
+            label: item.Name,
+            value: item.Id,
+            dep: item.Dep,
+          }))
       );
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, value]);
 
   useEffect(() => {
     if (!open) {
@@ -70,8 +66,6 @@ const CusUserM = ({
       setOptions([]);
     }
   }, [open]);
-
-  const { getNameById } = useCommon();
 
   return (
     <ConfigProvider
@@ -99,6 +93,7 @@ const CusUserM = ({
       <Select
         mode="multiple"
         showSearch
+        allowClear
         filterOption={false}
         value={value}
         options={options}

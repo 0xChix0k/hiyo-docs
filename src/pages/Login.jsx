@@ -2,10 +2,9 @@
 import { Flex, Form } from 'antd';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { CusButton, CusCheckBox, CusSelect, TextInput } from 'components';
-import { useFormCommon, useLogin } from 'hooks';
+import { useCommon, useFormCommon, useLogin } from 'hooks';
 import Cookies from 'js-cookie';
-import debounce from 'lodash/debounce';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetCompany } from 'services/loginService';
 import { cssLogin } from './loginCss';
 
@@ -16,31 +15,20 @@ const Login = () => {
   const [companyId, setCompanyId] = useState(Cookies.get('company') || null);
   const [remin, setRemin] = useState(Cookies.get('userId') ? true : false);
   const [failLogin, setFailLogin] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const { onCheck } = useLogin(
     userId,
     password,
     companyId,
     remin,
+    setLoginLoading,
     setFailLogin
   );
   const { requiredObj } = useFormCommon();
+  const { debounceFn } = useCommon();
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    onCheck();
-    console.log('Success:', values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-  const { data: companys, isLoading, isSuccess } = useGetCompany(searchStr);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debounceFn = useCallback(
-    debounce((value) => {
-      setSearchStr(value);
-    }, 500),
-    []
-  );
+  const { data: companys, isLoading } = useGetCompany(searchStr);
 
   useEffect(() => {
     setSearchStr(userId);
@@ -64,8 +52,8 @@ const Login = () => {
           <Form
             form={form}
             className="form"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            onFinish={(values) => onCheck()}
+            onFinishFailed={(errorInfo) => console.log('Failed:', errorInfo)}
             autoComplete="off"
             layout="vertical"
           >
@@ -78,9 +66,10 @@ const Login = () => {
                 value={userId}
                 onChange={(v) => {
                   setUserId(v);
-                  debounceFn(v);
+                  debounceFn(v, setSearchStr);
                 }}
                 placeholder="帳號 *"
+                disabled={loginLoading}
               />
             </Form.Item>
             <Form.Item
@@ -93,6 +82,7 @@ const Login = () => {
                 onChange={setPassword}
                 placeholder="密碼 *"
                 type="password"
+                disabled={loginLoading}
               />
             </Form.Item>
             <Form.Item name="companyId">
@@ -102,7 +92,7 @@ const Login = () => {
                 placeholder="公司"
                 onChange={setCompanyId}
                 loading={isLoading}
-                disabled={!companys?.length}
+                disabled={!companys?.length || loginLoading}
               />
             </Form.Item>
             <Form.Item name="remember" initialValue={remin}>
@@ -110,6 +100,7 @@ const Login = () => {
                 label="記住登入資訊"
                 checked={remin}
                 onChange={setRemin}
+                disabled={loginLoading}
                 bgColor="#367aff"
                 tColor="#5566a4"
               />
@@ -120,6 +111,8 @@ const Login = () => {
                 bgColor="#2D336B"
                 htmlType="submit"
                 isBlock={true}
+                loading={loginLoading}
+                disabled={loginLoading}
               />
             </Form.Item>
           </Form>

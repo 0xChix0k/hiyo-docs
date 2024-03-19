@@ -11,12 +11,14 @@ const MyForm = lazy(() => import('pages/MyForm'));
 const Setting = lazy(() => import('pages/Setting'));
 const Document = lazy(() => import('pages/Document'));
 
+const GenSpin = () => <CusSpin dotSize={100} loading={true} full={true} />;
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <WithAuthentication>
-        <Suspense fallback={<CusSpin loading={true} full={true} />}>
+        <Suspense fallback={<GenSpin />}>
           <Main />
         </Suspense>
       </WithAuthentication>
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
         path: '/todo',
         element: (
           <WithAuthentication>
-            <Suspense fallback={<CusSpin loading={true} full={true} />}>
+            <Suspense fallback={<GenSpin />}>
               <Todo />
             </Suspense>
           </WithAuthentication>
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
         path: '/my-form',
         element: (
           <WithAuthentication>
-            <Suspense fallback={<CusSpin loading={true} full={true} />}>
+            <Suspense fallback={<GenSpin />}>
               <MyForm />
             </Suspense>
           </WithAuthentication>
@@ -48,7 +50,7 @@ const router = createBrowserRouter([
         path: '/document',
         element: (
           <WithAuthentication>
-            <Suspense fallback={<CusSpin loading={true} full={true} />}>
+            <Suspense fallback={<GenSpin />}>
               <Document />
             </Suspense>
           </WithAuthentication>
@@ -59,7 +61,7 @@ const router = createBrowserRouter([
         path: '/setting',
         element: (
           <WithAuthentication>
-            <Suspense fallback={<CusSpin loading={true} full={true} />}>
+            <Suspense fallback={<GenSpin />}>
               <Setting />
             </Suspense>
           </WithAuthentication>
@@ -72,7 +74,7 @@ const router = createBrowserRouter([
     path: '/login',
     element: (
       <WithLogin>
-        <Suspense fallback={<CusSpin loading={true} full={true} />}>
+        <Suspense fallback={<GenSpin />}>
           <Login />
         </Suspense>
       </WithLogin>

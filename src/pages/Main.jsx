@@ -3,12 +3,8 @@ import { Header } from 'components';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import {
-  useGetDates,
-  useGetForms,
-  useGetTypes,
-} from 'services/dropdownService';
-import { setDates, setForms, setTypes } from 'store/dropdownSlice';
+import { useGetForms, useGetTypes } from 'services/dropdownService';
+import { setForms, setTypes } from 'store/dropdownSlice';
 import { useSearch } from 'hooks';
 import Result from './Result';
 

@@ -1,3 +1,4 @@
+import Icon, { LoadingOutlined } from '@ant-design/icons';
 import { Flex } from 'antd';
 import { ReactComponent as IconApprove } from 'assets/icon-approve.svg';
 import { ReactComponent as IconBook } from 'assets/icon-book.svg';
@@ -10,7 +11,7 @@ import { ReactComponent as IconUpdate } from 'assets/icon-upadte.svg';
  * @param {Object} data
  * @returns  {Object}
  */
-const useCollapse = (setSelectId, data) => {
+const useCollapse = (selectId, setSelectId, data, loading) => {
   /**
    * @description getFilterData
    * @param {string} status
@@ -21,9 +22,21 @@ const useCollapse = (setSelectId, data) => {
       ?.filter((item) => item.Status === status)
       .map((item) => {
         return (
-          <div key={item.Id} onClick={() => setSelectId(item.Id)}>
+          <Flex
+            align="center"
+            justify="space-between"
+            key={item.Id}
+            onClick={loading ? null : () => setSelectId(item.Id)}
+            style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+          >
             {item.Name}
-          </div>
+            {loading && selectId && selectId === item?.Id && (
+              <Icon
+                component={LoadingOutlined}
+                style={{ color: 'var(--primary-default)' }}
+              />
+            )}
+          </Flex>
         );
       });
   };
@@ -97,7 +110,6 @@ const useCollapse = (setSelectId, data) => {
       return acc + cur.children?.length;
     }, 0);
   };
-
 
   return {
     bookItems,

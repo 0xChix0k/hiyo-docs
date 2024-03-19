@@ -17,7 +17,6 @@ const CusCollapse = ({
   items = [],
   onChange,
   bordered = false,
-  isHover = true,
 }) => {
   return (
     <ConfigProvider
@@ -43,14 +42,14 @@ const CusCollapse = ({
         bordered={bordered}
         expandIcon={(panelProps) => <IconArrow />}
         expandIconPosition="end"
-        css={cssCollapse(activeKey, isHover)}
+        css={cssCollapse(activeKey)}
       />
     </ConfigProvider>
   );
 };
 export { CusCollapse };
 
-const cssCollapse = (key, isHover) => css`
+const cssCollapse = (key) => css`
   .ant-collapse-header {
     font-size: 18px;
     font-weight: 600;
@@ -58,14 +57,13 @@ const cssCollapse = (key, isHover) => css`
       transform: ${key && !!key.length ? 'rotate(0deg)' : 'rotate(180deg)'};
     }
   }
-  .ant-collapse-content-box div {
+  .ant-collapse-content-box > div {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     font-size: 16px;
     padding: 10px 16px !important;
     border-radius: 15px;
-    cursor: ${isHover ? 'pointer' : 'default'};
     :hover {
       background-color: var(--grey-10);
     }

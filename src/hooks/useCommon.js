@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import debounce from 'lodash/debounce';
+import { useCallback } from 'react';
 
 const useCommon = () => {
   /**
@@ -51,6 +53,20 @@ const useCommon = () => {
     return value && data ? data.find((item) => item[id] === value)[name] : '';
   };
 
-  return { EMPRTY_COLUMN, dFormat, isDateBetween, getNameById };
+  /**
+   * @description Debounce function
+   * @param {string} value
+   * @param {function} fn
+   * @returns {void}
+   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceFn = useCallback(
+    debounce((value, fn) => {
+      fn(value);
+    }, 500),
+    []
+  );
+
+  return { EMPRTY_COLUMN, dFormat, isDateBetween, getNameById, debounceFn };
 };
 export { useCommon };

@@ -34,7 +34,7 @@ const FormContent = ({ formInstance, data, setData = null }) => {
     isSuccess,
   } = useGetReaders(data?.Id === 7 ? 7 : null);
   const isList = !!readersData?.Readers?.length && isSuccess;
-  const { types, forms } = useSelector(selectDropdown);
+  const { types } = useSelector(selectDropdown);
   const fileInput = useRef(null);
   const { onAddFile } = useAddFiles();
   const isOnlyView = data?.Status === 'pending' || data?.Status === 'approved';

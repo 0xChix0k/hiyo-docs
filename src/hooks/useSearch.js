@@ -9,7 +9,6 @@ import {
 
 const useSearch = () => {
   const dispatch = useDispatch();
-  // const { debounce } = useCommon();
   const { searchData } = useSelector(selectCommon);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

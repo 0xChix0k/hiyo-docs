@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Flex } from 'antd';
 import { ReactComponent as IconListCheck } from 'assets/icon-list_check.svg';
-import { CusCollapse, CusModal } from 'components';
-import { useConfirmProps ,useModalProps} from 'hooks';
-import { useCollapse,  } from 'hooks/todo';
+import { CusCollapse, CusModal, CusSpin } from 'components';
+import { useConfirmProps, useModalProps } from 'hooks';
+import { useCollapse } from 'hooks/todo';
 import { useState } from 'react';
 import { useGetTodo, useGetTodoList } from 'services/todoService';
 import { cssTodo } from './todoCss';
@@ -25,7 +25,7 @@ const Todo = () => {
     rejectItems,
     onChangeCollapse,
     getItemsCount,
-  } = useCollapse(setSelectId, todos);
+  } = useCollapse(selectId, setSelectId, todos, dataLoading);
   const [bookColl, setBookColl] = useState(bookItems[0]?.key || []);
   const [updateColl, setUpdateColl] = useState(unUpdateItems[0]?.key || []);
   const [approveColl, setApproveColl] = useState(approveItems[0]?.key || []);

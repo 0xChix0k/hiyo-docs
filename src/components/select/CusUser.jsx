@@ -5,8 +5,7 @@ import { ReactComponent as IconArrow } from 'assets/icon-arrow_down.svg';
 import { CusAvatar, CusEmpty } from 'components';
 import users from 'data/dropdown/users.json';
 import { useCommon } from 'hooks/useCommon';
-import debounce from 'lodash/debounce';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetUsers } from 'services/dropdownService';
 import { cssSelect } from './selectCss';
 
@@ -28,7 +27,7 @@ const CusUser = ({
   dw = null,
   placeholder = '請選擇',
 }) => {
-  const { getNameById } = useCommon();
+  const { getNameById, debounceFn } = useCommon();
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [newVaue, setNewValue] = useState(
@@ -43,14 +42,6 @@ const CusUser = ({
   const [searchStr, setSearchStr] = useState(null);
   const { data, isLoading, isSuccess } = useGetUsers(searchStr);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debounceFn = useCallback(
-    debounce((value) => {
-      setSearchStr(value);
-    }, 500),
-    []
-  );
-
   const handleChange = (value) => {
     // console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
     setNewValue({
@@ -63,7 +54,7 @@ const CusUser = ({
   const handleSearch = (v) => {
     setOptions([]);
     setSearchInput(v);
-    debounceFn(v);
+    debounceFn(v, setSearchStr);
     if (!v) {
       setOpen(false);
     }

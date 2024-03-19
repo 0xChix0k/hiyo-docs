@@ -1,6 +1,6 @@
+import Icon from '@ant-design/icons';
 import { Flex } from 'antd';
 import { ReactComponent as IconForm } from 'assets/icon-form.svg';
-
 /**
  * @description Set Forms Column
  * @returns {Array<object>} columns
@@ -16,7 +16,12 @@ const useSetFormsCol = () => {
       render: (FormName, record) => {
         return (
           <Flex align="center" gap={8}>
-            <IconForm />
+            <Icon
+              component={IconForm}
+              style={{
+                fontSize: 25,
+              }}
+            />
             <div>{FormName}</div>
           </Flex>
         );

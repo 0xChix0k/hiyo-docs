@@ -4,17 +4,18 @@ import { Button, ConfigProvider } from 'antd';
 
 /**
  * @description Custom Button
- * @param {string} text
- * @param {ReactNode} icon
- * @param {function} onClick
- * @param {boolean} disabled
- * @param {string} bgColor
- * @param {string} tColor
- * @param {string} size
- * @param {string} htmlType
- * @param {string} type
- * @param {boolean} isBlock
- * @param {number} radius
+ * @param {string} text='NA'
+ * @param {ReactNode} icon=null
+ * @param {function} onClick=()=>{}
+ * @param {boolean} disabled=false
+ * @param {string} bgColor='#fff'
+ * @param {string} tColor='#8F9BC8'
+ * @param {string} size='large'
+ * @param {string} htmlType=''
+ * @param {string} type='default'
+ * @param {boolean} isBlock=false
+ * @param {number} radius=33
+ * @param {boolean} loading=false
  * @returns
  */
 const CusButton = ({
@@ -28,6 +29,7 @@ const CusButton = ({
   type = 'default',
   isBlock = false,
   radius = 33,
+  loading = false,
 }) => {
   const btnStyle = getStyles(bgColor);
 
@@ -61,9 +63,10 @@ const CusButton = ({
           htmlType={htmlType}
           type={type}
           block={isBlock}
+          loading={loading}
+          icon={icon}
           css={cssButton(getStyles(bgColor).tx)}
         >
-          {icon && icon}
           {text}
         </Button>
       </ConfigProvider>
@@ -112,11 +115,14 @@ const cssButton = (iconColor) => css`
   align-items: center;
   justify-content: center;
   gap: 4px;
+  :not(.ant-btn-icon-only) > .ant-btn-icon:not(:last-child) {
+    margin-inline-end: 0px !important;
+  }
   svg {
     width: 15px;
     height: 15px;
-    path {
+    /* path {
       fill: ${iconColor};
-    }
+    } */
   }
 `;

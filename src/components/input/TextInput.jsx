@@ -8,6 +8,7 @@ import { IconClose } from 'components/icon';
  * @param {function} onChange
  * @param {string} size='large'
  * @param {string} placeholder=''
+ * @param {boolean} disabled=false
  * @param {string} type='text'
  * @param {ReactNode} prefix=null
  * @param {ReactNode} suffix=null
@@ -24,6 +25,7 @@ const TextInput = ({
   onChange,
   size = 'large',
   placeholder = '',
+  disabled = false,
   type = 'text',
   prefix = null,
   suffix = null,
@@ -63,6 +65,7 @@ const TextInput = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
+          disabled={disabled}
           allowClear={isClear ? { clearIcon: <IconClose /> } : null}
           size={size}
           type={type}
@@ -79,6 +82,7 @@ const TextInput = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
+          disabled={disabled}
           allowClear={isClear ? { clearIcon: <IconClose /> } : null}
           size={size}
           type={type}

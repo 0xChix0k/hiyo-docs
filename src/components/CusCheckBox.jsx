@@ -27,7 +27,7 @@ const CusCheckBox = ({
           colorPrimary: bgColor,
           colorPrimaryBorder: bgColor,
           colorPrimaryHover: bgColor,
-          colorBorder: bgColor,
+          colorBorder: disabled ? '#d9d9d9' : bgColor,
           colorText: tColor,
           borderRadiusSM: 5,
         },

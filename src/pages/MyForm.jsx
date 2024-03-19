@@ -73,6 +73,7 @@ const MyForm = () => {
 
   return (
     <Flex vertical align="center" css={cssMyForm}>
+      {/* <CusSpin dotSize={20} loading={dataLoading} full={true} /> */}
       {!!myFormId && dataSuccess && (
         <CusModal
           open={!!myFormId && dataSuccess}

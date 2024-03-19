@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import Icon, { LoadingOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
 import { ConfigProvider, Spin } from 'antd';
-
 /**
  * @description Custom Spin
  * @param {boolean} loading=false
@@ -17,6 +17,8 @@ const CusSpin = ({
   full = false,
   size = 'large',
   dotSize = 50,
+  // bgColor = '#3A3D5CCC',
+  bgColor = 'var(--grey-20)',
 }) => {
   return (
     <ConfigProvider
@@ -35,8 +37,13 @@ const CusSpin = ({
         delay={delay}
         size={size}
         fullscreen={full}
-        css={cssSpin}
-        // indicator={<LoadingOutlined spin />}
+        css={cssSpin(bgColor)}
+        indicator={
+          <Icon
+            component={LoadingOutlined}
+            style={{ color: 'var(--primary-default)' }}
+          />
+        }
       />
     </ConfigProvider>
   );
@@ -44,8 +51,18 @@ const CusSpin = ({
 
 export { CusSpin };
 
-const cssSpin = css`
+const cssSpin = (bgColor) => css`
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  .ant-spin-dot .ant-spin-dot-item {
+    background-color: var(--primary-default);
+  }
   :is(.ant-spin-fullscreen) {
-    background-color: #3a3d5ccc;
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    background-color: ${bgColor};
   }
 `;
