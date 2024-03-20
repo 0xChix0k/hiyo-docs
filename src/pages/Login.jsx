@@ -1,7 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { Flex, Form } from 'antd';
 import { ReactComponent as Logo } from 'assets/logo.svg';
-import { CusButton, CusCheckBox, CusSelect, TextInput } from 'components';
+import {
+  CusButton,
+  CusCheckBox,
+  CusSelect,
+  CusSpin,
+  TextInput,
+} from 'components';
 import { useCommon, useFormCommon, useLogin } from 'hooks';
 import { useEffect, useState } from 'react';
 import { useGetCompanys } from 'services/dropdownService';
@@ -52,6 +58,7 @@ const Login = () => {
       </Flex>
       <Flex justify="center" flex={'1 1 100%'} className="content">
         <Flex vertical className="form">
+          {loginLoading && <CusSpin loading={loginLoading} />}
           <div className="title">登入</div>
           <div className="sub-title">Hiyo Docs</div>
           <Form
@@ -86,7 +93,7 @@ const Login = () => {
                 options={companys}
                 placeholder="公司 *"
                 loading={isLoading}
-                disabled={!companys?.length}
+                disabled={!companys?.length || loginLoading}
               />
             </Form.Item>
             <Form.Item name="remin" valuePropName="checked">
@@ -103,7 +110,7 @@ const Login = () => {
                 bgColor="#2D336B"
                 htmlType="submit"
                 isBlock={true}
-                loading={loginLoading}
+                // loading={loginLoading}
                 disabled={loginLoading}
               />
             </Form.Item>

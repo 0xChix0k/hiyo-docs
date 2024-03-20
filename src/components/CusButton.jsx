@@ -121,8 +121,8 @@ const cssButton = (iconColor) => css`
   svg {
     width: 15px;
     height: 15px;
-    /* path {
+    path {
       fill: ${iconColor};
-    } */
+    }
   }
 `;

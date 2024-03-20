@@ -5,10 +5,13 @@ import { CusCollapse, CusModal } from 'components';
 import { useConfirmProps, useModalProps } from 'hooks';
 import { useCollapse } from 'hooks/todo';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useGetTodo, useGetTodoList } from 'services/todoService';
+import { selectUser } from 'store/userSlice';
 import { cssTodo } from './todoCss';
 
 const Todo = () => {
+  const { userInfo } = useSelector(selectUser);
   const [selectId, setSelectId] = useState('');
   const [openConfirm, setOpenConfirm] = useState('');
   const [rejectRemark, setRejectRemark] = useState('');
@@ -81,7 +84,7 @@ const Todo = () => {
         />
       )}
       <div className="todo-container">
-        <div className="title">✨ 歡迎, 侯小吟</div>
+        <div className="title">✨ 歡迎, {userInfo.EmpName}</div>
         {todos ? (
           <Flex vertical gap={20} style={{ marginBottom: 24 }}>
             {!!getItemsCount(bookItems) && (

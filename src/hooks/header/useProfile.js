@@ -32,7 +32,6 @@ const useProfile = (setOpen) => {
       dispatch(setUser(initUser));
       jsCookie.remove('Jwt');
       localStorage.removeItem('UserInfo');
-      // window.location.href = '/login';
       navigate('/login', { replace: true });
     } else {
       setOpen(true);
