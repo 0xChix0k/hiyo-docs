@@ -6,9 +6,9 @@ export const useGetReaders = (id) => {
   return useQuery(
     ['readersList', id],
     async () => {
-      console.log('todo id:', id);
+      // console.log('todo id:', id);
       const data = readersList.find((item) => item.Id === 1);
-      console.log('readers data:', data);
+      // console.log('readers data:', data);
       return data;
     },
     {

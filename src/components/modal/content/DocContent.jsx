@@ -4,7 +4,6 @@ import { Flex } from 'antd';
 import { ReactComponent as IconDownload } from 'assets/icon-download.svg';
 import { CapsuleTabs, CusAvatar, CusButton, CusModal } from 'components';
 import { useState } from 'react';
-import { genConfig } from 'react-nice-avatar';
 import { useGetReaders } from 'services/readerService';
 import { ReadersContent } from './ReadersContent';
 
@@ -18,7 +17,7 @@ const DocContent = ({ isMa, docData }) => {
     {
       label: '擁有者',
       value: `${docData?.Owner?.Dep} ${docData?.Owner?.Name}`,
-      avatar: genConfig(),
+      avatar: '123',
     },
     {
       label: '觀看數',
@@ -63,7 +62,7 @@ const DocContent = ({ isMa, docData }) => {
               <Flex key={index} vertical gap={4} className="info">
                 <div className="label">{item.label}</div>
                 <Flex align="center" gap={4}>
-                  {item.avatar && <CusAvatar wh={25} />}
+                  {item.avatar && <CusAvatar />}
                   <div
                     className={`${item.link && 'link'} value`}
                     onClick={item.onClick || null}

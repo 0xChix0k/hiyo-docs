@@ -4,19 +4,18 @@ import {
   FormContent,
   UpdateContent,
 } from 'components/modal/content';
-import { useStatus } from 'hooks';
-import { useSelector } from 'react-redux';
-import { selectUser } from 'store/userSlice';
+import { useCommon, useStatus } from 'hooks';
 
 /**
  * @description useModalProps
  * @param {Array} data
+ * @param {Function} setData
  * @param {Function} setOpenConfirm
  * @returns {Object} mProps
  */
-const useModalProps = (data, setOpenConfirm) => {
-  const { userInfo } = useSelector(selectUser);
+const useModalProps = (data, setData,setOpenConfirm) => {
   const { getText, getColor } = useStatus();
+  const { IS_SUPER_ADMIN } = useCommon();
   const status = data?.Status;
 
   const mProps = {
@@ -61,11 +60,11 @@ const useModalProps = (data, setOpenConfirm) => {
         : 240,
     content:
       status === 'book' ? (
-        <DocContent isMa={userInfo.role === 'manager'} docData={data} />
+        <DocContent isMa={IS_SUPER_ADMIN} docData={data} />
       ) : status === 'update' ? (
         <UpdateContent data={data} />
       ) : ['pending', 'rejected', 'approved'].includes(status) ? (
-        <FormContent data={data} />
+        <FormContent data={data} setData={setData}/>
       ) : null,
   };
 

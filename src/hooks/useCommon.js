@@ -1,8 +1,14 @@
 import dayjs from 'dayjs';
 import debounce from 'lodash/debounce';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'store/userSlice';
 
 const useCommon = () => {
+  const { userInfo } = useSelector(selectUser);
+
+  const IS_SUPER_ADMIN = userInfo.Roles.includes('SuperAdmin');
+
   /**
    * @description Empty column for table
    */
@@ -67,6 +73,13 @@ const useCommon = () => {
     []
   );
 
-  return { EMPRTY_COLUMN, dFormat, isDateBetween, getNameById, debounceFn };
+  return {
+    IS_SUPER_ADMIN,
+    EMPRTY_COLUMN,
+    dFormat,
+    isDateBetween,
+    getNameById,
+    debounceFn,
+  };
 };
 export { useCommon };

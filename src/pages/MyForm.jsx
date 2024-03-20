@@ -1,17 +1,19 @@
 /**@jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { Flex } from 'antd';
+import { ReactComponent as IconForm } from 'assets/icon-form.svg';
 import {
   CapsuleTabs,
   CusModal,
   CusRangePicker,
   CusSelect,
+  CusSpin,
   CusTable,
 } from 'components';
 import { useConfirmProps, useDateOption, useModalProps } from 'hooks';
 import { useMyFormCol } from 'hooks/myForm';
 import { useEffect, useState } from 'react';
 import { useGetMyForm, useGetMyForms } from 'services/myFormService';
+import { cssMyForm } from './myFormCss';
 
 const MyForm = () => {
   const [cusName, setCusName] = useState('日期範圍');
@@ -28,6 +30,7 @@ const MyForm = () => {
   const [myFormId, setMyFormId] = useState(null);
   const [openConfirm, setOpenConfirm] = useState('');
   const [rejectRemark, setRejectRemark] = useState('');
+  const [fData, setFData] = useState(null);
   const status = activeTab === 0 ? 'pending' : 'approved';
 
   useEffect(() => {
@@ -44,14 +47,21 @@ const MyForm = () => {
     });
   }, [activeTab, formDates, status]);
 
-  const { data: myFormList, isLoading } = useGetMyForms(param);
+  const { data: myFormList, isLoading, isSuccess } = useGetMyForms(param);
   const {
     data: myFormData,
     isLoading: dataLoading,
     isSuccess: dataSuccess,
   } = useGetMyForm(myFormId);
+
+  useEffect(() => {
+    if (dataSuccess) {
+      setFData(myFormData);
+    }
+  }, [dataSuccess, myFormData]);
+
   const columns = useMyFormCol(status);
-  const { mProps } = useModalProps(myFormData, setOpenConfirm);
+  const { mProps } = useModalProps(fData, setFData, setOpenConfirm);
   const { confirmProps } = useConfirmProps(
     openConfirm,
     setOpenConfirm,
@@ -60,9 +70,6 @@ const MyForm = () => {
     setRejectRemark
   );
 
-  const onDateChange = (v) => {
-    setSelectId(v);
-  };
   const onDateSelect = (v) => {
     if (v === 'custom') {
       setIsOpen(true);
@@ -73,7 +80,6 @@ const MyForm = () => {
 
   return (
     <Flex vertical align="center" css={cssMyForm}>
-      {/* <CusSpin dotSize={20} loading={dataLoading} full={true} /> */}
       {!!myFormId && dataSuccess && (
         <CusModal
           open={!!myFormId && dataSuccess}
@@ -105,12 +111,17 @@ const MyForm = () => {
           content={confirmProps?.content}
         />
       )}
-      <Flex vertical flex="1 1 auto" gap={30} className="my-form-container">
-        <Flex align="center" className="title">
+      <Flex vertical gap={30} className="my-form-container">
+        <Flex align="center" flex="0 0 auto" className="title">
           我的表單
         </Flex>
-        <Flex vertical gap={20} className="form-div">
-          <Flex justify="space-between" align="center" className="tool-div">
+        <Flex vertical flex="1 0 500" gap={20} className="form-div">
+          <Flex
+            justify="space-between"
+            flex="0 0 auto"
+            align="center"
+            className="tool-div"
+          >
             <CapsuleTabs
               tabs={['簽核中', '已核准']}
               activeTab={activeTab}
@@ -132,19 +143,30 @@ const MyForm = () => {
                 <CusSelect
                   value={SelectId}
                   options={myFormDates}
-                  onChange={onDateChange}
+                  onChange={(v) => setSelectId(v)}
                   onSelect={onDateSelect}
                 />
               </div>
             </div>
           </Flex>
-          <CusTable
-            data={myFormList}
-            columns={columns}
-            loading={isLoading || dataLoading}
-            keyName="Id"
-            onRow={(record) => setMyFormId(record.Id)}
-          />
+          {isLoading && <CusSpin loading={true} dotSize={30} />}
+          {!isLoading &&
+            isSuccess &&
+            (!!myFormList?.length ? (
+              <CusTable
+                data={myFormList}
+                columns={columns}
+                loading={isLoading || dataLoading}
+                keyName="Id"
+                onRow={(record) => setMyFormId(record.Id)}
+              />
+            ) : (
+              <NoDataBySearch
+                text={`沒有任何${
+                  status === 'pending' ? '簽核中' : '已核准'
+                }表單`}
+              />
+            ))}
         </Flex>
       </Flex>
     </Flex>
@@ -153,37 +175,18 @@ const MyForm = () => {
 
 export default MyForm;
 
-const cssMyForm = css`
-  width: 100%;
-  height: 100%;
-  padding-top: 30px;
-  overflow-y: auto;
-  > .my-form-container {
-    width: 930px;
-    margin-bottom: 24px;
-    > .title {
-      width: 100%;
-      font-size: 35px;
-      font-weight: 600;
-      color: var(--grey-default);
-    }
-    > .form-div {
-      padding: 30px;
-      border-radius: 25px;
-      background-color: white;
-      min-height: 400px;
-      > .tool-div {
-      }
-      > .list-div {
-      }
-    }
-    > .nodata {
-      height: 400px;
-      border-radius: 25px;
-      background: white;
-      .text {
-        color: var(--grey-50);
-      }
-    }
-  }
-`;
+const NoDataBySearch = ({ text }) => {
+  return (
+    <Flex
+      vertical
+      align="center"
+      justify="center"
+      gap={20}
+      className="nodata"
+      flex="1 1 auto"
+    >
+      <IconForm className="icon" />
+      {text}
+    </Flex>
+  );
+};

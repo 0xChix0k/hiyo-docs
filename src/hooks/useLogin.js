@@ -1,42 +1,58 @@
 import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { usePostLogin } from 'services/loginService';
+import { setUser } from 'store/userSlice';
+
 /**
  * @description use Login
- * @param {string} userId
- * @param {string} password
- * @param {boolean} remin
  * @param {Function} setLoading
  * @param {Function} setFial
  * @returns {object}
  */
-const useLogin = (userId, password, company, remin, setLoading, setFial) => {
+const useLogin = (setLoading, setFial) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const mutation = usePostLogin();
+
+  const formInit = {
+    empNo: localStorage.getItem('EmpNo') || '',
+    password: localStorage.getItem('Password') || '',
+    companyNo: localStorage.getItem('CompanyNo') || null,
+    remin: localStorage.getItem('EmpNo') ? true : false,
+  };
+
   /**
-   * @description onCheck
+   * @description onLogin
+   * @param {string} empNo
+   * @param {string} password
+   * @param {string} companyNo
+   * @param {boolean} remin
    * @returns {void}
    */
-  const onCheck = () => {
+  const onLogin = (empNo, password, companyNo, remin) => {
     setLoading(true);
     mutation.mutate(
-      { UserId: userId, Password: password },
+      { EmpNo: empNo, Password: password, CompanyNo: companyNo },
       {
         onSuccess: (data) => {
           setFial(false);
           if (remin) {
-            Cookies.set('userId', userId, { expires: 7 });
-            Cookies.set('password', password, { expires: 7 });
-            Cookies.set('company', company, { expires: 7 });
+            localStorage.setItem('EmpNo', empNo);
+            localStorage.setItem('Password', password);
+            localStorage.setItem('CompanyNo', companyNo);
           } else {
-            Cookies.remove('userId');
-            Cookies.remove('password');
-            Cookies.remove('company');
+            localStorage.removeItem('EmpNo');
+            localStorage.removeItem('Password');
+            localStorage.removeItem('CompanyNo');
           }
-          Cookies.set('Jwt', '123', { expires: 7 });
+          localStorage.setItem('UserInfo', JSON.stringify(data.UserInfo));
+          dispatch(setUser(data.UserInfo));
+          Cookies.set('Jwt', data.Jwt);
           navigate('/');
         },
         onError: (error) => {
+          console.log('login error:', error);
           setFial(true);
         },
         onSettled: () => {
@@ -46,6 +62,6 @@ const useLogin = (userId, password, company, remin, setLoading, setFial) => {
     );
   };
 
-  return { onCheck };
+  return { formInit, onLogin };
 };
 export { useLogin };

@@ -127,7 +127,7 @@ const CusUserM = ({
         optionRender={(option) => {
           return (
             <Space size={10}>
-              <CusAvatar wh={25} />
+              <CusAvatar />
               {`${option.data.dep} ${option.data.label}`}
             </Space>
           );
@@ -142,7 +142,8 @@ const CusUserM = ({
 export { CusUserM };
 
 const tagRender = (props, data, getNameById, isClose) => {
-  const { label, value, closable, onClose } = props;
+  //props: {label, value, closable, onClose}
+  const { value, closable, onClose } = props;
   const onPreventMouseDown = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -152,7 +153,7 @@ const tagRender = (props, data, getNameById, isClose) => {
   return (
     <CusTagUser
       text={`${dep} ${name}`}
-      avatar={<CusAvatar wh={25} />}
+      avatar={<CusAvatar />}
       onMouseDown={onPreventMouseDown}
       closable={isClose ? closable : false}
       onClose={onClose}

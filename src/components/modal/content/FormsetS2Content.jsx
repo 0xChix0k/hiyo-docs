@@ -145,7 +145,7 @@ const FlowBlock = ({ list, getName }) => {
                 <Flex justify="center" align="center" className="num-box">
                   {index + 1}
                 </Flex>
-                <CusAvatar wh={boxSize} />
+                <CusAvatar />
                 <Flex vertical justify="center">
                   {getName(item?.Id, users, 'Id', 'Dep')}{' '}
                   {getName(item?.Id, users, 'Id', 'Name')}

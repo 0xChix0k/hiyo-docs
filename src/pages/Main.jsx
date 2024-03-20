@@ -1,11 +1,12 @@
 import { Flex } from 'antd';
 import { Header } from 'components';
+import { useSearch } from 'hooks';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useGetForms, useGetTypes } from 'services/dropdownService';
 import { setForms, setTypes } from 'store/dropdownSlice';
-import { useSearch } from 'hooks';
+import { setUser } from 'store/userSlice';
 import Result from './Result';
 
 const Main = () => {
@@ -24,13 +25,14 @@ const Main = () => {
     if (formSuccess) {
       dispatch(setForms(forms));
     }
+    dispatch(setUser(JSON.parse(localStorage.getItem('UserInfo'))));
   }, [typeSuccess, dispatch, types, formSuccess, forms]);
 
   useEffect(() => {
     if (location.pathname === '/') {
       navigate('/todo');
     }
-  });
+  }, [location.pathname, navigate]);
 
   const { isSearched } = useSearch();
 

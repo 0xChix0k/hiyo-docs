@@ -4,10 +4,9 @@ import { Flex } from 'antd';
 import { CusAvatar } from 'components';
 import { useCommon } from 'hooks';
 
-
 /**
  * @description MyForm List Column
- * @param {string} status 
+ * @param {string} status
  * @returns {Array} columns
  */
 const useMyFormCol = (status) => {
@@ -26,7 +25,7 @@ const useMyFormCol = (status) => {
       render: (Approver, record) => {
         return (
           <Flex align="center" gap={14} css={cssApprover}>
-            <CusAvatar wh={25} />
+            <CusAvatar />
             <div>
               {record.Dep} {Approver}
             </div>

@@ -137,7 +137,7 @@ const CusUser = ({
         optionRender={(option) => {
           return (
             <Space size={10}>
-              <CusAvatar wh={25} />
+              <CusAvatar />
               {`${option.data.dep} ${option.data.label}`}
             </Space>
           );
@@ -157,7 +157,7 @@ const GenTag = ({ value, data, getName }) => {
     <>
       {!dep || !name ? null : (
         <Flex align="center" gap={10} css={cssTag}>
-          <CusAvatar wh={25} />
+          <CusAvatar />
           {`${dep} ${name}`}
         </Flex>
       )}

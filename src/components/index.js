@@ -1,4 +1,3 @@
-export { CusAvatar } from './CusAvatar';
 export { CusButton } from './CusButton';
 export { CusCheckBox } from './CusCheckBox';
 export { CusDivider } from './CusDivider';
@@ -15,3 +14,4 @@ export { TextInput, UploadInput } from './input';
 export { CusModal } from './modal';
 export { CusDropdown, CusSelect, CusUser, CusUserM } from './select';
 export { CapsuleTabs, CusTabs } from './tabs';
+export {CusAvatar} from './CusAvatar'

@@ -3,42 +3,47 @@ import { Flex, Form } from 'antd';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { CusButton, CusCheckBox, CusSelect, TextInput } from 'components';
 import { useCommon, useFormCommon, useLogin } from 'hooks';
-import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
-import { useGetCompany } from 'services/loginService';
+import { useGetCompanys } from 'services/dropdownService';
 import { cssLogin } from './loginCss';
 
 const Login = () => {
-  const [userId, setUserId] = useState(Cookies.get('userId') || '');
-  const [password, setPassword] = useState(Cookies.get('password') || '');
-  const [searchStr, setSearchStr] = useState('');
-  const [companyId, setCompanyId] = useState(Cookies.get('company') || null);
-  const [remin, setRemin] = useState(Cookies.get('userId') ? true : false);
+  const [searchStr, setSearchStr] = useState(null);
   const [failLogin, setFailLogin] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
+  const [companys, setCompanys] = useState([]);
 
-  const { onCheck } = useLogin(
-    userId,
-    password,
-    companyId,
-    remin,
-    setLoginLoading,
-    setFailLogin
-  );
+  const [form] = Form.useForm();
+  const { onLogin, formInit } = useLogin(setLoginLoading, setFailLogin);
   const { requiredObj } = useFormCommon();
   const { debounceFn } = useCommon();
-  const [form] = Form.useForm();
-  const { data: companys, isLoading } = useGetCompany(searchStr);
+  const { data, isLoading } = useGetCompanys(searchStr);
+
+  const onFinish = (values) => {
+    onLogin(values.empNo, values.password, values.companyNo, values.remin);
+  };
 
   useEffect(() => {
-    setSearchStr(userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // 如果表單的 empNo 有初始值，則立即設置 searchStr
+    if (formInit.empNo) {
+      setSearchStr(formInit.empNo);
+    }
+  }, [form, formInit.empNo]);
 
   useEffect(() => {
-    setCompanyId(companys && !!companys?.length ? companys[0]?.Id : null);
-    form.setFieldValue('companyId', companyId);
-  }, [companyId, companys, form]);
+    if (!!data?.length) {
+      const newList = data?.map((item) => ({
+        Name: item.AliasName,
+        Id: item.CompanyNo,
+      }));
+      setCompanys(newList);
+      const comNo = form.getFieldValue('companyNo') || newList[0]?.Id;
+      form.setFieldsValue({ companyNo: comNo });
+    } else {
+      setCompanys([]);
+      form.setFieldValue('companyNo', null);
+    }
+  }, [data, form]);
 
   return (
     <Flex vertical css={cssLogin}>
@@ -52,54 +57,41 @@ const Login = () => {
           <Form
             form={form}
             className="form"
-            onFinish={(values) => onCheck()}
+            onFinish={onFinish}
             onFinishFailed={(errorInfo) => console.log('Failed:', errorInfo)}
             autoComplete="off"
             layout="vertical"
+            initialValues={formInit}
           >
-            <Form.Item
-              name="userId"
-              initialValue={userId}
-              rules={[requiredObj]}
-            >
+            <Form.Item name="empNo" rules={[requiredObj]}>
               <TextInput
-                value={userId}
                 onChange={(v) => {
-                  setUserId(v);
                   debounceFn(v, setSearchStr);
                 }}
                 placeholder="帳號 *"
+                // isClear={true}
                 disabled={loginLoading}
               />
             </Form.Item>
-            <Form.Item
-              name="password"
-              initialValue={password}
-              rules={[requiredObj]}
-            >
+            <Form.Item name="password" rules={[requiredObj]}>
               <TextInput
-                value={password}
-                onChange={setPassword}
                 placeholder="密碼 *"
                 type="password"
+                // isClear={true}
                 disabled={loginLoading}
               />
             </Form.Item>
-            <Form.Item name="companyId">
+            <Form.Item name="companyNo">
               <CusSelect
                 options={companys}
-                value={companyId}
-                placeholder="公司"
-                onChange={setCompanyId}
+                placeholder="公司 *"
                 loading={isLoading}
-                disabled={!companys?.length || loginLoading}
+                disabled={!companys?.length}
               />
             </Form.Item>
-            <Form.Item name="remember" initialValue={remin}>
+            <Form.Item name="remin" valuePropName="checked">
               <CusCheckBox
                 label="記住登入資訊"
-                checked={remin}
-                onChange={setRemin}
                 disabled={loginLoading}
                 bgColor="#367aff"
                 tColor="#5566a4"

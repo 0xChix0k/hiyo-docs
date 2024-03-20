@@ -41,7 +41,6 @@ const FormContent = ({ formInstance, data, setData = null }) => {
   const isRejected = data?.Status === 'rejected';
   const { requiredObj, fileRules } = useFormCommon();
   const [filterForms, setFilterForms] = useState([]);
-
   useEffect(() => {
     if (!isOnlyView && data?.TypeId) {
       const filter = assList.filter((item) => item.Type === data?.TypeId);
@@ -188,7 +187,7 @@ const RejInfo = ({ data }) => {
       className="reject-div"
     >
       <Flex gap={16} align="center" flex="1 1 auto" className="rej-left">
-        <CusAvatar wh={25} />
+        <CusAvatar />
         <Flex vertical className="rej-info-div">
           <div className="user-info">
             {data?.Dep} {data?.Name}
@@ -235,7 +234,7 @@ const FlowBlock = ({ list }) => {
               style={{ height: 47 }}
             >
               <Flex align="center" flex="1 1 auto" gap={10}>
-                <CusAvatar wh={boxSize} />
+                <CusAvatar size={boxSize} />
                 <Flex vertical justify="center">
                   <p>
                     {item?.Dep} {item?.Name}

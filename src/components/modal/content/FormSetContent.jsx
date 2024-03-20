@@ -11,7 +11,6 @@ import { useFormCommon } from 'hooks';
 import { useEffect } from 'react';
 
 const FormSetContent = ({ level, data, setData, refs }) => {
-  console.log('data', data);
   const { requiredObj } = useFormCommon();
   const [form] = Form.useForm();
   useEffect(() => {

@@ -73,7 +73,7 @@ const useDocmentCol = (topType) => {
           render: (Owner, record) => {
             return (
               <Flex gap={12} align="center">
-                <CusAvatar wh={20} />
+                <CusAvatar size={20} />
                 {Owner?.Dep} {Owner?.Name}
               </Flex>
             );

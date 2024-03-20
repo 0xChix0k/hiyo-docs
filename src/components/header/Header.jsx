@@ -13,7 +13,7 @@ import {
 } from 'components';
 import { IconSetting } from 'components/icon';
 import { SearchContent } from 'components/modal/content';
-import { useFormCommon, useSearch } from 'hooks';
+import { useCommon, useFormCommon, useSearch } from 'hooks';
 import { useAddForm, useProfile, useSetProps, useTabs } from 'hooks/header';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -29,6 +29,7 @@ const Header = () => {
   const addFormRef = useRef(null);
   const setRef = useRef(null);
   const { onValidate } = useFormCommon();
+  const { IS_SUPER_ADMIN } = useCommon();
   const { userInfo } = useSelector(selectUser);
   const { searchData } = useSelector(selectCommon);
   const [tabKey, setTabKey] = useState(location.pathname.slice(1));
@@ -51,7 +52,7 @@ const Header = () => {
     setNewFormData,
     initFormData
   );
-  const { tabs } = useTabs(userInfo.role === 'manager');
+  const { tabs } = useTabs(IS_SUPER_ADMIN);
   const [openSet, setOpenSet] = useState(false);
   const { profileList, profileClick } = useProfile(setOpenSet);
   const { setPrrops } = useSetProps(setRef, setOpenSet);
@@ -65,7 +66,7 @@ const Header = () => {
   useEffect(() => {
     setTempData(searchData);
     setSearchInput(searchData.text || '');
-  },[searchData])
+  }, [searchData]);
 
   return (
     <Flex
@@ -161,7 +162,13 @@ const Header = () => {
         <CusDropdown
           items={profileList}
           onClick={profileClick}
-          btn={<CusAvatar config={userInfo.avatar} />}
+          btn={
+            <CusAvatar
+              cmNo={userInfo.CompanyNo}
+              empNo={userInfo.EmpNo}
+              size={40}
+            />
+          }
         />
       </Flex>
     </Flex>

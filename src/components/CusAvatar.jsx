@@ -1,13 +1,27 @@
-import Avatar, { genConfig } from 'react-nice-avatar';
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
+import { useState } from 'react';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 /**
  * @description Custom Avatar
- * @param {string} wh=40
- * @param {object} config=genConfig()
+ * @param {string} cmNo='9999'
+ * @param {string} empNo='9999'
+ * @param {number} size=25
  * @returns {JSX.Element}
  */
-const CusAvatar = ({ wh = 40, config = genConfig() }) => {
-  return <Avatar style={{ width: wh, height: wh }} {...config} />;
+const CusAvatar = ({ cmNo = '9999', empNo = '9999', size = 25 }) => {
+  const [isError, setIsError] = useState(false);
+  return (
+    <Avatar
+      src={`${API_URL}/avatar/${cmNo}/${empNo}`}
+      size={size}
+      icon={<UserOutlined />}
+      onError={() => setIsError(true)}
+      style={{ backgroundColor: isError ? 'var(--primary-default)' : null }}
+    />
+  );
 };
 
 export { CusAvatar };

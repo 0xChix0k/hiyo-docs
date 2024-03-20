@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { Flex } from 'antd';
 import { ReactComponent as IconListCheck } from 'assets/icon-list_check.svg';
-import { CusCollapse, CusModal, CusSpin } from 'components';
+import { CusCollapse, CusModal } from 'components';
 import { useConfirmProps, useModalProps } from 'hooks';
 import { useCollapse } from 'hooks/todo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetTodo, useGetTodoList } from 'services/todoService';
 import { cssTodo } from './todoCss';
 
@@ -12,12 +12,19 @@ const Todo = () => {
   const [selectId, setSelectId] = useState('');
   const [openConfirm, setOpenConfirm] = useState('');
   const [rejectRemark, setRejectRemark] = useState('');
-  const { data: todos, isSuccess, isLoading, error } = useGetTodoList();
+  const [tData, setTData] = useState(null);
+  const { data: todos, isSuccess, isLoading } = useGetTodoList();
   const {
     data: todoData,
     isSuccess: dataSuccess,
     isLoading: dataLoading,
   } = useGetTodo(selectId);
+
+  useEffect(() => {
+    if (dataSuccess) {
+      setTData(todoData);
+    }
+  }, [dataSuccess, todoData]);
   const {
     bookItems,
     unUpdateItems,
@@ -31,7 +38,7 @@ const Todo = () => {
   const [approveColl, setApproveColl] = useState(approveItems[0]?.key || []);
   const [rejectColl, setRejectColl] = useState(rejectItems[0]?.key || []);
 
-  const { mProps } = useModalProps(todoData, setOpenConfirm);
+  const { mProps } = useModalProps(tData, setTData, setOpenConfirm);
   const { confirmProps } = useConfirmProps(
     openConfirm,
     setOpenConfirm,

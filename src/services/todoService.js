@@ -29,7 +29,7 @@ export const useGetTodo = (id) => {
     ['todoData', id],
     async () => {
       const data = todoList.find((item) => item.Id === id);
-      console.log('todoData', data);
+      // console.log('todoData', data);
       return data;
     },
     {

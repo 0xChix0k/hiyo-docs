@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { genConfig } from 'react-nice-avatar';
 
 export const initUser = {
-  role: 'manager',
-  avatar: genConfig(),
+  CompanyNo: null,
+  EmpNo: null,
+  EmpName: null,
+  Email: null,
+  Department: null,
+  Roles: [],
 };
 
 const userSlice = createSlice({
